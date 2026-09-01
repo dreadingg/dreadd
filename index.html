@@ -38,6 +38,30 @@
             transform: scale(0.95);
             pointer-events: none;
         }
+        #login .back-btn {
+            position: absolute;
+            top: 16px;
+            left: 20px;
+            background: none;
+            border: none;
+            color: #8888aa;
+            font-size: 20px;
+            cursor: pointer;
+            transition: color 0.3s;
+            padding: 4px 8px;
+        }
+        #login .back-btn:hover {
+            color: #e0e0e0;
+        }
+        #login .selected-link {
+            font-size: 14px;
+            color: #6c6cff;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+            text-transform: lowercase;
+            border-bottom: 1px solid #2a2a3a;
+            padding-bottom: 12px;
+        }
         #login input {
             width: 100%;
             padding: 14px 16px;
@@ -86,40 +110,54 @@
             display: none;
             letter-spacing: 0.5px;
         }
-        .link-options {
+        .link-list {
             margin-top: 20px;
             text-align: left;
             border-top: 1px solid #2a2a3a;
             padding-top: 16px;
-            max-height: 300px;
+            max-height: 400px;
             overflow-y: auto;
         }
-        .link-options::-webkit-scrollbar {
+        .link-list::-webkit-scrollbar {
             width: 4px;
         }
-        .link-options::-webkit-scrollbar-track {
+        .link-list::-webkit-scrollbar-track {
             background: #1a1a26;
         }
-        .link-options::-webkit-scrollbar-thumb {
+        .link-list::-webkit-scrollbar-thumb {
             background: #6c6cff;
             border-radius: 4px;
         }
-        .link-options .option {
+        .link-list .option {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 6px 0;
-            font-size: 12px;
+            padding: 10px 0;
+            font-size: 13px;
             color: #8888aa;
             border-bottom: 1px solid #1a1a26;
+            cursor: pointer;
+            transition: color 0.3s, background 0.3s;
+            border-radius: 4px;
+            padding-left: 8px;
+            padding-right: 8px;
         }
-        .link-options .option .badge {
+        .link-list .option:hover {
+            color: #e0e0e0;
             background: #1a1a26;
-            padding: 2px 10px;
+        }
+        .link-list .option .badge {
+            background: #1a1a26;
+            padding: 2px 12px;
             border-radius: 12px;
             font-size: 10px;
             color: #6c6cff;
             letter-spacing: 0.5px;
+        }
+        .link-list .option .arrow {
+            color: #2a2a3a;
+            font-size: 14px;
+            margin-left: 8px;
         }
         #splash {
             display: none;
@@ -162,6 +200,10 @@
             }
             #login {
                 padding: 30px 20px;
+            }
+            .link-list .option {
+                font-size: 11px;
+                padding: 8px 0;
             }
         }
         #iframe-container {
@@ -211,25 +253,72 @@
             background: #2a2a3e;
             color: #e0e0e0;
         }
+        .login-header {
+            position: relative;
+            padding-top: 4px;
+        }
+        .link-list-title {
+            font-size: 13px;
+            color: #555566;
+            margin-bottom: 16px;
+            letter-spacing: 2px;
+            text-transform: lowercase;
+        }
     </style>
 </head>
 <body>
 
     <!-- login screen -->
     <div id="login">
-        <input type="password" id="passwordInput" placeholder="password" autofocus>
-        <button onclick="checkPassword()">unlock</button>
-        <div id="error">access denied</div>
+        <div class="login-header">
+            <button class="back-btn" onclick="showLinkList()" id="backBtn" style="display:none;">←</button>
+        </div>
         
-        <div class="link-options">
-            <div class="option"><span>cleverlearning (s3)</span><span class="badge">fall</span></div>
-            <div class="option"><span>cleverlearning (storage)</span><span class="badge">clever</span></div>
-            <div class="option"><span>opiumbest (s3)</span><span class="badge">opium</span></div>
-            <div class="option"><span>opiumbest (storage)</span><span class="badge">best</span></div>
-            <div class="option"><span>opiumbest (github)</span><span class="badge">pages</span></div>
-            <div class="option"><span>svg (jsdelivr)</span><span class="badge">svg</span></div>
-            <div class="option"><span>svg (cdn)</span><span class="badge">cdn</span></div>
-            <div class="option"><span>opiumbest (s3 alternate)</span><span class="badge">opium2</span></div>
+        <!-- link list (default view) -->
+        <div id="linkListView">
+            <div class="link-list-title">select a site</div>
+            <div class="link-list">
+                <div class="option" onclick="selectLink('fall')">
+                    <span>cleverlearning (s3)</span>
+                    <span class="badge">password: fall</span>
+                </div>
+                <div class="option" onclick="selectLink('clever')">
+                    <span>cleverlearning (storage)</span>
+                    <span class="badge">password: clever</span>
+                </div>
+                <div class="option" onclick="selectLink('opium')">
+                    <span>opiumbest (s3)</span>
+                    <span class="badge">password: opium</span>
+                </div>
+                <div class="option" onclick="selectLink('best')">
+                    <span>opiumbest (storage)</span>
+                    <span class="badge">password: best</span>
+                </div>
+                <div class="option" onclick="selectLink('pages')">
+                    <span>opiumbest (github)</span>
+                    <span class="badge">password: pages</span>
+                </div>
+                <div class="option" onclick="selectLink('svg')">
+                    <span>svg (jsdelivr)</span>
+                    <span class="badge">password: svg</span>
+                </div>
+                <div class="option" onclick="selectLink('cdn')">
+                    <span>svg (cdn)</span>
+                    <span class="badge">password: cdn</span>
+                </div>
+                <div class="option" onclick="selectLink('opium2')">
+                    <span>opiumbest (s3 alternate)</span>
+                    <span class="badge">password: opium2</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- password view (hidden initially) -->
+        <div id="passwordView" style="display:none;">
+            <div class="selected-link" id="selectedLinkDisplay">cleverlearning</div>
+            <input type="password" id="passwordInput" placeholder="enter password" autofocus>
+            <button onclick="checkPassword()">unlock</button>
+            <div id="error">access denied</div>
         </div>
     </div>
 
@@ -267,17 +356,56 @@
             "opium2": "opium s3"
         };
 
+        const displayNames = {
+            "fall": "cleverlearning (s3)",
+            "clever": "cleverlearning (storage)",
+            "opium": "opiumbest (s3)",
+            "best": "opiumbest (storage)",
+            "pages": "opiumbest (github)",
+            "svg": "svg (jsdelivr)",
+            "cdn": "svg (cdn)",
+            "opium2": "opiumbest (s3 alternate)"
+        };
+
+        let selectedKey = null;
+
+        function selectLink(key) {
+            selectedKey = key;
+            document.getElementById('linkListView').style.display = 'none';
+            document.getElementById('passwordView').style.display = 'block';
+            document.getElementById('selectedLinkDisplay').textContent = displayNames[key] || key;
+            document.getElementById('backBtn').style.display = 'block';
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('passwordInput').focus();
+            document.getElementById('error').style.display = 'none';
+        }
+
+        function showLinkList() {
+            selectedKey = null;
+            document.getElementById('linkListView').style.display = 'block';
+            document.getElementById('passwordView').style.display = 'none';
+            document.getElementById('backBtn').style.display = 'none';
+            document.getElementById('error').style.display = 'none';
+            document.getElementById('passwordInput').value = '';
+        }
+
         function checkPassword() {
             const input = document.getElementById('passwordInput');
             const error = document.getElementById('error');
             const password = input.value.trim().toLowerCase();
 
-            if (links[password]) {
+            if (!selectedKey) {
+                error.textContent = 'select a site first';
+                error.style.display = 'block';
+                return;
+            }
+
+            if (password === selectedKey) {
                 document.getElementById('login').classList.add('fade-out');
                 error.style.display = 'none';
 
                 const splash = document.getElementById('splash');
-                const splashText = splashTexts[password] || "fall productions";
+                const splashText = splashTexts[selectedKey] || "fall productions";
                 splash.querySelector('.text').innerHTML = splashText.replace(/ /g, ' <span>') + '</span>';
                 const words = splashText.split(' ');
                 if (words.length > 1) {
@@ -296,7 +424,7 @@
                         splash.style.display = 'none';
                         splash.classList.remove('show', 'fade-out');
                         
-                        document.getElementById('mirror-iframe').src = links[password];
+                        document.getElementById('mirror-iframe').src = links[selectedKey];
                         const container = document.getElementById('iframe-container');
                         container.style.display = 'block';
                         setTimeout(() => container.classList.add('fade-in'), 50);
@@ -308,6 +436,7 @@
                 }, 1500);
 
             } else {
+                error.textContent = 'access denied';
                 error.style.display = 'block';
                 input.value = '';
                 input.focus();
@@ -328,8 +457,7 @@
                 logoutBtn.style.display = 'none';
                 document.getElementById('mirror-iframe').src = '';
                 document.getElementById('login').classList.remove('fade-out');
-                document.getElementById('passwordInput').value = '';
-                document.getElementById('passwordInput').focus();
+                showLinkList();
             }, 500);
         }
 
