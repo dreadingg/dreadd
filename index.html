@@ -153,6 +153,7 @@
             font-size: 10px;
             color: #6c6cff;
             letter-spacing: 0.5px;
+            font-family: monospace;
         }
         .link-list .option .arrow {
             color: #2a2a3a;
@@ -264,6 +265,13 @@
             letter-spacing: 2px;
             text-transform: lowercase;
         }
+        .password-hint {
+            font-size: 10px;
+            color: #444455;
+            margin-top: 8px;
+            letter-spacing: 0.5px;
+            font-family: monospace;
+        }
     </style>
 </head>
 <body>
@@ -280,37 +288,38 @@
             <div class="link-list">
                 <div class="option" onclick="selectLink('fall')">
                     <span>cleverlearning (s3)</span>
-                    <span class="badge">password: fall</span>
+                    <span class="badge">****</span>
                 </div>
                 <div class="option" onclick="selectLink('clever')">
                     <span>cleverlearning (storage)</span>
-                    <span class="badge">password: clever</span>
+                    <span class="badge">******</span>
                 </div>
                 <div class="option" onclick="selectLink('opium')">
                     <span>opiumbest (s3)</span>
-                    <span class="badge">password: opium</span>
+                    <span class="badge">*****</span>
                 </div>
                 <div class="option" onclick="selectLink('best')">
                     <span>opiumbest (storage)</span>
-                    <span class="badge">password: best</span>
+                    <span class="badge">****</span>
                 </div>
                 <div class="option" onclick="selectLink('pages')">
                     <span>opiumbest (github)</span>
-                    <span class="badge">password: pages</span>
+                    <span class="badge">*****</span>
                 </div>
                 <div class="option" onclick="selectLink('svg')">
                     <span>svg (jsdelivr)</span>
-                    <span class="badge">password: svg</span>
+                    <span class="badge">***</span>
                 </div>
                 <div class="option" onclick="selectLink('cdn')">
                     <span>svg (cdn)</span>
-                    <span class="badge">password: cdn</span>
+                    <span class="badge">***</span>
                 </div>
                 <div class="option" onclick="selectLink('opium2')">
                     <span>opiumbest (s3 alternate)</span>
-                    <span class="badge">password: opium2</span>
+                    <span class="badge">******</span>
                 </div>
             </div>
+            <div class="password-hint">passwords hidden</div>
         </div>
 
         <!-- password view (hidden initially) -->
