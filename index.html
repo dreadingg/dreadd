@@ -174,6 +174,7 @@
             opacity: 0;
             transition: opacity 1s ease;
             pointer-events: none;
+            flex-direction: column;
         }
         #splash.show {
             opacity: 1;
@@ -188,16 +189,45 @@
             color: #e0e0e0;
             text-transform: lowercase;
             text-align: center;
-            padding: 20px;
+            padding: 20px 20px 0 20px;
         }
         #splash .text span {
             color: #6c6cff;
             font-weight: 400;
         }
+        #splash .quote {
+            font-size: 14px;
+            color: #666688;
+            letter-spacing: 2px;
+            text-align: center;
+            padding: 12px 30px 20px 30px;
+            opacity: 0;
+            transition: opacity 1.2s ease;
+            max-width: 600px;
+            line-height: 1.6;
+            font-style: italic;
+        }
+        #splash .quote.show {
+            opacity: 1;
+        }
+        #splash .quote .attribution {
+            font-size: 11px;
+            color: #444466;
+            letter-spacing: 1px;
+            display: block;
+            margin-top: 6px;
+            font-style: normal;
+        }
         @media (max-width: 480px) {
             #splash .text {
                 font-size: 22px;
                 letter-spacing: 4px;
+                padding: 16px 16px 0 16px;
+            }
+            #splash .quote {
+                font-size: 12px;
+                padding: 10px 20px 16px 20px;
+                letter-spacing: 1px;
             }
             #login {
                 padding: 30px 20px;
@@ -334,6 +364,7 @@
     <!-- splash screen -->
     <div id="splash">
         <div class="text">fall <span>productions</span></div>
+        <div class="quote" id="splashQuote"></div>
     </div>
 
     <!-- mirror content -->
@@ -343,6 +374,70 @@
     </div>
 
     <script>
+        // ===== QUOTES DATABASE =====
+        const quotes = [
+            // Philosophical Quotes
+            { text: "the unexamined life is not worth living", attribution: "socrates" },
+            { text: "i think, therefore i am", attribution: "descartes" },
+            { text: "the only true wisdom is in knowing you know nothing", attribution: "socrates" },
+            { text: "to be or not to be, that is the question", attribution: "shakespeare" },
+            { text: "the cave you fear to enter holds the treasure you seek", attribution: "joseph campbell" },
+            { text: "life is really simple, but we insist on making it complicated", attribution: "confucius" },
+            { text: "the journey of a thousand miles begins with one step", attribution: "lao tzu" },
+            { text: "he who has a why to live can bear almost any how", attribution: "nietzsche" },
+            { text: "we suffer more often in imagination than in reality", attribution: "seneca" },
+            { text: "the only thing i know is that i know nothing", attribution: "socrates" },
+            { text: "it does not matter how slowly you go as long as you do not stop", attribution: "confucius" },
+            { text: "the mind is everything. what you think you become", attribution: "buddha" },
+            { text: "we are what we repeatedly do. excellence, then, is not an act, but a habit", attribution: "aristotle" },
+            { text: "the function of prayer is not to influence god, but to change the nature of the one who prays", attribution: "kierkegaard" },
+            { text: "life can only be understood backwards; but it must be lived forwards", attribution: "kierkegaard" },
+            { text: "the greater the difficulty, the more the glory in surmounting it", attribution: "epicurus" },
+            { text: "it is not death that a man should fear, but he should fear never beginning to live", attribution: "marcus aurelius" },
+            { text: "the happiness of your life depends upon the quality of your thoughts", attribution: "marcus aurelius" },
+            { text: "we have two ears and one mouth so we can listen twice as much as we speak", attribution: "epictetus" },
+            { text: "first say to yourself what you would be; and then do what you have to do", attribution: "epictetus" },
+            { text: "the soul is dyed the color of its thoughts", attribution: "marcus aurelius" },
+            { text: "be kind, for everyone you meet is fighting a hard battle", attribution: "plato" },
+            { text: "the measure of a man is what he does with power", attribution: "plato" },
+            { text: "the secret of change is to focus all your energy not on fighting the old, but on building the new", attribution: "socrates" },
+            { text: "there is only one good, knowledge, and one evil, ignorance", attribution: "socrates" },
+            { text: "the greatest wealth is to live content with little", attribution: "plato" },
+            { text: "the beginning is the most important part of the work", attribution: "plato" },
+            { text: "character is simply habit long continued", attribution: "plutarch" },
+            { text: "the whole is greater than the sum of its parts", attribution: "aristotle" },
+            { text: "knowing yourself is the beginning of all wisdom", attribution: "aristotle" },
+            { text: "the more you know, the more you realize you don't know", attribution: "aristotle" },
+            { text: "i cannot teach anybody anything. i can only make them think", attribution: "socrates" },
+            { text: "the only real failure is the failure to try", attribution: "seneca" },
+            { text: "luck is what happens when preparation meets opportunity", attribution: "seneca" },
+            { text: "the greatest minds are capable of the greatest vices as well as of the greatest virtues", attribution: "descartes" },
+            { text: "doubt is the origin of wisdom", attribution: "descartes" },
+            { text: "the more we know, the more we know we don't know", attribution: "lao tzu" },
+            { text: "the way out is through the door. why is it that no one will use it?", attribution: "confucius" },
+            { text: "the man who moves a mountain begins by carrying away small stones", attribution: "confucius" },
+            { text: "everything has beauty, but not everyone sees it", attribution: "confucius" },
+            { text: "the world is a book and those who do not travel read only one page", attribution: "augustine" },
+            { text: "the heart has its reasons which reason knows nothing of", attribution: "pascal" },
+            { text: "the more we try to understand, the more mysterious it becomes", attribution: "pascal" },
+            { text: "all our knowledge begins with the senses, proceeds then to the understanding, and ends with reason", attribution: "kant" },
+            { text: "the only thing necessary for the triumph of evil is for good men to do nothing", attribution: "edmund burke" },
+            { text: "life is not about finding yourself. life is about creating yourself", attribution: "george bernard shaw" },
+            { text: "the power of accurate observation is commonly called cynicism by those who have not got it", attribution: "george bernard shaw" },
+            { text: "the only way to find true happiness is to risk being completely cut open", attribution: "chuck palahniuk" },
+            { text: "you are not a drop in the ocean. you are the entire ocean in a drop", attribution: "rumi" },
+            { text: "the wound is the place where the light enters you", attribution: "rumi" },
+            // Gucci Morty Names
+            { text: "oscar gucci morty", attribution: "" },
+            { text: "julian gucci morty", attribution: "" },
+            { text: "jacob gucci morty", attribution: "" },
+            { text: "cameron gucci morty", attribution: "" },
+            { text: "gio gucci morty", attribution: "" },
+            { text: "saul gucci morty", attribution: "" },
+            { text: "ian gucci morty", attribution: "" }
+        ];
+
+        // ===== LINKS CONFIGURATION =====
         const links = {
             "fall": "https://s3.amazonaws.com/cleverlearning/index.html",
             "clever": "https://storage.googleapis.com/gclassroom/index.html",
@@ -378,6 +473,7 @@
 
         let selectedKey = null;
 
+        // ===== FUNCTIONS =====
         function selectLink(key) {
             selectedKey = key;
             document.getElementById('linkListView').style.display = 'none';
@@ -398,6 +494,11 @@
             document.getElementById('passwordInput').value = '';
         }
 
+        function getRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            return quotes[randomIndex];
+        }
+
         function checkPassword() {
             const input = document.getElementById('passwordInput');
             const error = document.getElementById('error');
@@ -413,8 +514,11 @@
                 document.getElementById('login').classList.add('fade-out');
                 error.style.display = 'none';
 
+                // Setup splash screen
                 const splash = document.getElementById('splash');
                 const splashText = splashTexts[selectedKey] || "fall productions";
+                
+                // Set main text
                 splash.querySelector('.text').innerHTML = splashText.replace(/ /g, ' <span>') + '</span>';
                 const words = splashText.split(' ');
                 if (words.length > 1) {
@@ -424,14 +528,33 @@
                     splash.querySelector('.text').innerHTML = '<span>' + splashText + '</span>';
                 }
 
-                splash.style.display = 'flex';
-                setTimeout(() => splash.classList.add('show'), 50);
+                // Set random quote
+                const quoteElement = document.getElementById('splashQuote');
+                const randomQuote = getRandomQuote();
+                if (randomQuote.attribution) {
+                    quoteElement.innerHTML = `"${randomQuote.text}" <span class="attribution">— ${randomQuote.attribution}</span>`;
+                } else {
+                    quoteElement.textContent = randomQuote.text;
+                }
+                quoteElement.classList.remove('show');
 
+                splash.style.display = 'flex';
+                setTimeout(() => {
+                    splash.classList.add('show');
+                    // Fade in quote after main text appears
+                    setTimeout(() => {
+                        quoteElement.classList.add('show');
+                    }, 400);
+                }, 50);
+
+                // After 2.5 seconds, fade out splash and show mirror
                 setTimeout(() => {
                     splash.classList.add('fade-out');
+                    
                     setTimeout(() => {
                         splash.style.display = 'none';
                         splash.classList.remove('show', 'fade-out');
+                        quoteElement.classList.remove('show');
                         
                         document.getElementById('mirror-iframe').src = links[selectedKey];
                         const container = document.getElementById('iframe-container');
@@ -442,7 +565,7 @@
                         logoutBtn.style.display = 'block';
                         setTimeout(() => logoutBtn.classList.add('show'), 300);
                     }, 1000);
-                }, 1500);
+                }, 2500);
 
             } else {
                 error.textContent = 'access denied';
