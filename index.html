@@ -155,11 +155,6 @@
             letter-spacing: 0.5px;
             font-family: monospace;
         }
-        .link-list .option .arrow {
-            color: #2a2a3a;
-            font-size: 14px;
-            margin-left: 8px;
-        }
         #splash {
             display: none;
             position: fixed;
@@ -316,37 +311,41 @@
         <div id="linkListView">
             <div class="link-list-title">select a site</div>
             <div class="link-list">
-                <div class="option" onclick="selectLink('fall')">
+                <div class="option" onclick="selectLink('gclassroom')">
+                    <span>gclassroom (storage)</span>
+                    <span class="badge">******</span>
+                </div>
+                <div class="option" onclick="selectLink('clever-s3')">
                     <span>cleverlearning (s3)</span>
-                    <span class="badge">****</span>
+                    <span class="badge">******</span>
                 </div>
                 <div class="option" onclick="selectLink('clever')">
-                    <span>cleverlearning (storage)</span>
+                    <span>cleverlearning (s3 alt)</span>
+                    <span class="badge">****</span>
+                </div>
+                <div class="option" onclick="selectLink('svg-cdn')">
+                    <span>svg (jsdelivr)</span>
+                    <span class="badge">***</span>
+                </div>
+                <div class="option" onclick="selectLink('pages')">
+                    <span>opiumbest (github)</span>
+                    <span class="badge">*****</span>
+                </div>
+                <div class="option" onclick="selectLink('opium-s3')">
+                    <span>opiumisbest (s3)</span>
                     <span class="badge">******</span>
                 </div>
                 <div class="option" onclick="selectLink('opium')">
-                    <span>opiumbest (s3)</span>
+                    <span>opiumisbest (s3 alt)</span>
                     <span class="badge">*****</span>
                 </div>
                 <div class="option" onclick="selectLink('best')">
                     <span>opiumbest (storage)</span>
                     <span class="badge">****</span>
                 </div>
-                <div class="option" onclick="selectLink('pages')">
-                    <span>opiumbest (github)</span>
-                    <span class="badge">*****</span>
-                </div>
-                <div class="option" onclick="selectLink('svg')">
-                    <span>svg (jsdelivr)</span>
-                    <span class="badge">***</span>
-                </div>
                 <div class="option" onclick="selectLink('cdn')">
                     <span>svg (cdn)</span>
                     <span class="badge">***</span>
-                </div>
-                <div class="option" onclick="selectLink('opium2')">
-                    <span>opiumbest (s3 alternate)</span>
-                    <span class="badge">******</span>
                 </div>
             </div>
             <div class="password-hint">passwords hidden</div>
@@ -354,7 +353,7 @@
 
         <!-- password view (hidden initially) -->
         <div id="passwordView" style="display:none;">
-            <div class="selected-link" id="selectedLinkDisplay">cleverlearning</div>
+            <div class="selected-link" id="selectedLinkDisplay">site name</div>
             <input type="password" id="passwordInput" placeholder="enter password" autofocus>
             <button onclick="checkPassword()">unlock</button>
             <div id="error">access denied</div>
@@ -439,36 +438,52 @@
 
         // ===== LINKS CONFIGURATION =====
         const links = {
-            "fall": "https://s3.amazonaws.com/cleverlearning/index.html",
-            "clever": "https://storage.googleapis.com/gclassroom/index.html",
+            "gclassroom": "https://storage.googleapis.com/gclassroom/index.html",
+            "clever-s3": "https://cleverlearning.s3.amazonaws.com/index.html",
+            "clever": "https://s3.amazonaws.com/cleverlearning/index.html",
+            "svg-cdn": "https://jsdelivr.b-cdn.net/gh/opiumbest/svg/index.svg",
+            "pages": "https://opiumbest.github.io/",
+            "opium-s3": "https://opiumisbest.s3.amazonaws.com/index.html",
             "opium": "https://s3.amazonaws.com/opiumisbest/index.html",
             "best": "https://storage.googleapis.com/opiumbest/index.html",
-            "pages": "https://opiumbest.github.io/",
-            "svg": "https://cdn.jsdelivr.net/gh/opiumbest/svg/index.svg",
-            "cdn": "https://jsdelivr.b-cdn.net/gh/opiumbest/svg/index.svg",
-            "opium2": "https://opiumisbest.s3.amazonaws.com/index.html"
+            "cdn": "https://cdn.jsdelivr.net/gh/opiumbest/svg/index.svg"
         };
 
         const splashTexts = {
-            "fall": "fall productions",
+            "gclassroom": "gclassroom",
+            "clever-s3": "clever learning",
             "clever": "clever learning",
+            "svg-cdn": "svg mirror",
+            "pages": "github pages",
+            "opium-s3": "opium best",
             "opium": "opium best",
             "best": "opium storage",
-            "pages": "github pages",
-            "svg": "svg mirror",
-            "cdn": "cdn mirror",
-            "opium2": "opium s3"
+            "cdn": "cdn mirror"
         };
 
         const displayNames = {
-            "fall": "cleverlearning (s3)",
-            "clever": "cleverlearning (storage)",
-            "opium": "opiumbest (s3)",
-            "best": "opiumbest (storage)",
+            "gclassroom": "gclassroom (storage)",
+            "clever-s3": "cleverlearning (s3)",
+            "clever": "cleverlearning (s3 alt)",
+            "svg-cdn": "svg (jsdelivr)",
             "pages": "opiumbest (github)",
-            "svg": "svg (jsdelivr)",
-            "cdn": "svg (cdn)",
-            "opium2": "opiumbest (s3 alternate)"
+            "opium-s3": "opiumisbest (s3)",
+            "opium": "opiumisbest (s3 alt)",
+            "best": "opiumbest (storage)",
+            "cdn": "svg (cdn)"
+        };
+
+        // Password mapping (each key requires its own password)
+        const passwords = {
+            "gclassroom": "clever",
+            "clever-s3": "clever",
+            "clever": "fall",
+            "svg-cdn": "svg",
+            "pages": "pages",
+            "opium-s3": "opium",
+            "opium": "opium",
+            "best": "best",
+            "cdn": "cdn"
         };
 
         let selectedKey = null;
@@ -510,7 +525,8 @@
                 return;
             }
 
-            if (password === selectedKey) {
+            // Check against the specific password for this key
+            if (password === passwords[selectedKey]) {
                 document.getElementById('login').classList.add('fade-out');
                 error.style.display = 'none';
 
