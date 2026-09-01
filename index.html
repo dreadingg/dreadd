@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mirror</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #0a0a0f;
+            color: #e0e0e0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: auto;
+            padding: 20px;
+        }
+        #login {
+            background: #12121a;
+            padding: 40px 30px;
+            border-radius: 16px;
+            border: 1px solid #2a2a3a;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            text-align: center;
+            width: 100%;
+            max-width: 400px;
+            transition: opacity 0.8s ease, transform 0.8s ease;
+            z-index: 10;
+        }
+        #login.fade-out {
+            opacity: 0;
+            transform: scale(0.95);
+            pointer-events: none;
+        }
+        #login input {
+            width: 100%;
+            padding: 14px 16px;
+            background: #1a1a26;
+            border: 1px solid #2a2a3e;
+            border-radius: 8px;
+            color: #e0e0e0;
+            font-size: 15px;
+            outline: none;
+            transition: border 0.3s;
+            margin-bottom: 12px;
+        }
+        #login input:focus {
+            border-color: #6c6cff;
+            box-shadow: 0 0 20px rgba(108,108,255,0.08);
+        }
+        #login input::placeholder {
+            color: #555566;
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+        #login button {
+            width: 100%;
+            padding: 14px;
+            background: #6c6cff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.1s;
+            text-transform: lowercase;
+        }
+        #login button:hover {
+            background: #7a7aff;
+        }
+        #login button:active {
+            transform: scale(0.97);
+        }
+        #error {
+            color: #ff6b6b;
+            font-size: 13px;
+            margin-top: 14px;
+            display: none;
+            letter-spacing: 0.5px;
+        }
+        .link-options {
+            margin-top: 20px;
+            text-align: left;
+            border-top: 1px solid #2a2a3a;
+            padding-top: 16px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .link-options::-webkit-scrollbar {
+            width: 4px;
+        }
+        .link-options::-webkit-scrollbar-track {
+            background: #1a1a26;
+        }
+        .link-options::-webkit-scrollbar-thumb {
+            background: #6c6cff;
+            border-radius: 4px;
+        }
+        .link-options .option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            font-size: 12px;
+            color: #8888aa;
+            border-bottom: 1px solid #1a1a26;
+        }
+        .link-options .option .badge {
+            background: #1a1a26;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 10px;
+            color: #6c6cff;
+            letter-spacing: 0.5px;
+        }
+        #splash {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #0a0a0f;
+            z-index: 20;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 1s ease;
+            pointer-events: none;
+        }
+        #splash.show {
+            opacity: 1;
+        }
+        #splash.fade-out {
+            opacity: 0;
+        }
+        #splash .text {
+            font-size: 32px;
+            font-weight: 300;
+            letter-spacing: 8px;
+            color: #e0e0e0;
+            text-transform: lowercase;
+            text-align: center;
+            padding: 20px;
+        }
+        #splash .text span {
+            color: #6c6cff;
+            font-weight: 400;
+        }
+        @media (max-width: 480px) {
+            #splash .text {
+                font-size: 22px;
+                letter-spacing: 4px;
+            }
+            #login {
+                padding: 30px 20px;
+            }
+        }
+        #iframe-container {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: #0a0a0f;
+            opacity: 0;
+            transition: opacity 1s ease;
+            z-index: 5;
+        }
+        #iframe-container.fade-in {
+            opacity: 1;
+        }
+        #iframe-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            background: white;
+        }
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            background: rgba(26,26,38,0.9);
+            color: #8888aa;
+            border: 1px solid #2a2a3e;
+            padding: 8px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: lowercase;
+            transition: background 0.3s, color 0.3s, opacity 0.8s ease;
+            display: none;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+        }
+        .logout-btn.show {
+            opacity: 1;
+        }
+        .logout-btn:hover {
+            background: #2a2a3e;
+            color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- login screen -->
+    <div id="login">
+        <input type="password" id="passwordInput" placeholder="password" autofocus>
+        <button onclick="checkPassword()">unlock</button>
+        <div id="error">access denied</div>
+        
+        <div class="link-options">
+            <div class="option"><span>cleverlearning (s3)</span><span class="badge">fall</span></div>
+            <div class="option"><span>cleverlearning (storage)</span><span class="badge">clever</span></div>
+            <div class="option"><span>opiumbest (s3)</span><span class="badge">opium</span></div>
+            <div class="option"><span>opiumbest (storage)</span><span class="badge">best</span></div>
+            <div class="option"><span>opiumbest (github)</span><span class="badge">pages</span></div>
+            <div class="option"><span>svg (jsdelivr)</span><span class="badge">svg</span></div>
+            <div class="option"><span>svg (cdn)</span><span class="badge">cdn</span></div>
+            <div class="option"><span>opiumbest (s3 alternate)</span><span class="badge">opium2</span></div>
+        </div>
+    </div>
+
+    <!-- splash screen -->
+    <div id="splash">
+        <div class="text">fall <span>productions</span></div>
+    </div>
+
+    <!-- mirror content -->
+    <div id="iframe-container">
+        <iframe id="mirror-iframe" src=""></iframe>
+        <button class="logout-btn" onclick="logout()">exit</button>
+    </div>
+
+    <script>
+        const links = {
+            "fall": "https://s3.amazonaws.com/cleverlearning/index.html",
+            "clever": "https://storage.googleapis.com/gclassroom/index.html",
+            "opium": "https://s3.amazonaws.com/opiumisbest/index.html",
+            "best": "https://storage.googleapis.com/opiumbest/index.html",
+            "pages": "https://opiumbest.github.io/",
+            "svg": "https://cdn.jsdelivr.net/gh/opiumbest/svg/index.svg",
+            "cdn": "https://jsdelivr.b-cdn.net/gh/opiumbest/svg/index.svg",
+            "opium2": "https://opiumisbest.s3.amazonaws.com/index.html"
+        };
+
+        const splashTexts = {
+            "fall": "fall productions",
+            "clever": "clever learning",
+            "opium": "opium best",
+            "best": "opium storage",
+            "pages": "github pages",
+            "svg": "svg mirror",
+            "cdn": "cdn mirror",
+            "opium2": "opium s3"
+        };
+
+        function checkPassword() {
+            const input = document.getElementById('passwordInput');
+            const error = document.getElementById('error');
+            const password = input.value.trim().toLowerCase();
+
+            if (links[password]) {
+                document.getElementById('login').classList.add('fade-out');
+                error.style.display = 'none';
+
+                const splash = document.getElementById('splash');
+                const splashText = splashTexts[password] || "fall productions";
+                splash.querySelector('.text').innerHTML = splashText.replace(/ /g, ' <span>') + '</span>';
+                const words = splashText.split(' ');
+                if (words.length > 1) {
+                    const lastWord = words.pop();
+                    splash.querySelector('.text').innerHTML = words.join(' ') + ' <span>' + lastWord + '</span>';
+                } else {
+                    splash.querySelector('.text').innerHTML = '<span>' + splashText + '</span>';
+                }
+
+                splash.style.display = 'flex';
+                setTimeout(() => splash.classList.add('show'), 50);
+
+                setTimeout(() => {
+                    splash.classList.add('fade-out');
+                    setTimeout(() => {
+                        splash.style.display = 'none';
+                        splash.classList.remove('show', 'fade-out');
+                        
+                        document.getElementById('mirror-iframe').src = links[password];
+                        const container = document.getElementById('iframe-container');
+                        container.style.display = 'block';
+                        setTimeout(() => container.classList.add('fade-in'), 50);
+
+                        const logoutBtn = document.querySelector('.logout-btn');
+                        logoutBtn.style.display = 'block';
+                        setTimeout(() => logoutBtn.classList.add('show'), 300);
+                    }, 1000);
+                }, 1500);
+
+            } else {
+                error.style.display = 'block';
+                input.value = '';
+                input.focus();
+                input.style.borderColor = '#ff6b6b';
+                setTimeout(() => input.style.borderColor = '#2a2a3e', 800);
+            }
+        }
+
+        function logout() {
+            const container = document.getElementById('iframe-container');
+            container.classList.remove('fade-in');
+
+            const logoutBtn = document.querySelector('.logout-btn');
+            logoutBtn.classList.remove('show');
+
+            setTimeout(() => {
+                container.style.display = 'none';
+                logoutBtn.style.display = 'none';
+                document.getElementById('mirror-iframe').src = '';
+                document.getElementById('login').classList.remove('fade-out');
+                document.getElementById('passwordInput').value = '';
+                document.getElementById('passwordInput').focus();
+            }, 500);
+        }
+
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+    </script>
+
+</body>
+</html>
