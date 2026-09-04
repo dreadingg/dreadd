@@ -298,36 +298,52 @@
             font-style: normal;
         }
         
-        /* ===== TEXT ART STYLES ===== */
-        #splash .text-art {
+        /* ===== TEXT ART - FULL SCREEN ===== */
+        #splash .text-art-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #050508;
+            z-index: 25;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            pointer-events: none;
+            padding: 20px;
+        }
+        #splash .text-art-container.show {
+            display: flex;
+            opacity: 1;
+        }
+        #splash .text-art-container.fade-out {
+            opacity: 0;
+        }
+        #splash .text-art-container .text-art {
             font-family: 'Courier New', monospace;
-            font-size: 10px;
+            font-size: 12px;
             color: #7a7aff;
             letter-spacing: 0px;
             text-align: center;
-            padding: 12px 20px 0 20px;
-            opacity: 0;
-            transition: opacity 0.8s ease, transform 0.8s ease;
-            transform: translateY(10px);
             white-space: pre;
-            line-height: 1.2;
-            max-width: 90vw;
-            overflow: hidden;
-            text-shadow: 0 0 30px rgba(106, 106, 255, 0.08);
-        }
-        #splash .text-art.show {
-            opacity: 0.8;
-            transform: translateY(0);
-        }
-        #splash .text-art.fade-out {
-            opacity: 0;
-            transform: translateY(-10px);
+            line-height: 1.3;
+            max-width: 95vw;
+            max-height: 90vh;
+            overflow: auto;
+            text-shadow: 0 0 40px rgba(106, 106, 255, 0.08);
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         @media (max-width: 480px) {
-            #splash .text-art {
-                font-size: 6px;
-                padding: 6px 10px 0 10px;
+            #splash .text-art-container .text-art {
+                font-size: 7px;
                 line-height: 1.1;
+                padding: 10px;
             }
             #splash .text {
                 font-size: 18px;
@@ -339,9 +355,10 @@
             }
         }
         @media (max-width: 380px) {
-            #splash .text-art {
-                font-size: 4.5px;
-                padding: 4px 6px 0 6px;
+            #splash .text-art-container .text-art {
+                font-size: 5px;
+                line-height: 1.0;
+                padding: 6px;
             }
         }
 
@@ -745,6 +762,10 @@
     <div id="splash">
         <div class="text">fall <span>productions</span></div>
         <div class="quote" id="splashQuote"></div>
+    </div>
+
+    <!-- ===== TEXT ART - FULL SCREEN ===== -->
+    <div class="text-art-container" id="textArtContainer">
         <div class="text-art" id="splashTextArt"></div>
     </div>
 
@@ -1061,11 +1082,12 @@
         function showSplashScreen(url, isFree) {
             const splash = document.getElementById('splash');
             const quoteElement = document.getElementById('splashQuote');
+            const textArtContainer = document.getElementById('textArtContainer');
             const textArtElement = document.getElementById('splashTextArt');
             
             // Reset states
             quoteElement.classList.remove('show', 'fade-out');
-            textArtElement.classList.remove('show', 'fade-out');
+            textArtContainer.classList.remove('show', 'fade-out');
             
             // Set random quote
             const randomQuote = getRandomQuote();
@@ -1090,44 +1112,45 @@
                     quoteElement.classList.add('show');
                 }, 500);
                 
-                // Fade out quote after 2.5s, then show text art
+                // Fade out quote after 2.5s, then show full-screen text art
                 setTimeout(() => {
                     quoteElement.classList.remove('show');
                     quoteElement.classList.add('fade-out');
                     
-                    // Fade in text art after quote fades out
+                    // Fade out splash (text + quote)
                     setTimeout(() => {
-                        textArtElement.classList.add('show');
-                    }, 400);
-                    
-                    // Fade out text art after 2.5s, then load mirror
-                    setTimeout(() => {
-                        textArtElement.classList.remove('show');
-                        textArtElement.classList.add('fade-out');
+                        splash.classList.remove('show');
+                        splash.classList.add('fade-out');
                         
+                        // Show full-screen text art
                         setTimeout(() => {
-                            // Load the mirror
-                            document.getElementById('mirror-iframe').src = url;
-                            document.getElementById('iframe-container').style.display = 'block';
-                            setTimeout(() => {
-                                document.getElementById('iframe-container').classList.add('fade-in');
-                            }, 50);
+                            splash.style.display = 'none';
+                            splash.classList.remove('fade-out');
                             
-                            const logoutBtn = document.querySelector('.logout-btn');
-                            logoutBtn.style.display = 'block';
-                            setTimeout(() => logoutBtn.classList.add('show'), 300);
+                            textArtContainer.classList.add('show');
                             
-                            // Hide splash
-                            splash.classList.remove('show');
-                            splash.classList.add('fade-out');
+                            // Fade out text art after 3s, then load mirror
                             setTimeout(() => {
-                                splash.style.display = 'none';
-                                splash.classList.remove('fade-out');
-                                quoteElement.classList.remove('fade-out');
-                                textArtElement.classList.remove('fade-out');
-                            }, 800);
-                        }, 2500);
-                    }, 2500);
+                                textArtContainer.classList.remove('show');
+                                textArtContainer.classList.add('fade-out');
+                                
+                                setTimeout(() => {
+                                    textArtContainer.classList.remove('fade-out');
+                                    
+                                    // Load the mirror
+                                    document.getElementById('mirror-iframe').src = url;
+                                    document.getElementById('iframe-container').style.display = 'block';
+                                    setTimeout(() => {
+                                        document.getElementById('iframe-container').classList.add('fade-in');
+                                    }, 50);
+                                    
+                                    const logoutBtn = document.querySelector('.logout-btn');
+                                    logoutBtn.style.display = 'block';
+                                    setTimeout(() => logoutBtn.classList.add('show'), 300);
+                                }, 800);
+                            }, 3000);
+                        }, 800);
+                    }, 400);
                 }, 2500);
             }, 50);
         }
