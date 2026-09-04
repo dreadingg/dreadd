@@ -29,7 +29,7 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.8);
             text-align: center;
             width: 100%;
-            max-width: 400px;
+            max-width: 420px;
             transition: opacity 0.8s ease, transform 0.8s ease;
             z-index: 10;
         }
@@ -110,31 +110,54 @@
             display: none;
             letter-spacing: 0.5px;
         }
-        .section-divider {
+
+        /* ===== TAB STYLES ===== */
+        .tab-container {
+            display: flex;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #2a2a3a;
+        }
+        .tab-btn {
+            flex: 1;
+            padding: 10px 0;
+            background: none;
+            border: none;
             color: #555566;
-            font-size: 11px;
+            font-size: 12px;
             letter-spacing: 2px;
             text-transform: lowercase;
-            padding: 12px 0 6px 0;
-            border-bottom: 1px solid #1a1a26;
-            margin-top: 8px;
+            cursor: pointer;
+            transition: color 0.3s, border-color 0.3s;
+            border-bottom: 2px solid transparent;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
-        .link-list {
-            margin-top: 10px;
+        .tab-btn:hover {
+            color: #8888aa;
+        }
+        .tab-btn.active {
+            color: #e0e0e0;
+            border-bottom-color: #6c6cff;
+        }
+        .tab-content {
+            display: none;
             text-align: left;
             max-height: 400px;
             overflow-y: auto;
         }
-        .link-list::-webkit-scrollbar {
+        .tab-content.active {
+            display: block;
+        }
+        .tab-content::-webkit-scrollbar {
             width: 4px;
         }
-        .link-list::-webkit-scrollbar-track {
+        .tab-content::-webkit-scrollbar-track {
             background: #1a1a26;
         }
-        .link-list::-webkit-scrollbar-thumb {
+        .tab-content::-webkit-scrollbar-thumb {
             background: #6c6cff;
             border-radius: 4px;
         }
+
         .link-list .option {
             display: flex;
             justify-content: space-between;
@@ -165,6 +188,16 @@
         .link-list .option .badge.free {
             color: #44aa88;
         }
+
+        .tab-hint {
+            font-size: 10px;
+            color: #444455;
+            margin-top: 12px;
+            letter-spacing: 0.5px;
+            font-family: monospace;
+            text-align: center;
+        }
+
         #splash {
             display: none;
             position: fixed;
@@ -241,6 +274,10 @@
                 font-size: 11px;
                 padding: 8px 0;
             }
+            .tab-btn {
+                font-size: 10px;
+                padding: 8px 0;
+            }
         }
         #iframe-container {
             display: none;
@@ -293,20 +330,6 @@
             position: relative;
             padding-top: 4px;
         }
-        .link-list-title {
-            font-size: 13px;
-            color: #555566;
-            margin-bottom: 16px;
-            letter-spacing: 2px;
-            text-transform: lowercase;
-        }
-        .password-hint {
-            font-size: 10px;
-            color: #444455;
-            margin-top: 8px;
-            letter-spacing: 0.5px;
-            font-family: monospace;
-        }
     </style>
 </head>
 <body>
@@ -316,316 +339,322 @@
         <div class="login-header">
             <button class="back-btn" onclick="showLinkList()" id="backBtn" style="display:none;">←</button>
         </div>
-        
-        <!-- link list (default view) -->
+
         <div id="linkListView">
-            <div class="link-list-title">select a site</div>
-            <div class="link-list">
-                <!-- ===== NEW: PASSWORD-FREE SECTION ===== -->
-                <div class="section-divider">quick access (no password)</div>
-                
-                <div class="option" onclick="openFreeLink('https://storage.googleapis.com/fernisbest/index.html')">
-                    <span>fernisbest (storage)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fernisbest/index.html')">
-                    <span>fernisbest (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fernlinks/index.html')">
-                    <span>fernlinks (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/classworks/index.html')">
-                    <span>classworks (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bull33/index.html')">
-                    <span>bull33 (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bullbestyoutuber/index.html')">
-                    <span>bullbestyoutuber (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bulledu/index.html')">
-                    <span>bulledu (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bullguardian/index.html')">
-                    <span>bullguardian (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bullisgoated/index.html')">
-                    <span>bullisgoated (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bulllightspeed/index.html')">
-                    <span>bulllightspeed (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bullmath/index.html')">
-                    <span>bullmath (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bullubg/index.html')">
-                    <span>bullubg (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/iloveliteratures/index.html')">
-                    <span>iloveliteratures (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/ilovemaths/index.html')">
-                    <span>ilovemaths (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/lsrelay-extension-production/index.html')">
-                    <span>lsrelay-extension (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/macrolo/index.html')">
-                    <span>macrolo (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/macrologoat/index.html')">
-                    <span>macrologoat (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/macrolomath/index.html')">
-                    <span>macrolomath (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/angelfern/index.html')">
-                    <span>angelfern (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/deaganfern/index.html')">
-                    <span>deaganfern (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://bullbestyoutuber.s3.amazonaws.com/index.html')">
-                    <span>bullbestyoutuber (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://bulledu.s3.amazonaws.com/index.html')">
-                    <span>bulledu (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://bullguardian.s3.amazonaws.com/index.html')">
-                    <span>bullguardian (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://bullisgoated.s3.amazonaws.com/index.html')">
-                    <span>bullisgoated (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://bulllightspeed.s3.amazonaws.com/index.html')">
-                    <span>bulllightspeed (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://bullmath.s3.amazonaws.com/index.html')">
-                    <span>bullmath (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://bullubg.s3.amazonaws.com/index.html')">
-                    <span>bullubg (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://iloveliteratures.s3.amazonaws.com/index.html')">
-                    <span>iloveliteratures (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://ilovemaths.s3.amazonaws.com/index.html')">
-                    <span>ilovemaths (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://lsrelay-extension-production.s3.amazonaws.com/index.html')">
-                    <span>lsrelay-extension (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://macrolo.s3.amazonaws.com/index.html')">
-                    <span>macrolo (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://macrologoat.s3.amazonaws.com/index.html')">
-                    <span>macrologoat (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://macrolomath.s3.amazonaws.com/index.html')">
-                    <span>macrolomath (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://angelfern.s3.amazonaws.com/index.html')">
-                    <span>angelfern (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://deaganfern.s3.amazonaws.com/index.html')">
-                    <span>deaganfern (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://bullreading.s3.amazonaws.com/index.html')">
-                    <span>bullreading (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bullreading/index.html')">
-                    <span>bullreading (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://fern-s3t.s3.amazonaws.com/index.html')">
-                    <span>fern-s3t (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fern-s3t/index.html')">
-                    <span>fern-s3t (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://fernvcsa.s3.amazonaws.com/index.html')">
-                    <span>fernvcsa (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fernvcsa/index.html')">
-                    <span>fernvcsa (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://fsmath.s3.amazonaws.com/index.html')">
-                    <span>fsmath (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fsmath/index.html')">
-                    <span>fsmath (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://fsreading.s3.amazonaws.com/index.html')">
-                    <span>fsreading (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fsreading/index.html')">
-                    <span>fsreading (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://fstudentsareinventors.s3.amazonaws.com/index.html')">
-                    <span>fstudentsareinventors (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fstudentsareinventors/index.html')">
-                    <span>fstudentsareinventors (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://glwithfinals.s3.amazonaws.com/index.html')">
-                    <span>glwithfinals (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/glwithfinals/index.html')">
-                    <span>glwithfinals (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://mathvc.s3.amazonaws.com/index.html')">
-                    <span>mathvc (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/mathvc/index.html')">
-                    <span>mathvc (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://onelastlink.s3.amazonaws.com/index.html')">
-                    <span>onelastlink (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/onelastlink/index.html')">
-                    <span>onelastlink (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://readvc.s3.amazonaws.com/index.html')">
-                    <span>readvc (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/readvc/index.html')">
-                    <span>readvc (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://vcsafern.s3.amazonaws.com/index.html')">
-                    <span>vcsafern (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/vcsafern/index.html')">
-                    <span>vcsafern (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://vcsamath.s3.amazonaws.com/index.html')">
-                    <span>vcsamath (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/vcsamath/index.html')">
-                    <span>vcsamath (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://vcsareading.s3.amazonaws.com/index.html')">
-                    <span>vcsareading (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/vcsareading/index.html')">
-                    <span>vcsareading (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://writevc.s3.amazonaws.com/index.html')">
-                    <span>writevc (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
-                <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/writevc/index.html')">
-                    <span>writevc (s3)</span>
-                    <span class="badge free">free</span>
-                </div>
+            <!-- ===== TABS ===== -->
+            <div class="tab-container">
+                <button class="tab-btn active" onclick="switchTab('free')">quick access</button>
+                <button class="tab-btn" onclick="switchTab('protected')">password protected</button>
+            </div>
 
-                <!-- ===== EXISTING PASSWORD-PROTECTED SECTION ===== -->
-                <div class="section-divider">password protected</div>
-
-                <div class="option" onclick="selectLink('gclassroom')">
-                    <span>gclassroom (storage)</span>
-                    <span class="badge">******</span>
-                </div>
-                <div class="option" onclick="selectLink('clever-s3')">
-                    <span>cleverlearning (s3)</span>
-                    <span class="badge">******</span>
-                </div>
-                <div class="option" onclick="selectLink('clever')">
-                    <span>cleverlearning (s3 alt)</span>
-                    <span class="badge">****</span>
-                </div>
-                <div class="option" onclick="selectLink('pages')">
-                    <span>opiumbest (github)</span>
-                    <span class="badge">*****</span>
-                </div>
-                <div class="option" onclick="selectLink('opium-s3')">
-                    <span>opiumisbest (s3)</span>
-                    <span class="badge">******</span>
-                </div>
-                <div class="option" onclick="selectLink('opium')">
-                    <span>opiumisbest (s3 alt)</span>
-                    <span class="badge">*****</span>
-                </div>
-                <div class="option" onclick="selectLink('best')">
-                    <span>opiumbest (storage)</span>
-                    <span class="badge">****</span>
-                </div>
-                <div class="option" onclick="selectLink('svg-cdn')">
-                    <span>svg (jsdelivr)</span>
-                    <span class="badge">***</span>
-                </div>
-                <div class="option" onclick="selectLink('cdn')">
-                    <span>svg (cdn)</span>
-                    <span class="badge">***</span>
-                </div>
-                <div class="option" onclick="selectLink('statically')">
-                    <span>svg (statically)</span>
-                    <span class="badge">***</span>
-                </div>
-                <div class="option" onclick="selectLink('raw-esm')">
-                    <span>svg (raw.esm)</span>
-                    <span class="badge">***</span>
+            <!-- ===== TAB 1: QUICK ACCESS (NO PASSWORD) ===== -->
+            <div id="tab-free" class="tab-content active">
+                <div class="link-list">
+                    <div class="option" onclick="openFreeLink('https://storage.googleapis.com/fernisbest/index.html')">
+                        <span>fernisbest (storage)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fernisbest/index.html')">
+                        <span>fernisbest (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fernlinks/index.html')">
+                        <span>fernlinks (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/classworks/index.html')">
+                        <span>classworks (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bull33/index.html')">
+                        <span>bull33 (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bullbestyoutuber/index.html')">
+                        <span>bullbestyoutuber (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bulledu/index.html')">
+                        <span>bulledu (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bullguardian/index.html')">
+                        <span>bullguardian (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bullisgoated/index.html')">
+                        <span>bullisgoated (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bulllightspeed/index.html')">
+                        <span>bulllightspeed (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bullmath/index.html')">
+                        <span>bullmath (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bullubg/index.html')">
+                        <span>bullubg (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/iloveliteratures/index.html')">
+                        <span>iloveliteratures (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/ilovemaths/index.html')">
+                        <span>ilovemaths (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/lsrelay-extension-production/index.html')">
+                        <span>lsrelay-extension (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/macrolo/index.html')">
+                        <span>macrolo (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/macrologoat/index.html')">
+                        <span>macrologoat (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/macrolomath/index.html')">
+                        <span>macrolomath (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/angelfern/index.html')">
+                        <span>angelfern (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/deaganfern/index.html')">
+                        <span>deaganfern (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://bullbestyoutuber.s3.amazonaws.com/index.html')">
+                        <span>bullbestyoutuber (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://bulledu.s3.amazonaws.com/index.html')">
+                        <span>bulledu (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://bullguardian.s3.amazonaws.com/index.html')">
+                        <span>bullguardian (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://bullisgoated.s3.amazonaws.com/index.html')">
+                        <span>bullisgoated (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://bulllightspeed.s3.amazonaws.com/index.html')">
+                        <span>bulllightspeed (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://bullmath.s3.amazonaws.com/index.html')">
+                        <span>bullmath (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://bullubg.s3.amazonaws.com/index.html')">
+                        <span>bullubg (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://iloveliteratures.s3.amazonaws.com/index.html')">
+                        <span>iloveliteratures (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://ilovemaths.s3.amazonaws.com/index.html')">
+                        <span>ilovemaths (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://lsrelay-extension-production.s3.amazonaws.com/index.html')">
+                        <span>lsrelay-extension (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://macrolo.s3.amazonaws.com/index.html')">
+                        <span>macrolo (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://macrologoat.s3.amazonaws.com/index.html')">
+                        <span>macrologoat (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://macrolomath.s3.amazonaws.com/index.html')">
+                        <span>macrolomath (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://angelfern.s3.amazonaws.com/index.html')">
+                        <span>angelfern (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://deaganfern.s3.amazonaws.com/index.html')">
+                        <span>deaganfern (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://bullreading.s3.amazonaws.com/index.html')">
+                        <span>bullreading (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bullreading/index.html')">
+                        <span>bullreading (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://fern-s3t.s3.amazonaws.com/index.html')">
+                        <span>fern-s3t (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fern-s3t/index.html')">
+                        <span>fern-s3t (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://fernvcsa.s3.amazonaws.com/index.html')">
+                        <span>fernvcsa (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fernvcsa/index.html')">
+                        <span>fernvcsa (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://fsmath.s3.amazonaws.com/index.html')">
+                        <span>fsmath (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fsmath/index.html')">
+                        <span>fsmath (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://fsreading.s3.amazonaws.com/index.html')">
+                        <span>fsreading (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fsreading/index.html')">
+                        <span>fsreading (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://fstudentsareinventors.s3.amazonaws.com/index.html')">
+                        <span>fstudentsareinventors (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fstudentsareinventors/index.html')">
+                        <span>fstudentsareinventors (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://glwithfinals.s3.amazonaws.com/index.html')">
+                        <span>glwithfinals (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/glwithfinals/index.html')">
+                        <span>glwithfinals (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://mathvc.s3.amazonaws.com/index.html')">
+                        <span>mathvc (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/mathvc/index.html')">
+                        <span>mathvc (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://onelastlink.s3.amazonaws.com/index.html')">
+                        <span>onelastlink (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/onelastlink/index.html')">
+                        <span>onelastlink (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://readvc.s3.amazonaws.com/index.html')">
+                        <span>readvc (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/readvc/index.html')">
+                        <span>readvc (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://vcsafern.s3.amazonaws.com/index.html')">
+                        <span>vcsafern (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/vcsafern/index.html')">
+                        <span>vcsafern (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://vcsamath.s3.amazonaws.com/index.html')">
+                        <span>vcsamath (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/vcsamath/index.html')">
+                        <span>vcsamath (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://vcsareading.s3.amazonaws.com/index.html')">
+                        <span>vcsareading (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/vcsareading/index.html')">
+                        <span>vcsareading (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://writevc.s3.amazonaws.com/index.html')">
+                        <span>writevc (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
+                    <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/writevc/index.html')">
+                        <span>writevc (s3)</span>
+                        <span class="badge free">free</span>
+                    </div>
                 </div>
             </div>
-            <div class="password-hint">passwords hidden</div>
+
+            <!-- ===== TAB 2: PASSWORD PROTECTED ===== -->
+            <div id="tab-protected" class="tab-content">
+                <div class="link-list">
+                    <div class="option" onclick="selectLink('gclassroom')">
+                        <span>gclassroom (storage)</span>
+                        <span class="badge">******</span>
+                    </div>
+                    <div class="option" onclick="selectLink('clever-s3')">
+                        <span>cleverlearning (s3)</span>
+                        <span class="badge">******</span>
+                    </div>
+                    <div class="option" onclick="selectLink('clever')">
+                        <span>cleverlearning (s3 alt)</span>
+                        <span class="badge">****</span>
+                    </div>
+                    <div class="option" onclick="selectLink('pages')">
+                        <span>opiumbest (github)</span>
+                        <span class="badge">*****</span>
+                    </div>
+                    <div class="option" onclick="selectLink('opium-s3')">
+                        <span>opiumisbest (s3)</span>
+                        <span class="badge">******</span>
+                    </div>
+                    <div class="option" onclick="selectLink('opium')">
+                        <span>opiumisbest (s3 alt)</span>
+                        <span class="badge">*****</span>
+                    </div>
+                    <div class="option" onclick="selectLink('best')">
+                        <span>opiumbest (storage)</span>
+                        <span class="badge">****</span>
+                    </div>
+                    <div class="option" onclick="selectLink('svg-cdn')">
+                        <span>svg (jsdelivr)</span>
+                        <span class="badge">***</span>
+                    </div>
+                    <div class="option" onclick="selectLink('cdn')">
+                        <span>svg (cdn)</span>
+                        <span class="badge">***</span>
+                    </div>
+                    <div class="option" onclick="selectLink('statically')">
+                        <span>svg (statically)</span>
+                        <span class="badge">***</span>
+                    </div>
+                    <div class="option" onclick="selectLink('raw-esm')">
+                        <span>svg (raw.esm)</span>
+                        <span class="badge">***</span>
+                    </div>
+                </div>
+                <div class="tab-hint">passwords hidden</div>
+            </div>
         </div>
 
         <!-- password view (hidden initially) -->
@@ -650,7 +679,7 @@
     </div>
 
     <script>
-        // ===== QUOTES DATABASE (unchanged) =====
+        // ===== QUOTES DATABASE =====
         const quotes = [
             { text: "the unexamined life is not worth living", attribution: "socrates" },
             { text: "i think, therefore i am", attribution: "descartes" },
@@ -711,7 +740,7 @@
             { text: "ian gucci morty", attribution: "" }
         ];
 
-        // ===== EXISTING PASSWORD-PROTECTED LINKS =====
+        // ===== PASSWORD-PROTECTED LINKS =====
         const links = {
             "gclassroom": "https://storage.googleapis.com/gclassroom/index.html",
             "clever-s3": "https://cleverlearning.s3.amazonaws.com/index.html",
@@ -770,15 +799,21 @@
 
         let selectedKey = null;
 
-        // ===== NEW: FUNCTION FOR PASSWORD-FREE LINKS =====
+        // ===== TAB SWITCHING =====
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById('tab-' + tab).classList.add('active');
+            document.querySelector(`.tab-btn[onclick="switchTab('${tab}')"]`).classList.add('active');
+        }
+
+        // ===== FREE LINK FUNCTION =====
         function openFreeLink(url) {
-            // Directly load the URL in the iframe without password
             document.getElementById('login').classList.add('fade-out');
             
-            // Show a simple splash without password prompt
             const splash = document.getElementById('splash');
-            const splashText = "loading...";
-            splash.querySelector('.text').innerHTML = '<span>' + splashText + '</span>';
+            splash.querySelector('.text').innerHTML = '<span>loading...</span>';
             
             const quoteElement = document.getElementById('splashQuote');
             const randomQuote = getRandomQuote();
@@ -792,23 +827,21 @@
             splash.style.display = 'flex';
             setTimeout(() => {
                 splash.classList.add('show');
-                setTimeout(() => {
-                    quoteElement.classList.add('show');
-                }, 400);
+                setTimeout(() => quoteElement.classList.add('show'), 400);
             }, 50);
 
             setTimeout(() => {
                 splash.classList.add('fade-out');
-                
                 setTimeout(() => {
                     splash.style.display = 'none';
                     splash.classList.remove('show', 'fade-out');
                     quoteElement.classList.remove('show');
                     
                     document.getElementById('mirror-iframe').src = url;
-                    const container = document.getElementById('iframe-container');
-                    container.style.display = 'block';
-                    setTimeout(() => container.classList.add('fade-in'), 50);
+                    document.getElementById('iframe-container').style.display = 'block';
+                    setTimeout(() => {
+                        document.getElementById('iframe-container').classList.add('fade-in');
+                    }, 50);
 
                     const logoutBtn = document.querySelector('.logout-btn');
                     logoutBtn.style.display = 'block';
@@ -817,7 +850,7 @@
             }, 1500);
         }
 
-        // ===== EXISTING FUNCTIONS (selectLink, showLinkList, checkPassword, logout) =====
+        // ===== PASSWORD FUNCTIONS =====
         function selectLink(key) {
             selectedKey = key;
             document.getElementById('linkListView').style.display = 'none';
@@ -839,8 +872,7 @@
         }
 
         function getRandomQuote() {
-            const randomIndex = Math.floor(Math.random() * quotes.length);
-            return quotes[randomIndex];
+            return quotes[Math.floor(Math.random() * quotes.length)];
         }
 
         function checkPassword() {
@@ -882,23 +914,21 @@
                 splash.style.display = 'flex';
                 setTimeout(() => {
                     splash.classList.add('show');
-                    setTimeout(() => {
-                        quoteElement.classList.add('show');
-                    }, 400);
+                    setTimeout(() => quoteElement.classList.add('show'), 400);
                 }, 50);
 
                 setTimeout(() => {
                     splash.classList.add('fade-out');
-                    
                     setTimeout(() => {
                         splash.style.display = 'none';
                         splash.classList.remove('show', 'fade-out');
                         quoteElement.classList.remove('show');
                         
                         document.getElementById('mirror-iframe').src = links[selectedKey];
-                        const container = document.getElementById('iframe-container');
-                        container.style.display = 'block';
-                        setTimeout(() => container.classList.add('fade-in'), 50);
+                        document.getElementById('iframe-container').style.display = 'block';
+                        setTimeout(() => {
+                            document.getElementById('iframe-container').classList.add('fade-in');
+                        }, 50);
 
                         const logoutBtn = document.querySelector('.logout-btn');
                         logoutBtn.style.display = 'block';
