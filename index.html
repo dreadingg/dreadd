@@ -22,16 +22,19 @@
             padding: 16px;
         }
         #login {
-            background: #0a0a14;
+            background: transparent;
             padding: 24px 20px;
             border-radius: 10px;
-            border: 1px solid #1a1a2e;
-            box-shadow: 0 8px 40px rgba(80, 60, 200, 0.06);
+            border: 1px solid rgba(26, 26, 46, 0.3);
+            box-shadow: none;
             text-align: center;
             width: 100%;
             max-width: 400px;
             transition: opacity 0.8s ease, transform 0.8s ease;
             z-index: 10;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            background: rgba(5, 5, 8, 0.25);
         }
         #login.fade-out {
             opacity: 0;
@@ -59,14 +62,14 @@
             margin-bottom: 12px;
             letter-spacing: 0.3px;
             text-transform: lowercase;
-            border-bottom: 1px solid #14142a;
+            border-bottom: 1px solid rgba(20, 20, 42, 0.4);
             padding-bottom: 8px;
         }
         #login input {
             width: 100%;
             padding: 8px 12px;
-            background: #08080f;
-            border: 1px solid #181830;
+            background: rgba(8, 8, 15, 0.5);
+            border: 1px solid rgba(24, 24, 48, 0.4);
             border-radius: 5px;
             color: #d0d0e0;
             font-size: 13px;
@@ -113,17 +116,18 @@
             letter-spacing: 0.3px;
         }
 
-        /* ===== HOVER TABS ===== */
+        /* ===== TRANSPARENT TABS ===== */
         .tab-container {
             display: flex;
             margin-bottom: 12px;
-            border-bottom: 1px solid #12122a;
+            border-bottom: 1px solid rgba(18, 18, 42, 0.3);
             position: relative;
+            background: transparent;
         }
         .tab-btn {
             flex: 1;
             padding: 6px 0;
-            background: none;
+            background: transparent !important;
             border: none;
             color: #3a3a55;
             font-size: 10px;
@@ -143,6 +147,7 @@
         .tab-btn.active {
             color: #c0c0e0;
             border-bottom-color: #6a6aff;
+            background: transparent !important;
         }
         .tab-content {
             display: none;
@@ -162,7 +167,7 @@
             width: 2px;
         }
         .tab-content::-webkit-scrollbar-track {
-            background: #08080f;
+            background: rgba(8, 8, 15, 0.2);
         }
         .tab-content::-webkit-scrollbar-thumb {
             background: #1a1a3e;
@@ -177,7 +182,7 @@
             padding: 6px 4px;
             font-size: 11px;
             color: #7777aa;
-            border-bottom: 1px solid #0a0a1a;
+            border-bottom: 1px solid rgba(10, 10, 26, 0.3);
             cursor: pointer;
             transition: color 0.3s, background 0.3s;
             border-radius: 3px;
@@ -185,10 +190,10 @@
         }
         .link-list .option:hover {
             color: #d0d0f0;
-            background: #0a0a18;
+            background: rgba(10, 10, 24, 0.3);
         }
         .link-list .option .badge {
-            background: #080810;
+            background: rgba(8, 8, 16, 0.4);
             padding: 0px 10px;
             border-radius: 8px;
             font-size: 8px;
@@ -204,7 +209,7 @@
 
         .tab-hint {
             font-size: 8px;
-            color: #2a2a44;
+            color: rgba(42, 42, 68, 0.6);
             margin-top: 8px;
             letter-spacing: 0.5px;
             font-family: 'Inter', monospace;
@@ -363,10 +368,16 @@
         </div>
 
         <div id="linkListView">
-            <!-- ===== HOVER TABS ===== -->
+            <!-- ===== TRANSPARENT TABS ===== -->
             <div class="tab-container">
-                <button class="tab-btn active" onmouseover="switchTab('protected')" id="tab-protected-btn">password</button>
-                <button class="tab-btn" onmouseover="switchTab('free')" id="tab-free-btn">free</button>
+                <button class="tab-btn active" 
+                        onmouseenter="startHoverTimer('protected')" 
+                        onmouseleave="clearHoverTimer()" 
+                        id="tab-protected-btn">password</button>
+                <button class="tab-btn" 
+                        onmouseenter="startHoverTimer('free')" 
+                        onmouseleave="clearHoverTimer()" 
+                        id="tab-free-btn">free</button>
             </div>
 
             <!-- ===== TAB 1: PASSWORD PROTECTED ===== -->
@@ -701,6 +712,24 @@
     </div>
 
     <script>
+        // ===== HOVER DELAY TIMER =====
+        let hoverTimer = null;
+        const HOVER_DELAY = 400; // milliseconds (0.4 seconds)
+
+        function startHoverTimer(tab) {
+            clearHoverTimer();
+            hoverTimer = setTimeout(() => {
+                switchTab(tab);
+            }, HOVER_DELAY);
+        }
+
+        function clearHoverTimer() {
+            if (hoverTimer) {
+                clearTimeout(hoverTimer);
+                hoverTimer = null;
+            }
+        }
+
         // ===== QUOTES DATABASE =====
         const quotes = [
             { text: "the unexamined life is not worth living", attribution: "socrates" },
