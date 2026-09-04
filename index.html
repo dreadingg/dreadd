@@ -19,80 +19,80 @@
             align-items: center;
             min-height: 100vh;
             overflow: auto;
-            padding: 20px;
+            padding: 16px;
         }
         #login {
             background: #12121a;
-            padding: 40px 30px;
-            border-radius: 16px;
-            border: 1px solid #2a2a3a;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+            padding: 28px 24px;
+            border-radius: 12px;
+            border: 1px solid #1e1e2e;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
             text-align: center;
             width: 100%;
-            max-width: 420px;
+            max-width: 400px;
             transition: opacity 0.8s ease, transform 0.8s ease;
             z-index: 10;
         }
         #login.fade-out {
             opacity: 0;
-            transform: scale(0.95);
+            transform: scale(0.96);
             pointer-events: none;
         }
         #login .back-btn {
             position: absolute;
-            top: 16px;
-            left: 20px;
+            top: 12px;
+            left: 16px;
             background: none;
             border: none;
-            color: #8888aa;
-            font-size: 20px;
+            color: #555566;
+            font-size: 18px;
             cursor: pointer;
             transition: color 0.3s;
-            padding: 4px 8px;
+            padding: 2px 6px;
         }
         #login .back-btn:hover {
             color: #e0e0e0;
         }
         #login .selected-link {
-            font-size: 14px;
+            font-size: 13px;
             color: #6c6cff;
-            margin-bottom: 16px;
-            letter-spacing: 1px;
+            margin-bottom: 14px;
+            letter-spacing: 0.5px;
             text-transform: lowercase;
-            border-bottom: 1px solid #2a2a3a;
-            padding-bottom: 12px;
+            border-bottom: 1px solid #1e1e2e;
+            padding-bottom: 10px;
         }
         #login input {
             width: 100%;
-            padding: 14px 16px;
-            background: #1a1a26;
-            border: 1px solid #2a2a3e;
-            border-radius: 8px;
+            padding: 10px 14px;
+            background: #0f0f18;
+            border: 1px solid #1e1e2e;
+            border-radius: 6px;
             color: #e0e0e0;
-            font-size: 15px;
+            font-size: 14px;
             outline: none;
             transition: border 0.3s;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
         #login input:focus {
             border-color: #6c6cff;
-            box-shadow: 0 0 20px rgba(108,108,255,0.08);
+            box-shadow: 0 0 12px rgba(108,108,255,0.06);
         }
         #login input::placeholder {
-            color: #555566;
+            color: #444455;
             font-weight: 300;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
         #login button {
             width: 100%;
-            padding: 14px;
+            padding: 10px;
             background: #6c6cff;
             color: white;
             border: none;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 500;
-            letter-spacing: 2px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 400;
+            letter-spacing: 1.5px;
             cursor: pointer;
             transition: background 0.3s, transform 0.1s;
             text-transform: lowercase;
@@ -105,34 +105,34 @@
         }
         #error {
             color: #ff6b6b;
-            font-size: 13px;
-            margin-top: 14px;
+            font-size: 12px;
+            margin-top: 12px;
             display: none;
             letter-spacing: 0.5px;
         }
 
-        /* ===== TAB STYLES ===== */
+        /* ===== MINIMALIST TAB STYLES ===== */
         .tab-container {
             display: flex;
-            margin-bottom: 16px;
-            border-bottom: 1px solid #2a2a3a;
+            margin-bottom: 14px;
+            border-bottom: 1px solid #1a1a26;
         }
         .tab-btn {
             flex: 1;
-            padding: 10px 0;
+            padding: 8px 0;
             background: none;
             border: none;
-            color: #555566;
-            font-size: 12px;
-            letter-spacing: 2px;
+            color: #444455;
+            font-size: 11px;
+            letter-spacing: 1.5px;
             text-transform: lowercase;
             cursor: pointer;
             transition: color 0.3s, border-color 0.3s;
-            border-bottom: 2px solid transparent;
+            border-bottom: 1.5px solid transparent;
             font-family: 'Segoe UI', Arial, sans-serif;
         }
         .tab-btn:hover {
-            color: #8888aa;
+            color: #777788;
         }
         .tab-btn.active {
             color: #e0e0e0;
@@ -141,48 +141,46 @@
         .tab-content {
             display: none;
             text-align: left;
-            max-height: 400px;
+            max-height: 380px;
             overflow-y: auto;
         }
         .tab-content.active {
             display: block;
         }
         .tab-content::-webkit-scrollbar {
-            width: 4px;
+            width: 3px;
         }
         .tab-content::-webkit-scrollbar-track {
-            background: #1a1a26;
+            background: #0f0f18;
         }
         .tab-content::-webkit-scrollbar-thumb {
-            background: #6c6cff;
-            border-radius: 4px;
+            background: #2a2a3e;
+            border-radius: 2px;
         }
 
         .link-list .option {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 0;
-            font-size: 13px;
-            color: #8888aa;
-            border-bottom: 1px solid #1a1a26;
+            padding: 8px 6px;
+            font-size: 12px;
+            color: #777788;
+            border-bottom: 1px solid #0f0f18;
             cursor: pointer;
             transition: color 0.3s, background 0.3s;
             border-radius: 4px;
-            padding-left: 8px;
-            padding-right: 8px;
         }
         .link-list .option:hover {
             color: #e0e0e0;
-            background: #1a1a26;
+            background: #0f0f18;
         }
         .link-list .option .badge {
-            background: #1a1a26;
-            padding: 2px 12px;
-            border-radius: 12px;
-            font-size: 10px;
+            background: #0f0f18;
+            padding: 1px 10px;
+            border-radius: 10px;
+            font-size: 9px;
             color: #6c6cff;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
             font-family: monospace;
         }
         .link-list .option .badge.free {
@@ -190,9 +188,9 @@
         }
 
         .tab-hint {
-            font-size: 10px;
-            color: #444455;
-            margin-top: 12px;
+            font-size: 9px;
+            color: #333344;
+            margin-top: 10px;
             letter-spacing: 0.5px;
             font-family: monospace;
             text-align: center;
@@ -210,7 +208,7 @@
             justify-content: center;
             align-items: center;
             opacity: 0;
-            transition: opacity 1s ease;
+            transition: opacity 0.8s ease;
             pointer-events: none;
             flex-direction: column;
         }
@@ -221,62 +219,62 @@
             opacity: 0;
         }
         #splash .text {
-            font-size: 32px;
+            font-size: 28px;
             font-weight: 300;
-            letter-spacing: 8px;
+            letter-spacing: 6px;
             color: #e0e0e0;
             text-transform: lowercase;
             text-align: center;
-            padding: 20px 20px 0 20px;
+            padding: 16px 16px 0 16px;
         }
         #splash .text span {
             color: #6c6cff;
             font-weight: 400;
         }
         #splash .quote {
-            font-size: 14px;
-            color: #666688;
-            letter-spacing: 2px;
+            font-size: 13px;
+            color: #555566;
+            letter-spacing: 1px;
             text-align: center;
-            padding: 12px 30px 20px 30px;
+            padding: 10px 24px 16px 24px;
             opacity: 0;
-            transition: opacity 1.2s ease;
-            max-width: 600px;
-            line-height: 1.6;
+            transition: opacity 0.8s ease;
+            max-width: 540px;
+            line-height: 1.5;
             font-style: italic;
         }
         #splash .quote.show {
             opacity: 1;
         }
         #splash .quote .attribution {
-            font-size: 11px;
-            color: #444466;
-            letter-spacing: 1px;
+            font-size: 10px;
+            color: #333344;
+            letter-spacing: 0.5px;
             display: block;
-            margin-top: 6px;
+            margin-top: 4px;
             font-style: normal;
         }
         @media (max-width: 480px) {
             #splash .text {
-                font-size: 22px;
+                font-size: 20px;
                 letter-spacing: 4px;
-                padding: 16px 16px 0 16px;
+                padding: 14px 14px 0 14px;
             }
             #splash .quote {
-                font-size: 12px;
-                padding: 10px 20px 16px 20px;
-                letter-spacing: 1px;
+                font-size: 11px;
+                padding: 8px 16px 14px 16px;
+                letter-spacing: 0.5px;
             }
             #login {
-                padding: 30px 20px;
+                padding: 20px 16px;
             }
             .link-list .option {
                 font-size: 11px;
-                padding: 8px 0;
+                padding: 6px 4px;
             }
             .tab-btn {
                 font-size: 10px;
-                padding: 8px 0;
+                padding: 6px 0;
             }
         }
         #iframe-container {
@@ -288,7 +286,7 @@
             left: 0;
             background: #0a0a0f;
             opacity: 0;
-            transition: opacity 1s ease;
+            transition: opacity 0.8s ease;
             z-index: 5;
         }
         #iframe-container.fade-in {
@@ -302,33 +300,34 @@
         }
         .logout-btn {
             position: fixed;
-            top: 20px;
+            top: 16px;
             right: 20px;
             z-index: 9999;
-            background: rgba(26,26,38,0.9);
-            color: #8888aa;
-            border: 1px solid #2a2a3a;
-            padding: 8px 18px;
-            border-radius: 6px;
+            background: rgba(15,15,24,0.9);
+            color: #555566;
+            border: 1px solid #1a1a26;
+            padding: 4px 14px;
+            border-radius: 4px;
             cursor: pointer;
-            font-size: 12px;
-            letter-spacing: 1.5px;
+            font-size: 10px;
+            letter-spacing: 1px;
             text-transform: lowercase;
-            transition: background 0.3s, color 0.3s, opacity 0.8s ease;
+            transition: background 0.3s, color 0.3s, opacity 0.6s ease;
             display: none;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(6px);
             opacity: 0;
         }
         .logout-btn.show {
-            opacity: 1;
+            opacity: 0.7;
         }
         .logout-btn:hover {
-            background: #2a2a3e;
+            background: #1a1a26;
             color: #e0e0e0;
+            opacity: 1;
         }
         .login-header {
             position: relative;
-            padding-top: 4px;
+            padding-top: 2px;
         }
     </style>
 </head>
@@ -343,11 +342,11 @@
         <div id="linkListView">
             <!-- ===== TABS ===== -->
             <div class="tab-container">
-                <button class="tab-btn active" onclick="switchTab('protected')">password protected</button>
-                <button class="tab-btn" onclick="switchTab('free')">quick access</button>
+                <button class="tab-btn active" onclick="switchTab('protected')">password</button>
+                <button class="tab-btn" onclick="switchTab('free')">quick</button>
             </div>
 
-            <!-- ===== TAB 1: PASSWORD PROTECTED (DEFAULT) ===== -->
+            <!-- ===== TAB 1: PASSWORD PROTECTED ===== -->
             <div id="tab-protected" class="tab-content active">
                 <div class="link-list">
                     <div class="option" onclick="selectLink('gclassroom')">
@@ -398,7 +397,7 @@
                 <div class="tab-hint">passwords hidden</div>
             </div>
 
-            <!-- ===== TAB 2: QUICK ACCESS (NO PASSWORD) ===== -->
+            <!-- ===== TAB 2: QUICK ACCESS ===== -->
             <div id="tab-free" class="tab-content">
                 <div class="link-list">
                     <div class="option" onclick="openFreeLink('https://storage.googleapis.com/fernisbest/index.html')">
@@ -846,8 +845,8 @@
                     const logoutBtn = document.querySelector('.logout-btn');
                     logoutBtn.style.display = 'block';
                     setTimeout(() => logoutBtn.classList.add('show'), 300);
-                }, 1000);
-            }, 1500);
+                }, 800);
+            }, 1200);
         }
 
         // ===== PASSWORD FUNCTIONS =====
@@ -933,8 +932,8 @@
                         const logoutBtn = document.querySelector('.logout-btn');
                         logoutBtn.style.display = 'block';
                         setTimeout(() => logoutBtn.classList.add('show'), 300);
-                    }, 1000);
-                }, 2500);
+                    }, 800);
+                }, 2200);
 
             } else {
                 error.textContent = 'access denied';
@@ -942,7 +941,7 @@
                 input.value = '';
                 input.focus();
                 input.style.borderColor = '#ff6b6b';
-                setTimeout(() => input.style.borderColor = '#2a2a3e', 800);
+                setTimeout(() => input.style.borderColor = '#1e1e2e', 800);
             }
         }
 
