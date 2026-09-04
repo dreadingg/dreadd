@@ -11,8 +11,8 @@
             box-sizing: border-box;
         }
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background: #0a0a0f;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #050508;
             color: #e0e0e0;
             display: flex;
             justify-content: center;
@@ -22,11 +22,11 @@
             padding: 16px;
         }
         #login {
-            background: #12121a;
-            padding: 28px 24px;
-            border-radius: 12px;
-            border: 1px solid #1e1e2e;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+            background: #0a0a14;
+            padding: 24px 20px;
+            border-radius: 10px;
+            border: 1px solid #1a1a2e;
+            box-shadow: 0 8px 40px rgba(80, 60, 200, 0.06);
             text-align: center;
             width: 100%;
             max-width: 400px;
@@ -40,62 +40,64 @@
         }
         #login .back-btn {
             position: absolute;
-            top: 12px;
-            left: 16px;
+            top: 10px;
+            left: 14px;
             background: none;
             border: none;
-            color: #555566;
-            font-size: 18px;
+            color: #444466;
+            font-size: 16px;
             cursor: pointer;
             transition: color 0.3s;
             padding: 2px 6px;
         }
         #login .back-btn:hover {
-            color: #e0e0e0;
+            color: #8888bb;
         }
         #login .selected-link {
-            font-size: 13px;
-            color: #6c6cff;
-            margin-bottom: 14px;
-            letter-spacing: 0.5px;
+            font-size: 12px;
+            color: #7a7aff;
+            margin-bottom: 12px;
+            letter-spacing: 0.3px;
             text-transform: lowercase;
-            border-bottom: 1px solid #1e1e2e;
-            padding-bottom: 10px;
+            border-bottom: 1px solid #14142a;
+            padding-bottom: 8px;
         }
         #login input {
             width: 100%;
-            padding: 10px 14px;
-            background: #0f0f18;
-            border: 1px solid #1e1e2e;
-            border-radius: 6px;
-            color: #e0e0e0;
-            font-size: 14px;
+            padding: 8px 12px;
+            background: #08080f;
+            border: 1px solid #181830;
+            border-radius: 5px;
+            color: #d0d0e0;
+            font-size: 13px;
             outline: none;
             transition: border 0.3s;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            font-family: 'Inter', sans-serif;
         }
         #login input:focus {
-            border-color: #6c6cff;
-            box-shadow: 0 0 12px rgba(108,108,255,0.06);
+            border-color: #6a6aff;
+            box-shadow: 0 0 16px rgba(100, 100, 255, 0.05);
         }
         #login input::placeholder {
-            color: #444455;
+            color: #3a3a55;
             font-weight: 300;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
         #login button {
             width: 100%;
-            padding: 10px;
-            background: #6c6cff;
+            padding: 8px;
+            background: #6a6aff;
             color: white;
             border: none;
-            border-radius: 6px;
-            font-size: 13px;
+            border-radius: 5px;
+            font-size: 12px;
             font-weight: 400;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.2px;
             cursor: pointer;
             transition: background 0.3s, transform 0.1s;
             text-transform: lowercase;
+            font-family: 'Inter', sans-serif;
         }
         #login button:hover {
             background: #7a7aff;
@@ -104,98 +106,112 @@
             transform: scale(0.97);
         }
         #error {
-            color: #ff6b6b;
-            font-size: 12px;
-            margin-top: 12px;
+            color: #ff5a6a;
+            font-size: 11px;
+            margin-top: 10px;
             display: none;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
 
-        /* ===== MINIMALIST TAB STYLES ===== */
+        /* ===== HOVER TABS ===== */
         .tab-container {
             display: flex;
-            margin-bottom: 14px;
-            border-bottom: 1px solid #1a1a26;
+            margin-bottom: 12px;
+            border-bottom: 1px solid #12122a;
+            position: relative;
         }
         .tab-btn {
             flex: 1;
-            padding: 8px 0;
+            padding: 6px 0;
             background: none;
             border: none;
-            color: #444455;
-            font-size: 11px;
+            color: #3a3a55;
+            font-size: 10px;
             letter-spacing: 1.5px;
             text-transform: lowercase;
             cursor: pointer;
             transition: color 0.3s, border-color 0.3s;
             border-bottom: 1.5px solid transparent;
-            font-family: 'Segoe UI', Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
+            position: relative;
+            z-index: 2;
         }
         .tab-btn:hover {
-            color: #777788;
+            color: #c0c0e0;
+            border-bottom-color: #6a6aff;
         }
         .tab-btn.active {
-            color: #e0e0e0;
-            border-bottom-color: #6c6cff;
+            color: #c0c0e0;
+            border-bottom-color: #6a6aff;
         }
         .tab-content {
             display: none;
             text-align: left;
             max-height: 380px;
             overflow-y: auto;
+            animation: fadeSlide 0.3s ease;
         }
         .tab-content.active {
             display: block;
         }
+        @keyframes fadeSlide {
+            0% { opacity: 0.5; transform: translateY(6px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
         .tab-content::-webkit-scrollbar {
-            width: 3px;
+            width: 2px;
         }
         .tab-content::-webkit-scrollbar-track {
-            background: #0f0f18;
+            background: #08080f;
         }
         .tab-content::-webkit-scrollbar-thumb {
-            background: #2a2a3e;
+            background: #1a1a3e;
             border-radius: 2px;
         }
 
+        /* ===== LIST ITEMS ===== */
         .link-list .option {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 8px 6px;
-            font-size: 12px;
-            color: #777788;
-            border-bottom: 1px solid #0f0f18;
+            padding: 6px 4px;
+            font-size: 11px;
+            color: #7777aa;
+            border-bottom: 1px solid #0a0a1a;
             cursor: pointer;
             transition: color 0.3s, background 0.3s;
-            border-radius: 4px;
+            border-radius: 3px;
+            font-family: 'Inter', sans-serif;
         }
         .link-list .option:hover {
-            color: #e0e0e0;
-            background: #0f0f18;
+            color: #d0d0f0;
+            background: #0a0a18;
         }
         .link-list .option .badge {
-            background: #0f0f18;
-            padding: 1px 10px;
-            border-radius: 10px;
-            font-size: 9px;
-            color: #6c6cff;
-            letter-spacing: 0.3px;
-            font-family: monospace;
+            background: #080810;
+            padding: 0px 10px;
+            border-radius: 8px;
+            font-size: 8px;
+            color: #6a6aff;
+            letter-spacing: 0.5px;
+            font-family: 'Inter', monospace;
+            font-weight: 400;
+            text-transform: lowercase;
         }
         .link-list .option .badge.free {
-            color: #44aa88;
+            color: #55bb99;
         }
 
         .tab-hint {
-            font-size: 9px;
-            color: #333344;
-            margin-top: 10px;
+            font-size: 8px;
+            color: #2a2a44;
+            margin-top: 8px;
             letter-spacing: 0.5px;
-            font-family: monospace;
+            font-family: 'Inter', monospace;
             text-align: center;
         }
 
+        /* ===== SPLASH SCREEN ===== */
         #splash {
             display: none;
             position: fixed;
@@ -203,7 +219,7 @@
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: #0a0a0f;
+            background: #050508;
             z-index: 20;
             justify-content: center;
             align-items: center;
@@ -219,36 +235,38 @@
             opacity: 0;
         }
         #splash .text {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 300;
             letter-spacing: 6px;
-            color: #e0e0e0;
+            color: #d0d0e8;
             text-transform: lowercase;
             text-align: center;
-            padding: 16px 16px 0 16px;
+            padding: 14px 14px 0 14px;
+            font-family: 'Inter', sans-serif;
         }
         #splash .text span {
-            color: #6c6cff;
+            color: #7a7aff;
             font-weight: 400;
         }
         #splash .quote {
-            font-size: 13px;
-            color: #555566;
+            font-size: 12px;
+            color: #555588;
             letter-spacing: 1px;
             text-align: center;
-            padding: 10px 24px 16px 24px;
+            padding: 8px 20px 14px 20px;
             opacity: 0;
             transition: opacity 0.8s ease;
-            max-width: 540px;
+            max-width: 520px;
             line-height: 1.5;
             font-style: italic;
+            font-family: 'Inter', sans-serif;
         }
         #splash .quote.show {
             opacity: 1;
         }
         #splash .quote .attribution {
-            font-size: 10px;
-            color: #333344;
+            font-size: 9px;
+            color: #333366;
             letter-spacing: 0.5px;
             display: block;
             margin-top: 4px;
@@ -256,27 +274,29 @@
         }
         @media (max-width: 480px) {
             #splash .text {
-                font-size: 20px;
+                font-size: 18px;
                 letter-spacing: 4px;
-                padding: 14px 14px 0 14px;
+                padding: 12px 12px 0 12px;
             }
             #splash .quote {
-                font-size: 11px;
-                padding: 8px 16px 14px 16px;
+                font-size: 10px;
+                padding: 6px 14px 12px 14px;
                 letter-spacing: 0.5px;
             }
             #login {
-                padding: 20px 16px;
+                padding: 16px 14px;
             }
             .link-list .option {
-                font-size: 11px;
-                padding: 6px 4px;
+                font-size: 10px;
+                padding: 5px 3px;
             }
             .tab-btn {
-                font-size: 10px;
-                padding: 6px 0;
+                font-size: 9px;
+                padding: 5px 0;
             }
         }
+
+        /* ===== IFRAME CONTAINER ===== */
         #iframe-container {
             display: none;
             width: 100vw;
@@ -284,7 +304,7 @@
             position: fixed;
             top: 0;
             left: 0;
-            background: #0a0a0f;
+            background: #050508;
             opacity: 0;
             transition: opacity 0.8s ease;
             z-index: 5;
@@ -296,33 +316,36 @@
             width: 100%;
             height: 100%;
             border: none;
-            background: white;
+            background: #ffffff;
         }
+
+        /* ===== LOGOUT BUTTON ===== */
         .logout-btn {
             position: fixed;
-            top: 16px;
-            right: 20px;
+            top: 14px;
+            right: 16px;
             z-index: 9999;
-            background: rgba(15,15,24,0.9);
-            color: #555566;
-            border: 1px solid #1a1a26;
-            padding: 4px 14px;
+            background: rgba(8, 8, 15, 0.92);
+            color: #444466;
+            border: 1px solid #14142a;
+            padding: 3px 12px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 10px;
+            font-size: 9px;
             letter-spacing: 1px;
             text-transform: lowercase;
             transition: background 0.3s, color 0.3s, opacity 0.6s ease;
             display: none;
             backdrop-filter: blur(6px);
             opacity: 0;
+            font-family: 'Inter', sans-serif;
         }
         .logout-btn.show {
-            opacity: 0.7;
+            opacity: 0.6;
         }
         .logout-btn:hover {
-            background: #1a1a26;
-            color: #e0e0e0;
+            background: #14142a;
+            color: #c0c0e0;
             opacity: 1;
         }
         .login-header {
@@ -340,10 +363,10 @@
         </div>
 
         <div id="linkListView">
-            <!-- ===== TABS ===== -->
+            <!-- ===== HOVER TABS ===== -->
             <div class="tab-container">
-                <button class="tab-btn active" onclick="switchTab('protected')">password</button>
-                <button class="tab-btn" onclick="switchTab('free')">quick</button>
+                <button class="tab-btn active" onmouseover="switchTab('protected')" id="tab-protected-btn">password</button>
+                <button class="tab-btn" onmouseover="switchTab('free')" id="tab-free-btn">free</button>
             </div>
 
             <!-- ===== TAB 1: PASSWORD PROTECTED ===== -->
@@ -800,11 +823,43 @@
 
         // ===== TAB SWITCHING =====
         function switchTab(tab) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            // Update button states
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById('tab-' + tab + '-btn').classList.add('active');
             
-            document.getElementById('tab-' + tab).classList.add('active');
-            document.querySelector(`.tab-btn[onclick="switchTab('${tab}')"]`).classList.add('active');
+            // Update content with fade
+            const currentContent = document.querySelector('.tab-content.active');
+            const newContent = document.getElementById('tab-' + tab);
+            
+            if (currentContent === newContent) return;
+            
+            // Fade out current
+            if (currentContent) {
+                currentContent.style.opacity = '0';
+                currentContent.style.transform = 'translateY(6px)';
+                setTimeout(() => {
+                    currentContent.classList.remove('active');
+                    currentContent.style.opacity = '';
+                    currentContent.style.transform = '';
+                }, 250);
+            }
+            
+            // Fade in new
+            setTimeout(() => {
+                newContent.classList.add('active');
+                newContent.style.opacity = '0';
+                newContent.style.transform = 'translateY(6px)';
+                requestAnimationFrame(() => {
+                    newContent.style.opacity = '1';
+                    newContent.style.transform = 'translateY(0)';
+                    newContent.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+                    setTimeout(() => {
+                        newContent.style.opacity = '';
+                        newContent.style.transform = '';
+                        newContent.style.transition = '';
+                    }, 300);
+                });
+            }, 250);
         }
 
         // ===== FREE LINK FUNCTION =====
@@ -940,8 +995,8 @@
                 error.style.display = 'block';
                 input.value = '';
                 input.focus();
-                input.style.borderColor = '#ff6b6b';
-                setTimeout(() => input.style.borderColor = '#1e1e2e', 800);
+                input.style.borderColor = '#ff5a6a';
+                setTimeout(() => input.style.borderColor = '#181830', 800);
             }
         }
 
