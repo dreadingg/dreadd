@@ -343,12 +343,63 @@
         <div id="linkListView">
             <!-- ===== TABS ===== -->
             <div class="tab-container">
-                <button class="tab-btn active" onclick="switchTab('free')">quick access</button>
-                <button class="tab-btn" onclick="switchTab('protected')">password protected</button>
+                <button class="tab-btn active" onclick="switchTab('protected')">password protected</button>
+                <button class="tab-btn" onclick="switchTab('free')">quick access</button>
             </div>
 
-            <!-- ===== TAB 1: QUICK ACCESS (NO PASSWORD) ===== -->
-            <div id="tab-free" class="tab-content active">
+            <!-- ===== TAB 1: PASSWORD PROTECTED (DEFAULT) ===== -->
+            <div id="tab-protected" class="tab-content active">
+                <div class="link-list">
+                    <div class="option" onclick="selectLink('gclassroom')">
+                        <span>gclassroom (storage)</span>
+                        <span class="badge">******</span>
+                    </div>
+                    <div class="option" onclick="selectLink('clever-s3')">
+                        <span>cleverlearning (s3)</span>
+                        <span class="badge">******</span>
+                    </div>
+                    <div class="option" onclick="selectLink('clever')">
+                        <span>cleverlearning (s3 alt)</span>
+                        <span class="badge">****</span>
+                    </div>
+                    <div class="option" onclick="selectLink('pages')">
+                        <span>opiumbest (github)</span>
+                        <span class="badge">*****</span>
+                    </div>
+                    <div class="option" onclick="selectLink('opium-s3')">
+                        <span>opiumisbest (s3)</span>
+                        <span class="badge">******</span>
+                    </div>
+                    <div class="option" onclick="selectLink('opium')">
+                        <span>opiumisbest (s3 alt)</span>
+                        <span class="badge">*****</span>
+                    </div>
+                    <div class="option" onclick="selectLink('best')">
+                        <span>opiumbest (storage)</span>
+                        <span class="badge">****</span>
+                    </div>
+                    <div class="option" onclick="selectLink('svg-cdn')">
+                        <span>svg (jsdelivr)</span>
+                        <span class="badge">***</span>
+                    </div>
+                    <div class="option" onclick="selectLink('cdn')">
+                        <span>svg (cdn)</span>
+                        <span class="badge">***</span>
+                    </div>
+                    <div class="option" onclick="selectLink('statically')">
+                        <span>svg (statically)</span>
+                        <span class="badge">***</span>
+                    </div>
+                    <div class="option" onclick="selectLink('raw-esm')">
+                        <span>svg (raw.esm)</span>
+                        <span class="badge">***</span>
+                    </div>
+                </div>
+                <div class="tab-hint">passwords hidden</div>
+            </div>
+
+            <!-- ===== TAB 2: QUICK ACCESS (NO PASSWORD) ===== -->
+            <div id="tab-free" class="tab-content">
                 <div class="link-list">
                     <div class="option" onclick="openFreeLink('https://storage.googleapis.com/fernisbest/index.html')">
                         <span>fernisbest (storage)</span>
@@ -603,57 +654,6 @@
                         <span class="badge free">free</span>
                     </div>
                 </div>
-            </div>
-
-            <!-- ===== TAB 2: PASSWORD PROTECTED ===== -->
-            <div id="tab-protected" class="tab-content">
-                <div class="link-list">
-                    <div class="option" onclick="selectLink('gclassroom')">
-                        <span>gclassroom (storage)</span>
-                        <span class="badge">******</span>
-                    </div>
-                    <div class="option" onclick="selectLink('clever-s3')">
-                        <span>cleverlearning (s3)</span>
-                        <span class="badge">******</span>
-                    </div>
-                    <div class="option" onclick="selectLink('clever')">
-                        <span>cleverlearning (s3 alt)</span>
-                        <span class="badge">****</span>
-                    </div>
-                    <div class="option" onclick="selectLink('pages')">
-                        <span>opiumbest (github)</span>
-                        <span class="badge">*****</span>
-                    </div>
-                    <div class="option" onclick="selectLink('opium-s3')">
-                        <span>opiumisbest (s3)</span>
-                        <span class="badge">******</span>
-                    </div>
-                    <div class="option" onclick="selectLink('opium')">
-                        <span>opiumisbest (s3 alt)</span>
-                        <span class="badge">*****</span>
-                    </div>
-                    <div class="option" onclick="selectLink('best')">
-                        <span>opiumbest (storage)</span>
-                        <span class="badge">****</span>
-                    </div>
-                    <div class="option" onclick="selectLink('svg-cdn')">
-                        <span>svg (jsdelivr)</span>
-                        <span class="badge">***</span>
-                    </div>
-                    <div class="option" onclick="selectLink('cdn')">
-                        <span>svg (cdn)</span>
-                        <span class="badge">***</span>
-                    </div>
-                    <div class="option" onclick="selectLink('statically')">
-                        <span>svg (statically)</span>
-                        <span class="badge">***</span>
-                    </div>
-                    <div class="option" onclick="selectLink('raw-esm')">
-                        <span>svg (raw.esm)</span>
-                        <span class="badge">***</span>
-                    </div>
-                </div>
-                <div class="tab-hint">passwords hidden</div>
             </div>
         </div>
 
