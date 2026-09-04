@@ -760,7 +760,7 @@
 
     <!-- splash screen -->
     <div id="splash">
-        <div class="text">fall <span>productions</span></div>
+        <div class="text" id="splashText">fall <span>productions</span></div>
         <div class="quote" id="splashQuote"></div>
     </div>
 
@@ -1081,11 +1081,13 @@
 
         function showSplashScreen(url, isFree) {
             const splash = document.getElementById('splash');
+            const textElement = document.getElementById('splashText');
             const quoteElement = document.getElementById('splashQuote');
             const textArtContainer = document.getElementById('textArtContainer');
             const textArtElement = document.getElementById('splashTextArt');
             
             // Reset states
+            textElement.style.opacity = '1';
             quoteElement.classList.remove('show', 'fade-out');
             textArtContainer.classList.remove('show', 'fade-out');
             
@@ -1112,12 +1114,13 @@
                     quoteElement.classList.add('show');
                 }, 500);
                 
-                // Fade out quote after 2.5s, then show full-screen text art
+                // Fade out quote AND "fall productions" text after 2.5s
                 setTimeout(() => {
                     quoteElement.classList.remove('show');
                     quoteElement.classList.add('fade-out');
+                    textElement.style.opacity = '0'; // Fade out "fall productions"
                     
-                    // Fade out splash (text + quote)
+                    // Fade out splash after quote fades
                     setTimeout(() => {
                         splash.classList.remove('show');
                         splash.classList.add('fade-out');
@@ -1126,6 +1129,7 @@
                         setTimeout(() => {
                             splash.style.display = 'none';
                             splash.classList.remove('fade-out');
+                            textElement.style.opacity = '1'; // Reset for next time
                             
                             textArtContainer.classList.add('show');
                             
