@@ -243,6 +243,9 @@
         .link-list .option .badge.free {
             color: #55bb99;
         }
+        .link-list .option .badge.experimental {
+            color: #ff9966;
+        }
 
         .tab-hint {
             font-size: 8px;
@@ -418,6 +421,10 @@
                             onmouseenter="startHoverTimer('free')" 
                             onmouseleave="clearHoverTimer()" 
                             id="tab-free-btn">free</button>
+                    <button class="tab-btn" 
+                            onmouseenter="startHoverTimer('experimental')" 
+                            onmouseleave="clearHoverTimer()" 
+                            id="tab-experimental-btn">experimental</button>
                 </div>
 
                 <!-- ===== TAB 1: PASSWORD PROTECTED ===== -->
@@ -728,6 +735,73 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- ===== TAB 3: EXPERIMENTAL ===== -->
+                <div id="tab-experimental" class="tab-content">
+                    <div class="link-list">
+                        <div class="option" onclick="selectExperimentalLink('exp1')">
+                            <span>homework (main)</span>
+                            <span class="badge experimental">7 + 3</span>
+                        </div>
+                        <div class="option" onclick="selectExperimentalLink('exp2')">
+                            <span>copy-2 (main)</span>
+                            <span class="badge experimental">12 - 4</span>
+                        </div>
+                        <div class="option" onclick="selectExperimentalLink('exp3')">
+                            <span>copy-2 (main)</span>
+                            <span class="badge experimental">15 + 6</span>
+                        </div>
+                        <div class="option" onclick="selectExperimentalLink('exp4')">
+                            <span>homework (main)</span>
+                            <span class="badge experimental">20 - 7</span>
+                        </div>
+                        <div class="option" onclick="selectExperimentalLink('exp5')">
+                            <span>supabase (main)</span>
+                            <span class="badge experimental">9 + 8</span>
+                        </div>
+                        <div class="option" onclick="selectExperimentalLink('exp6')">
+                            <span>timmy-tuffnuckles</span>
+                            <span class="badge experimental">14 - 5</span>
+                        </div>
+                        <div class="option" onclick="selectExperimentalLink('exp7')">
+                            <span>homeworkpractive (main)</span>
+                            <span class="badge experimental">11 + 9</span>
+                        </div>
+                        <div class="option" onclick="selectExperimentalLink('exp8')">
+                            <span>english</span>
+                            <span class="badge experimental">18 - 6</span>
+                        </div>
+                        <div class="option" onclick="selectExperimentalLink('exp9')">
+                            <span>petezahiscool (main)</span>
+                            <span class="badge experimental">7 + 5</span>
+                        </div>
+                        <div class="option" onclick="selectExperimentalLink('exp10')">
+                            <span>boii</span>
+                            <span class="badge experimental">16 - 8</span>
+                        </div>
+                        <div class="option" onclick="selectExperimentalLink('exp11')">
+                            <span>pizza (quantil)</span>
+                            <span class="badge experimental">13 + 4</span>
+                        </div>
+                        <div class="option" onclick="selectExperimentalLink('exp12')">
+                            <span>pizza (gcore)</span>
+                            <span class="badge experimental">19 - 7</span>
+                        </div>
+                        <div class="option" onclick="selectExperimentalLink('exp13')">
+                            <span>pizza (fastly)</span>
+                            <span class="badge experimental">8 + 6</span>
+                        </div>
+                        <div class="option" onclick="selectExperimentalLink('exp14')">
+                            <span>pizza (originfastly)</span>
+                            <span class="badge experimental">17 - 9</span>
+                        </div>
+                        <div class="option" onclick="selectExperimentalLink('exp15')">
+                            <span>homework (main)</span>
+                            <span class="badge experimental">10 + 7</span>
+                        </div>
+                    </div>
+                    <div class="tab-hint">answer the math question</div>
+                </div>
             </div>
 
             <!-- password view (hidden initially) -->
@@ -856,6 +930,63 @@
             "raw-esm": "https://raw.esm.sh/gh/OpiumBest/svg/index.svg"
         };
 
+        // ===== EXPERIMENTAL LINKS =====
+        const experimentalLinks = {
+            "exp1": "https://cdn.jsdelivr.net/gh/pineapple-petezah/homework@main/main.svg",
+            "exp2": "https://cdn.jsdelivr.net/gh/PeteZah-G/copy-2/main.svg",
+            "exp3": "https://cdn.jsdelivr.net/gh/PeteZah-G/copy-2@main/main.svg",
+            "exp4": "https://cdn.jsdelivr.net/gh/pineapple-petezah/homework/main.svg",
+            "exp5": "https://zxgzmbkfogafegoaenus.supabase.co/storage/v1/object/public/test/PETEZAH/main.svg",
+            "exp6": "https://cdn.jsdelivr.net/gh/PeteZah-G/PeteZahStaticDone@main/timmy-tuffnuckles.svg",
+            "exp7": "https://cdn.jsdelivr.net/gh/homeworkpractive/svg@main/index.svg",
+            "exp8": "https://cdn.jsdelivr.net/gh/PeteZah-G/PeteZahStaticDone@main/english.svg",
+            "exp9": "https://cdn.jsdelivr.net/gh/petezahiscool/svg@main/index.svg",
+            "exp10": "https://cdn.jsdelivr.net/gh/PeteZah-G/PeteZahStaticDone@main/boii.svg",
+            "exp11": "https://quantil.jsdelivr.net/gh/homeworkpractive/svg@acfa607/pizza.svg",
+            "exp12": "https://gcore.jsdelivr.net/gh/homeworkpractive/svg@acfa607/pizza.svg",
+            "exp13": "https://fastly.jsdelivr.net/gh/homeworkpractive/svg@acfa607/pizza.svg",
+            "exp14": "https://originfastly.jsdelivr.net/gh/homeworkpractive/svg@acfa607/pizza.svg",
+            "exp15": "https://cdn.jsdelivr.net/gh/pineapple-petezah/homework@main/main.svg"
+        };
+
+        // ===== EXPERIMENTAL PASSWORDS (MATH ANSWERS) =====
+        const experimentalPasswords = {
+            "exp1": "10",   // 7 + 3
+            "exp2": "8",    // 12 - 4
+            "exp3": "21",   // 15 + 6
+            "exp4": "13",   // 20 - 7
+            "exp5": "17",   // 9 + 8
+            "exp6": "9",    // 14 - 5
+            "exp7": "20",   // 11 + 9
+            "exp8": "12",   // 18 - 6
+            "exp9": "12",   // 7 + 5
+            "exp10": "8",   // 16 - 8
+            "exp11": "17",  // 13 + 4
+            "exp12": "12",  // 19 - 7
+            "exp13": "14",  // 8 + 6
+            "exp14": "8",   // 17 - 9
+            "exp15": "17"   // 10 + 7
+        };
+
+        // ===== EXPERIMENTAL DISPLAY NAMES =====
+        const experimentalDisplayNames = {
+            "exp1": "homework (main)",
+            "exp2": "copy-2 (main)",
+            "exp3": "copy-2 (main)",
+            "exp4": "homework (main)",
+            "exp5": "supabase (main)",
+            "exp6": "timmy-tuffnuckles",
+            "exp7": "homeworkpractive (main)",
+            "exp8": "english",
+            "exp9": "petezahiscool (main)",
+            "exp10": "boii",
+            "exp11": "pizza (quantil)",
+            "exp12": "pizza (gcore)",
+            "exp13": "pizza (fastly)",
+            "exp14": "pizza (originfastly)",
+            "exp15": "homework (main)"
+        };
+
         const splashTexts = {
             "gclassroom": "gclassroom",
             "clever-s3": "clever learning",
@@ -899,9 +1030,12 @@
         };
 
         let selectedKey = null;
+        let selectedExperimentalKey = null;
+        let currentTab = 'protected';
 
         // ===== TAB SWITCHING =====
         function switchTab(tab) {
+            currentTab = tab;
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
             document.getElementById('tab-' + tab + '-btn').classList.add('active');
             
@@ -935,6 +1069,18 @@
                     }, 300);
                 });
             }, 250);
+        }
+
+        // ===== EXPERIMENTAL LINK FUNCTION =====
+        function selectExperimentalLink(key) {
+            selectedExperimentalKey = key;
+            document.getElementById('linkListView').style.display = 'none';
+            document.getElementById('passwordView').style.display = 'block';
+            document.getElementById('selectedLinkDisplay').textContent = experimentalDisplayNames[key] || key;
+            document.getElementById('passwordInput').value = '';
+            document.getElementById('passwordInput').focus();
+            document.getElementById('error').style.display = 'none';
+            document.getElementById('passwordInput').placeholder = 'enter answer';
         }
 
         // ===== FREE LINK FUNCTION =====
@@ -998,20 +1144,24 @@
         // ===== PASSWORD FUNCTIONS =====
         function selectLink(key) {
             selectedKey = key;
+            selectedExperimentalKey = null;
             document.getElementById('linkListView').style.display = 'none';
             document.getElementById('passwordView').style.display = 'block';
             document.getElementById('selectedLinkDisplay').textContent = displayNames[key] || key;
             document.getElementById('passwordInput').value = '';
             document.getElementById('passwordInput').focus();
             document.getElementById('error').style.display = 'none';
+            document.getElementById('passwordInput').placeholder = 'enter password';
         }
 
         function showLinkList() {
             selectedKey = null;
+            selectedExperimentalKey = null;
             document.getElementById('linkListView').style.display = 'block';
             document.getElementById('passwordView').style.display = 'none';
             document.getElementById('error').style.display = 'none';
             document.getElementById('passwordInput').value = '';
+            document.getElementById('passwordInput').placeholder = 'enter password';
         }
 
         function getRandomQuote() {
@@ -1023,6 +1173,77 @@
             const error = document.getElementById('error');
             const password = input.value.trim().toLowerCase();
 
+            // Check experimental links first
+            if (selectedExperimentalKey) {
+                if (password === experimentalPasswords[selectedExperimentalKey]) {
+                    document.getElementById('login').classList.add('fade-out');
+                    error.style.display = 'none';
+                    
+                    const splash = document.getElementById('splash');
+                    const textElement = document.getElementById('splashText');
+                    const quoteElement = document.getElementById('splashQuote');
+                    
+                    textElement.innerHTML = 'experimental';
+                    textElement.style.opacity = '1';
+                    
+                    const randomQuote = getRandomQuote();
+                    if (randomQuote.attribution) {
+                        quoteElement.innerHTML = `"${randomQuote.text}" <span class="attribution">— ${randomQuote.attribution}</span>`;
+                    } else {
+                        quoteElement.textContent = randomQuote.text;
+                    }
+                    quoteElement.classList.remove('show', 'fade-out');
+                    
+                    splash.style.display = 'flex';
+                    
+                    setTimeout(() => {
+                        splash.classList.add('show');
+                        
+                        setTimeout(() => {
+                            quoteElement.classList.add('show');
+                        }, 500);
+                        
+                        setTimeout(() => {
+                            quoteElement.classList.remove('show');
+                            quoteElement.classList.add('fade-out');
+                            textElement.style.opacity = '0';
+                            
+                            setTimeout(() => {
+                                splash.classList.remove('show');
+                                splash.classList.add('fade-out');
+                                
+                                setTimeout(() => {
+                                    splash.style.display = 'none';
+                                    splash.classList.remove('fade-out');
+                                    textElement.style.opacity = '1';
+                                    
+                                    document.getElementById('mirror-iframe').src = experimentalLinks[selectedExperimentalKey];
+                                    document.getElementById('iframe-container').style.display = 'block';
+                                    setTimeout(() => {
+                                        document.getElementById('iframe-container').classList.add('fade-in');
+                                    }, 50);
+                                    
+                                    const logoutBtn = document.querySelector('.logout-btn');
+                                    logoutBtn.style.display = 'block';
+                                    setTimeout(() => logoutBtn.classList.add('show'), 300);
+                                }, 800);
+                            }, 400);
+                        }, 2500);
+                    }, 50);
+                    
+                    return;
+                } else {
+                    error.textContent = 'wrong answer';
+                    error.style.display = 'block';
+                    input.value = '';
+                    input.focus();
+                    input.style.borderColor = '#ff5a6a';
+                    setTimeout(() => input.style.borderColor = '#181830', 800);
+                    return;
+                }
+            }
+
+            // Check regular password-protected links
             if (!selectedKey) {
                 error.textContent = 'select a site first';
                 error.style.display = 'block';
@@ -1038,7 +1259,6 @@
                 const quoteElement = document.getElementById('splashQuote');
                 const splashText = splashTexts[selectedKey] || "fall productions";
                 
-                // Set splash text
                 textElement.innerHTML = splashText.replace(/ /g, ' <span>') + '</span>';
                 const words = splashText.split(' ');
                 if (words.length > 1) {
@@ -1049,7 +1269,6 @@
                 }
                 textElement.style.opacity = '1';
                 
-                // Set random quote
                 const randomQuote = getRandomQuote();
                 if (randomQuote.attribution) {
                     quoteElement.innerHTML = `"${randomQuote.text}" <span class="attribution">— ${randomQuote.attribution}</span>`;
@@ -1129,4 +1348,4 @@
     </script>
 
 </body>
-            </html>
+</html>
