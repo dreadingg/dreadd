@@ -294,18 +294,5 @@ function saveAndApplyCursor(cursor, el) {
 })();
 
 // =============================================
-// ===== LOAD SETTINGS ON START =====
+// =========== shhhhh fall prods ===============
 // =============================================
-document.addEventListener('DOMContentLoaded', function() {
-    setTimeout(loadSettings, 500);
-});
-
-window.addEventListener('beforeunload', saveSettings);
-
-window.saveSettings = saveSettings;
-window.loadSettings = loadSettings;
-window.saveAndApplyTheme = saveAndApplyTheme;
-window.saveAndApplyBg = saveAndApplyBg;
-window.saveAndApplyCursor = saveAndApplyCursor;
-
-console.log('📦 Settings Manager + Ad Blocker + Tab Blocker loaded');
