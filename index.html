@@ -414,7 +414,7 @@
         .channel-btn:hover .badge-channel { color: var(--text-secondary); }
 
         /* =============================================
-           MODALS
+           MODALS - FIXED POINTER EVENTS
            ============================================= */
         .channel-modal {
             display: none;
@@ -431,10 +431,12 @@
             padding: 20px;
             opacity: 0;
             transition: opacity 0.4s ease;
+            pointer-events: none;
         }
         .channel-modal.show {
             display: flex;
             opacity: 1;
+            pointer-events: all;
         }
         .channel-modal .modal-content {
             background: var(--panel-bg);
@@ -1128,7 +1130,69 @@
                     </div>
                     <div id="tab-free" class="tab-content">
                         <div class="link-list">
-                            <!-- Free links here (shortened for space) -->
+                            <div class="option" onclick="openFreeLink('https://storage.googleapis.com/fernisbest/index.html')"><span>fernisbest (storage)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fernisbest/index.html')"><span>fernisbest (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fernlinks/index.html')"><span>fernlinks (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/classworks/index.html')"><span>classworks (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bull33/index.html')"><span>bull33 (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bullbestyoutuber/index.html')"><span>bullbestyoutuber (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bulledu/index.html')"><span>bulledu (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bullguardian/index.html')"><span>bullguardian (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bullisgoated/index.html')"><span>bullisgoated (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bulllightspeed/index.html')"><span>bulllightspeed (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bullmath/index.html')"><span>bullmath (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bullubg/index.html')"><span>bullubg (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/iloveliteratures/index.html')"><span>iloveliteratures (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/ilovemaths/index.html')"><span>ilovemaths (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/lsrelay-extension-production/index.html')"><span>lsrelay-extension (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/macrolo/index.html')"><span>macrolo (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/macrologoat/index.html')"><span>macrologoat (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/macrolomath/index.html')"><span>macrolomath (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/angelfern/index.html')"><span>angelfern (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/deaganfern/index.html')"><span>deaganfern (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://bullbestyoutuber.s3.amazonaws.com/index.html')"><span>bullbestyoutuber (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://bulledu.s3.amazonaws.com/index.html')"><span>bulledu (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://bullguardian.s3.amazonaws.com/index.html')"><span>bullguardian (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://bullisgoated.s3.amazonaws.com/index.html')"><span>bullisgoated (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://bulllightspeed.s3.amazonaws.com/index.html')"><span>bulllightspeed (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://bullmath.s3.amazonaws.com/index.html')"><span>bullmath (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://bullubg.s3.amazonaws.com/index.html')"><span>bullubg (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://iloveliteratures.s3.amazonaws.com/index.html')"><span>iloveliteratures (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://ilovemaths.s3.amazonaws.com/index.html')"><span>ilovemaths (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://lsrelay-extension-production.s3.amazonaws.com/index.html')"><span>lsrelay-extension (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://macrolo.s3.amazonaws.com/index.html')"><span>macrolo (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://macrologoat.s3.amazonaws.com/index.html')"><span>macrologoat (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://macrolomath.s3.amazonaws.com/index.html')"><span>macrolomath (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://angelfern.s3.amazonaws.com/index.html')"><span>angelfern (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://deaganfern.s3.amazonaws.com/index.html')"><span>deaganfern (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://bullreading.s3.amazonaws.com/index.html')"><span>bullreading (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/bullreading/index.html')"><span>bullreading (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://fern-s3t.s3.amazonaws.com/index.html')"><span>fern-s3t (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fern-s3t/index.html')"><span>fern-s3t (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://fernvcsa.s3.amazonaws.com/index.html')"><span>fernvcsa (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fernvcsa/index.html')"><span>fernvcsa (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://fsmath.s3.amazonaws.com/index.html')"><span>fsmath (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fsmath/index.html')"><span>fsmath (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://fsreading.s3.amazonaws.com/index.html')"><span>fsreading (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fsreading/index.html')"><span>fsreading (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://fstudentsareinventors.s3.amazonaws.com/index.html')"><span>fstudentsareinventors (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/fstudentsareinventors/index.html')"><span>fstudentsareinventors (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://glwithfinals.s3.amazonaws.com/index.html')"><span>glwithfinals (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/glwithfinals/index.html')"><span>glwithfinals (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://mathvc.s3.amazonaws.com/index.html')"><span>mathvc (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/mathvc/index.html')"><span>mathvc (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://onelastlink.s3.amazonaws.com/index.html')"><span>onelastlink (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/onelastlink/index.html')"><span>onelastlink (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://readvc.s3.amazonaws.com/index.html')"><span>readvc (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/readvc/index.html')"><span>readvc (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://vcsafern.s3.amazonaws.com/index.html')"><span>vcsafern (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/vcsafern/index.html')"><span>vcsafern (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://vcsamath.s3.amazonaws.com/index.html')"><span>vcsamath (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/vcsamath/index.html')"><span>vcsamath (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://vcsareading.s3.amazonaws.com/index.html')"><span>vcsareading (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/vcsareading/index.html')"><span>vcsareading (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://writevc.s3.amazonaws.com/index.html')"><span>writevc (s3)</span><span class="badge free">free</span></div>
+                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/writevc/index.html')"><span>writevc (s3)</span><span class="badge free">free</span></div>
                         </div>
                     </div>
                     <div id="tab-experimental" class="tab-content">
@@ -1141,7 +1205,41 @@
                         </div>
                         <div id="experimentalLinks" style="display:none;">
                             <div class="link-list">
-                                <!-- Experimental links here -->
+                                <div class="option" onclick="openExperimentalLink('https://cdn.jsdelivr.net/gh/pineapple-petezah/homework@main/main.svg')"><span>homework (main)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://cdn.jsdelivr.net/gh/PeteZah-G/copy-2/main.svg')"><span>copy-2 (main)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://cdn.jsdelivr.net/gh/PeteZah-G/copy-2@main/main.svg')"><span>copy-2 (main)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://cdn.jsdelivr.net/gh/pineapple-petezah/homework/main.svg')"><span>homework (main)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://zxgzmbkfogafegoaenus.supabase.co/storage/v1/object/public/test/PETEZAH/main.svg')"><span>supabase (main)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://cdn.jsdelivr.net/gh/PeteZah-G/PeteZahStaticDone@main/timmy-tuffnuckles.svg')"><span>timmy-tuffnuckles</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://cdn.jsdelivr.net/gh/homeworkpractive/svg@main/index.svg')"><span>homeworkpractive (main)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://cdn.jsdelivr.net/gh/PeteZah-G/PeteZahStaticDone@main/english.svg')"><span>english</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://cdn.jsdelivr.net/gh/petezahiscool/svg@main/index.svg')"><span>petezahiscool (main)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://cdn.jsdelivr.net/gh/PeteZah-G/PeteZahStaticDone@main/boii.svg')"><span>boii</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://quantil.jsdelivr.net/gh/homeworkpractive/svg@acfa607/pizza.svg')"><span>pizza (quantil)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://gcore.jsdelivr.net/gh/homeworkpractive/svg@acfa607/pizza.svg')"><span>pizza (gcore)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://fastly.jsdelivr.net/gh/homeworkpractive/svg@acfa607/pizza.svg')"><span>pizza (fastly)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://originfastly.jsdelivr.net/gh/homeworkpractive/svg@acfa607/pizza.svg')"><span>pizza (originfastly)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://cdn.jsdelivr.net/gh/pineapple-petezah/homework@main/main.svg')"><span>homework (main)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://s3.amazonaws.com/bullproxy/index.html')"><span>bullproxy (s3)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://bullproxy.s3.amazonaws.com/index.html')"><span>bullproxy (s3 aws)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://s3.amazonaws.com/bulldebut/index.html')"><span>bulldebut (s3)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://bulldebut.s3.amazonaws.com/index.html')"><span>bulldebut (s3 aws)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://s3.amazonaws.com/finallybull/index.html')"><span>finallybull (s3)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://finallybull.s3.amazonaws.com/index.html')"><span>finallybull (s3 aws)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://s3.amazonaws.com/rahisbullsgoat/index.html')"><span>rahisbullsgoat (s3)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://rahisbullsgoat.s3.amazonaws.com/index.html')"><span>rahisbullsgoat (s3 aws)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://s3.amazonaws.com/m0ths/index.html')"><span>m0ths (s3)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://m0ths.s3.amazonaws.com/index.html')"><span>m0ths (s3 aws)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://s3.amazonaws.com/6q85/index.html')"><span>6q85 (s3)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://6q85.s3.amazonaws.com/index.html')"><span>6q85 (s3 aws)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://s3.amazonaws.com/sk7v/index.html')"><span>sk7v (s3)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://sk7v.s3.amazonaws.com/index.html')"><span>sk7v (s3 aws)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://s3.amazonaws.com/oiop/index.html')"><span>oiop (s3)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://oiop.s3.amazonaws.com/index.html')"><span>oiop (s3 aws)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://s3.amazonaws.com/iuyt/index.html')"><span>iuyt (s3)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://iuyt.s3.amazonaws.com/index.html')"><span>iuyt (s3 aws)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://s3.amazonaws.com/jlkl/index.html')"><span>jlkl (s3)</span><span class="badge experimental">exp</span></div>
+                                <div class="option" onclick="openExperimentalLink('https://jlkl.s3.amazonaws.com/index.html')"><span>jlkl (s3 aws)</span><span class="badge experimental">exp</span></div>
                             </div>
                             <div class="tab-hint">experimental unlocked</div>
                         </div>
@@ -1189,26 +1287,19 @@
                 <div class="update-date">📅 12:32, Tuesday</div>
                 <div class="section">
                     <div class="section-title">[ new features ]</div>
-                    <div class="item new">added 16 terminal script backgrounds (pipes, matrix, clock, starfield, fire, life, snow, rain, spinner, fireworks, water, galaxy, trees, moon, earth, banner)</div>
+                    <div class="item new">added 16 terminal script backgrounds</div>
                     <div class="item new">added background selector in settings</div>
                     <div class="item new">all backgrounds change colors with themes</div>
-                    <div class="item new">added 10 cursor effects (glow, trail, sparkle, ring, cross, dot, heart, star, moon)</div>
+                    <div class="item new">added 10 cursor effects</div>
                     <div class="item new">added 13 color themes</div>
-                    <div class="item new">added settings panel with cursor, theme, and background controls</div>
-                </div>
-                <div class="section">
-                    <div class="section-title">[ ui improvements ]</div>
-                    <div class="item">removed main login password - open straight to channels</div>
-                    <div class="item">channels and settings always visible</div>
-                    <div class="item">random closing animations for channels</div>
-                    <div class="item">all colors smoothly transition with themes</div>
+                    <div class="item new">settings now save to localStorage</div>
                 </div>
                 <div class="section">
                     <div class="section-title">[ bug fixes ]</div>
                     <div class="item">fixed all elements changing colors with themes</div>
-                    <div class="item">fixed cursor effects not working on hover/click</div>
+                    <div class="item">fixed cursor effects not working</div>
                     <div class="item">fixed fireworks background not looping</div>
-                    <div class="item">fixed background switching breaking other backgrounds</div>
+                    <div class="item">fixed modal pointer events blocking clicks</div>
                 </div>
             </div>
         </div>
@@ -1228,22 +1319,22 @@
         <div class="setting-group">
             <label>background</label>
             <div class="bg-grid">
-                <div class="bg-option active" data-bg="pipes" onclick="setBackground('pipes', this)">pipes</div>
-                <div class="bg-option" data-bg="matrix" onclick="setBackground('matrix', this)">matrix</div>
-                <div class="bg-option" data-bg="clock" onclick="setBackground('clock', this)">clock</div>
-                <div class="bg-option" data-bg="starfield" onclick="setBackground('starfield', this)">stars</div>
-                <div class="bg-option" data-bg="fire" onclick="setBackground('fire', this)">fire</div>
-                <div class="bg-option" data-bg="life" onclick="setBackground('life', this)">life</div>
-                <div class="bg-option" data-bg="snow" onclick="setBackground('snow', this)">snow</div>
-                <div class="bg-option" data-bg="rain" onclick="setBackground('rain', this)">rain</div>
-                <div class="bg-option" data-bg="spinner" onclick="setBackground('spinner', this)">spinner</div>
-                <div class="bg-option" data-bg="fireworks" onclick="setBackground('fireworks', this)">fireworks</div>
-                <div class="bg-option" data-bg="water" onclick="setBackground('water', this)">water</div>
-                <div class="bg-option" data-bg="galaxy" onclick="setBackground('galaxy', this)">galaxy</div>
-                <div class="bg-option" data-bg="trees" onclick="setBackground('trees', this)">trees</div>
-                <div class="bg-option" data-bg="moon" onclick="setBackground('moon', this)">moon</div>
-                <div class="bg-option" data-bg="earth" onclick="setBackground('earth', this)">earth</div>
-                <div class="bg-option" data-bg="banner" onclick="setBackground('banner', this)">banner</div>
+                <div class="bg-option active" data-bg="pipes" onclick="saveAndApplyBg('pipes', this)">pipes</div>
+                <div class="bg-option" data-bg="matrix" onclick="saveAndApplyBg('matrix', this)">matrix</div>
+                <div class="bg-option" data-bg="clock" onclick="saveAndApplyBg('clock', this)">clock</div>
+                <div class="bg-option" data-bg="starfield" onclick="saveAndApplyBg('starfield', this)">stars</div>
+                <div class="bg-option" data-bg="fire" onclick="saveAndApplyBg('fire', this)">fire</div>
+                <div class="bg-option" data-bg="life" onclick="saveAndApplyBg('life', this)">life</div>
+                <div class="bg-option" data-bg="snow" onclick="saveAndApplyBg('snow', this)">snow</div>
+                <div class="bg-option" data-bg="rain" onclick="saveAndApplyBg('rain', this)">rain</div>
+                <div class="bg-option" data-bg="spinner" onclick="saveAndApplyBg('spinner', this)">spinner</div>
+                <div class="bg-option" data-bg="fireworks" onclick="saveAndApplyBg('fireworks', this)">fireworks</div>
+                <div class="bg-option" data-bg="water" onclick="saveAndApplyBg('water', this)">water</div>
+                <div class="bg-option" data-bg="galaxy" onclick="saveAndApplyBg('galaxy', this)">galaxy</div>
+                <div class="bg-option" data-bg="trees" onclick="saveAndApplyBg('trees', this)">trees</div>
+                <div class="bg-option" data-bg="moon" onclick="saveAndApplyBg('moon', this)">moon</div>
+                <div class="bg-option" data-bg="earth" onclick="saveAndApplyBg('earth', this)">earth</div>
+                <div class="bg-option" data-bg="banner" onclick="saveAndApplyBg('banner', this)">banner</div>
             </div>
         </div>
 
@@ -1251,16 +1342,16 @@
         <div class="setting-group">
             <label>cursor effects</label>
             <div class="cursor-grid">
-                <div class="cursor-option active" data-cursor="default" onclick="setCursor('default', this)"><span>⬛</span><span class="label">default</span></div>
-                <div class="cursor-option" data-cursor="glow" onclick="setCursor('glow', this)"><span>💜</span><span class="label">glow</span></div>
-                <div class="cursor-option" data-cursor="trail" onclick="setCursor('trail', this)"><span>✨</span><span class="label">trail</span></div>
-                <div class="cursor-option" data-cursor="sparkle" onclick="setCursor('sparkle', this)"><span>⭐</span><span class="label">sparkle</span></div>
-                <div class="cursor-option" data-cursor="ring" onclick="setCursor('ring', this)"><span>⭕</span><span class="label">ring</span></div>
-                <div class="cursor-option" data-cursor="cross" onclick="setCursor('cross', this)"><span>✚</span><span class="label">cross</span></div>
-                <div class="cursor-option" data-cursor="dot" onclick="setCursor('dot', this)"><span>●</span><span class="label">dot</span></div>
-                <div class="cursor-option" data-cursor="heart" onclick="setCursor('heart', this)"><span>❤</span><span class="label">heart</span></div>
-                <div class="cursor-option" data-cursor="star" onclick="setCursor('star', this)"><span>★</span><span class="label">star</span></div>
-                <div class="cursor-option" data-cursor="moon" onclick="setCursor('moon', this)"><span>🌙</span><span class="label">moon</span></div>
+                <div class="cursor-option active" data-cursor="default" onclick="saveAndApplyCursor('default', this)"><span>⬛</span><span class="label">default</span></div>
+                <div class="cursor-option" data-cursor="glow" onclick="saveAndApplyCursor('glow', this)"><span>💜</span><span class="label">glow</span></div>
+                <div class="cursor-option" data-cursor="trail" onclick="saveAndApplyCursor('trail', this)"><span>✨</span><span class="label">trail</span></div>
+                <div class="cursor-option" data-cursor="sparkle" onclick="saveAndApplyCursor('sparkle', this)"><span>⭐</span><span class="label">sparkle</span></div>
+                <div class="cursor-option" data-cursor="ring" onclick="saveAndApplyCursor('ring', this)"><span>⭕</span><span class="label">ring</span></div>
+                <div class="cursor-option" data-cursor="cross" onclick="saveAndApplyCursor('cross', this)"><span>✚</span><span class="label">cross</span></div>
+                <div class="cursor-option" data-cursor="dot" onclick="saveAndApplyCursor('dot', this)"><span>●</span><span class="label">dot</span></div>
+                <div class="cursor-option" data-cursor="heart" onclick="saveAndApplyCursor('heart', this)"><span>❤</span><span class="label">heart</span></div>
+                <div class="cursor-option" data-cursor="star" onclick="saveAndApplyCursor('star', this)"><span>★</span><span class="label">star</span></div>
+                <div class="cursor-option" data-cursor="moon" onclick="saveAndApplyCursor('moon', this)"><span>🌙</span><span class="label">moon</span></div>
             </div>
         </div>
 
@@ -1268,19 +1359,19 @@
         <div class="setting-group">
             <label>themes</label>
             <div class="theme-grid">
-                <div class="theme-option theme-dark active" data-theme="dark" onclick="setTheme('dark', this)"><span class="check">✓</span><span class="theme-label">dark</span></div>
-                <div class="theme-option theme-light" data-theme="light" onclick="setTheme('light', this)"><span class="check">✓</span><span class="theme-label">light</span></div>
-                <div class="theme-option theme-purple" data-theme="purple" onclick="setTheme('purple', this)"><span class="check">✓</span><span class="theme-label">purple</span></div>
-                <div class="theme-option theme-cyan" data-theme="cyan" onclick="setTheme('cyan', this)"><span class="check">✓</span><span class="theme-label">cyan</span></div>
-                <div class="theme-option theme-pink" data-theme="pink" onclick="setTheme('pink', this)"><span class="check">✓</span><span class="theme-label">pink</span></div>
-                <div class="theme-option theme-green" data-theme="green" onclick="setTheme('green', this)"><span class="check">✓</span><span class="theme-label">green</span></div>
-                <div class="theme-option theme-orange" data-theme="orange" onclick="setTheme('orange', this)"><span class="check">✓</span><span class="theme-label">orange</span></div>
-                <div class="theme-option theme-forest" data-theme="forest" onclick="setTheme('forest', this)"><span class="check">✓</span><span class="theme-label">forest</span></div>
-                <div class="theme-option theme-lavender" data-theme="lavender" onclick="setTheme('lavender', this)"><span class="check">✓</span><span class="theme-label">lavender</span></div>
-                <div class="theme-option theme-slate" data-theme="slate" onclick="setTheme('slate', this)"><span class="check">✓</span><span class="theme-label">slate</span></div>
-                <div class="theme-option theme-rose" data-theme="rose" onclick="setTheme('rose', this)"><span class="check">✓</span><span class="theme-label">rose</span></div>
-                <div class="theme-option theme-ocean" data-theme="ocean" onclick="setTheme('ocean', this)"><span class="check">✓</span><span class="theme-label">ocean</span></div>
-                <div class="theme-option theme-sunset" data-theme="sunset" onclick="setTheme('sunset', this)"><span class="check">✓</span><span class="theme-label">sunset</span></div>
+                <div class="theme-option theme-dark active" data-theme="dark" onclick="saveAndApplyTheme('dark', this)"><span class="check">✓</span><span class="theme-label">dark</span></div>
+                <div class="theme-option theme-light" data-theme="light" onclick="saveAndApplyTheme('light', this)"><span class="check">✓</span><span class="theme-label">light</span></div>
+                <div class="theme-option theme-purple" data-theme="purple" onclick="saveAndApplyTheme('purple', this)"><span class="check">✓</span><span class="theme-label">purple</span></div>
+                <div class="theme-option theme-cyan" data-theme="cyan" onclick="saveAndApplyTheme('cyan', this)"><span class="check">✓</span><span class="theme-label">cyan</span></div>
+                <div class="theme-option theme-pink" data-theme="pink" onclick="saveAndApplyTheme('pink', this)"><span class="check">✓</span><span class="theme-label">pink</span></div>
+                <div class="theme-option theme-green" data-theme="green" onclick="saveAndApplyTheme('green', this)"><span class="check">✓</span><span class="theme-label">green</span></div>
+                <div class="theme-option theme-orange" data-theme="orange" onclick="saveAndApplyTheme('orange', this)"><span class="check">✓</span><span class="theme-label">orange</span></div>
+                <div class="theme-option theme-forest" data-theme="forest" onclick="saveAndApplyTheme('forest', this)"><span class="check">✓</span><span class="theme-label">forest</span></div>
+                <div class="theme-option theme-lavender" data-theme="lavender" onclick="saveAndApplyTheme('lavender', this)"><span class="check">✓</span><span class="theme-label">lavender</span></div>
+                <div class="theme-option theme-slate" data-theme="slate" onclick="saveAndApplyTheme('slate', this)"><span class="check">✓</span><span class="theme-label">slate</span></div>
+                <div class="theme-option theme-rose" data-theme="rose" onclick="saveAndApplyTheme('rose', this)"><span class="check">✓</span><span class="theme-label">rose</span></div>
+                <div class="theme-option theme-ocean" data-theme="ocean" onclick="saveAndApplyTheme('ocean', this)"><span class="check">✓</span><span class="theme-label">ocean</span></div>
+                <div class="theme-option theme-sunset" data-theme="sunset" onclick="saveAndApplyTheme('sunset', this)"><span class="check">✓</span><span class="theme-label">sunset</span></div>
             </div>
         </div>
 
@@ -1305,7 +1396,7 @@
     </div>
 
     <!-- =============================================
-    JAVASCRIPT - ALL IN ONE
+    JAVASCRIPT - ALL IN ONE WITH SAVING
     ============================================= -->
     <script>
         // =============================================
@@ -1313,7 +1404,7 @@
         // =============================================
         const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
-        let bgType = 'pipes';
+        let currentBg = 'pipes';
         let bgAnimationId = null;
 
         function resizeCanvas() {
@@ -1323,7 +1414,6 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        // ===== GET THEME COLORS =====
         function getThemeColor() {
             const body = document.body;
             if (body.classList.contains('theme-purple')) return '#9b6bff';
@@ -1769,7 +1859,7 @@
 
         function drawFireworks() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
+
             fireworks.forEach(fw => {
                 fw.age++;
                 fw.particles.forEach(p => {
@@ -1789,15 +1879,15 @@
                 });
                 ctx.shadowBlur = 0;
             });
-            
+
             fireworks = fireworks.filter(fw => fw.particles.some(p => p.life > 0));
-            
+
             fireworkTimer++;
             if (fireworkTimer > 15 && fireworks.length < 8) {
                 createFirework();
                 fireworkTimer = 0;
             }
-            
+
             ctx.globalAlpha = 1;
         }
 
@@ -2032,8 +2122,6 @@
             banner: { init: () => {}, draw: drawBanner }
         };
 
-        let currentBg = 'pipes';
-
         function setBackground(type, el) {
             currentBg = type;
             document.querySelectorAll('.bg-option').forEach(opt => opt.classList.remove('active'));
@@ -2208,11 +2296,11 @@
                     break;
                 case 'star':
                     document.body.style.cursor =
-                        "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><polygon fill=\"%23ffd700\" points=\"12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26\"/></svg>') 12 12, auto";
+                        "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><polygon fill=\"%23ffd700\" points=\"12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26\"/></svg>") 12 12, auto";
                     break;
                 case 'moon':
                     document.body.style.cursor =
-                        "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path fill=\"%23c0b0e0\" d=\"M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20Z\"/><path fill=\"%23c0b0e0\" d=\"M12 4a8 8 0 0 0-8 8a8 8 0 0 0 8 8a8 8 0 0 0 8-8a8 8 0 0 0-8-8Zm0 2a6 6 0 0 1 6 6a6 6 0 0 1-6 6a6 6 0 0 1-6-6a6 6 0 0 1 6-6Z\"/></svg>') 12 12, auto";
+                        "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\"><path fill=\"%23c0b0e0\" d=\"M12 2A10 10 0 1 0 22 12A10 10 0 0 0 12 2Zm0 18a8 8 0 1 1 8-8A8 8 0 0 1 12 20Z\"/><path fill=\"%23c0b0e0\" d=\"M12 4a8 8 0 0 0-8 8a8 8 0 0 0 8 8a8 8 0 0 0 8-8a8 8 0 0 0-8-8Zm0 2a6 6 0 0 1 6 6a6 6 0 0 1-6 6a6 6 0 0 1-6-6a6 6 0 0 1 6-6Z\"/></svg>") 12 12, auto";
                     break;
             }
         }
@@ -2245,6 +2333,102 @@
             document.getElementById('settingsPanel').classList.remove('open');
             document.getElementById('settingsToggle').classList.remove('active');
             setBackground('pipes', document.querySelector('.bg-option[data-bg="pipes"]'));
+            saveSettings();
+        }
+
+        // =============================================
+        // ===== SAVE & LOAD SETTINGS (localStorage) =====
+        // =============================================
+
+        function saveSettings() {
+            try {
+                let currentTheme = 'dark';
+                document.querySelectorAll('.theme-option').forEach(el => {
+                    if (el.classList.contains('active')) {
+                        currentTheme = el.dataset.theme;
+                    }
+                });
+
+                let currentBg = 'pipes';
+                document.querySelectorAll('.bg-option').forEach(el => {
+                    if (el.classList.contains('active')) {
+                        currentBg = el.dataset.bg;
+                    }
+                });
+
+                let currentCursor = 'default';
+                document.querySelectorAll('.cursor-option').forEach(el => {
+                    if (el.classList.contains('active')) {
+                        currentCursor = el.dataset.cursor;
+                    }
+                });
+
+                localStorage.setItem('mirror_theme', currentTheme);
+                localStorage.setItem('mirror_background', currentBg);
+                localStorage.setItem('mirror_cursor', currentCursor);
+
+                console.log('✅ Settings saved');
+            } catch (e) {
+                console.warn('Could not save settings:', e);
+            }
+        }
+
+        function loadSettings() {
+            try {
+                if (document.readyState === 'loading') {
+                    setTimeout(loadSettings, 100);
+                    return;
+                }
+
+                const savedTheme = localStorage.getItem('mirror_theme');
+                if (savedTheme) {
+                    const themeEl = document.querySelector(`.theme-option[data-theme="${savedTheme}"]`);
+                    if (themeEl && typeof setTheme === 'function') {
+                        setTheme(savedTheme, themeEl);
+                    }
+                }
+
+                const savedBg = localStorage.getItem('mirror_background');
+                if (savedBg && typeof setBackground === 'function') {
+                    const bgEl = document.querySelector(`.bg-option[data-bg="${savedBg}"]`);
+                    if (bgEl) {
+                        setBackground(savedBg, bgEl);
+                    }
+                }
+
+                const savedCursor = localStorage.getItem('mirror_cursor');
+                if (savedCursor && typeof setCursor === 'function') {
+                    const cursorEl = document.querySelector(`.cursor-option[data-cursor="${savedCursor}"]`);
+                    if (cursorEl) {
+                        setCursor(savedCursor, cursorEl);
+                    }
+                }
+
+                console.log('✅ Settings loaded');
+            } catch (e) {
+                console.warn('Could not load settings:', e);
+            }
+        }
+
+        function saveAndApplyTheme(theme, el) {
+            if (typeof setTheme === 'function') {
+                setTheme(theme, el);
+            }
+            saveSettings();
+        }
+
+        function saveAndApplyBg(bg, el) {
+            if (typeof setBackground === 'function') {
+                setBackground(bg, el);
+            }
+            saveSettings();
+        }
+
+        function saveAndApplyCursor(cursor, el) {
+            if (typeof setCursor === 'function') {
+                setCursor(cursor, el);
+            }
+            saveSettings();
         }
 
         // =============================================
@@ -2615,7 +2799,7 @@
                     if (link && link.href) {
                         e.preventDefault();
                         e.stopPropagation();
-                        const iframe = document.getElementById('mirror-iframe');
+                        const iframe = document.getElementById('mirroriframe');
                         if (iframe) iframe.src = link.href;
                         else window.location.href = link.href;
                         return false;
@@ -2637,6 +2821,19 @@
             });
             document.addEventListener('DOMContentLoaded', fixLinks);
         })();
+
+        // =============================================
+        // ===== LOAD SETTINGS ON START =====
+        // =============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(loadSettings, 500);
+        });
+
+        window.addEventListener('beforeunload', saveSettings);
     </script>
+    <!-- =============================================
+    JAVASCRIPT
+    ============================================= -->
+    <script src="script.js"></script>
 </body>
 </html>
