@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>mirror</title>
     <style>
-        /* ===== RESET & BASE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -25,8 +24,8 @@
             transition: background 0.8s ease, color 0.8s ease;
         }
 
-        /* ===== PIPE BACKGROUND ===== */
-        #pipeCanvas {
+        /* ===== BACKGROUND CANVAS ===== */
+        #bgCanvas {
             position: fixed;
             top: 0;
             left: 0;
@@ -34,7 +33,7 @@
             height: 100vh;
             z-index: 0;
             pointer-events: none;
-            opacity: 0.2;
+            opacity: 0.3;
             transition: opacity 0.8s ease;
         }
 
@@ -56,8 +55,9 @@
             --badge-bg: rgba(8, 8, 16, 0.4);
             --shadow: rgba(0, 0, 0, 0.6);
             --border-hover: rgba(106, 106, 255, 0.3);
+            --bg-opacity: 0.3;
         }
-        body.theme-dark #pipeCanvas { opacity: 0.2; }
+        body.theme-dark #bgCanvas { opacity: 0.3; }
 
         body.theme-light {
             --accent: #6a6aff;
@@ -74,8 +74,9 @@
             --badge-bg: rgba(200, 200, 220, 0.4);
             --shadow: rgba(0, 0, 0, 0.1);
             --border-hover: rgba(106, 106, 255, 0.3);
+            --bg-opacity: 0.15;
         }
-        body.theme-light #pipeCanvas { opacity: 0.1; }
+        body.theme-light #bgCanvas { opacity: 0.15; }
 
         body.theme-purple {
             --accent: #9b6bff;
@@ -92,8 +93,9 @@
             --badge-bg: rgba(60, 40, 120, 0.4);
             --shadow: rgba(80, 60, 200, 0.3);
             --border-hover: rgba(155, 107, 255, 0.3);
+            --bg-opacity: 0.35;
         }
-        body.theme-purple #pipeCanvas { opacity: 0.3; }
+        body.theme-purple #bgCanvas { opacity: 0.35; }
 
         body.theme-cyan {
             --accent: #4dd0e1;
@@ -110,8 +112,9 @@
             --badge-bg: rgba(40, 120, 140, 0.4);
             --shadow: rgba(40, 200, 220, 0.2);
             --border-hover: rgba(77, 208, 225, 0.3);
+            --bg-opacity: 0.35;
         }
-        body.theme-cyan #pipeCanvas { opacity: 0.3; }
+        body.theme-cyan #bgCanvas { opacity: 0.35; }
 
         body.theme-pink {
             --accent: #ff6b9d;
@@ -128,8 +131,9 @@
             --badge-bg: rgba(160, 60, 120, 0.4);
             --shadow: rgba(200, 60, 150, 0.2);
             --border-hover: rgba(255, 107, 157, 0.3);
+            --bg-opacity: 0.35;
         }
-        body.theme-pink #pipeCanvas { opacity: 0.3; }
+        body.theme-pink #bgCanvas { opacity: 0.35; }
 
         body.theme-green {
             --accent: #66bb6a;
@@ -146,8 +150,9 @@
             --badge-bg: rgba(40, 140, 60, 0.4);
             --shadow: rgba(60, 200, 80, 0.2);
             --border-hover: rgba(102, 187, 106, 0.3);
+            --bg-opacity: 0.35;
         }
-        body.theme-green #pipeCanvas { opacity: 0.3; }
+        body.theme-green #bgCanvas { opacity: 0.35; }
 
         body.theme-orange {
             --accent: #ffa726;
@@ -164,8 +169,9 @@
             --badge-bg: rgba(140, 100, 40, 0.4);
             --shadow: rgba(200, 160, 40, 0.2);
             --border-hover: rgba(255, 167, 38, 0.3);
+            --bg-opacity: 0.35;
         }
-        body.theme-orange #pipeCanvas { opacity: 0.3; }
+        body.theme-orange #bgCanvas { opacity: 0.35; }
 
         body.theme-forest {
             --accent: #4caf50;
@@ -182,8 +188,9 @@
             --badge-bg: rgba(40, 120, 60, 0.4);
             --shadow: rgba(60, 180, 80, 0.2);
             --border-hover: rgba(76, 175, 80, 0.3);
+            --bg-opacity: 0.35;
         }
-        body.theme-forest #pipeCanvas { opacity: 0.3; }
+        body.theme-forest #bgCanvas { opacity: 0.35; }
 
         body.theme-lavender {
             --accent: #b39ddb;
@@ -200,8 +207,9 @@
             --badge-bg: rgba(100, 80, 160, 0.4);
             --shadow: rgba(140, 120, 220, 0.2);
             --border-hover: rgba(179, 157, 219, 0.3);
+            --bg-opacity: 0.35;
         }
-        body.theme-lavender #pipeCanvas { opacity: 0.3; }
+        body.theme-lavender #bgCanvas { opacity: 0.35; }
 
         body.theme-slate {
             --accent: #78909c;
@@ -218,8 +226,9 @@
             --badge-bg: rgba(80, 100, 120, 0.4);
             --shadow: rgba(100, 120, 140, 0.2);
             --border-hover: rgba(120, 144, 156, 0.3);
+            --bg-opacity: 0.3;
         }
-        body.theme-slate #pipeCanvas { opacity: 0.25; }
+        body.theme-slate #bgCanvas { opacity: 0.3; }
 
         body.theme-rose {
             --accent: #ef5350;
@@ -236,8 +245,9 @@
             --badge-bg: rgba(160, 60, 60, 0.4);
             --shadow: rgba(200, 60, 60, 0.2);
             --border-hover: rgba(239, 83, 80, 0.3);
+            --bg-opacity: 0.35;
         }
-        body.theme-rose #pipeCanvas { opacity: 0.3; }
+        body.theme-rose #bgCanvas { opacity: 0.35; }
 
         body.theme-ocean {
             --accent: #42a5f5;
@@ -254,8 +264,9 @@
             --badge-bg: rgba(40, 100, 180, 0.4);
             --shadow: rgba(60, 160, 240, 0.2);
             --border-hover: rgba(66, 165, 245, 0.3);
+            --bg-opacity: 0.35;
         }
-        body.theme-ocean #pipeCanvas { opacity: 0.3; }
+        body.theme-ocean #bgCanvas { opacity: 0.35; }
 
         body.theme-sunset {
             --accent: #ff7043;
@@ -272,11 +283,12 @@
             --badge-bg: rgba(160, 100, 40, 0.4);
             --shadow: rgba(220, 140, 60, 0.2);
             --border-hover: rgba(255, 112, 67, 0.3);
+            --bg-opacity: 0.35;
         }
-        body.theme-sunset #pipeCanvas { opacity: 0.3; }
+        body.theme-sunset #bgCanvas { opacity: 0.35; }
 
         /* =============================================
-           FLOATING ARROW - THEME AWARE
+           FLOATING ARROW
            ============================================= */
         .floating-arrow {
             position: fixed;
@@ -321,7 +333,7 @@
         }
 
         /* =============================================
-           CHANNELS - THEME AWARE
+           CHANNELS
            ============================================= */
         .channels-container {
             position: fixed;
@@ -401,7 +413,7 @@
         .channel-btn:hover .badge-channel { color: var(--text-secondary); }
 
         /* =============================================
-           MODALS - THEME AWARE
+           MODALS
            ============================================= */
         .channel-modal {
             display: none;
@@ -466,7 +478,7 @@
         .channel-modal h2 span { color: var(--accent); transition: color 0.8s ease; }
 
         /* =============================================
-           UPDATE LOG - THEME AWARE
+           UPDATE LOG
            ============================================= */
         .update-log {
             font-size: 11px;
@@ -529,7 +541,7 @@
         .update-log .item.new::before { color: #ffd700; content: "✦"; }
 
         /* =============================================
-           INFO - THEME AWARE
+           INFO
            ============================================= */
         .info-content {
             font-size: 12px;
@@ -585,7 +597,7 @@
         }
 
         /* =============================================
-           WEB MODAL - THEME AWARE
+           WEB MODAL
            ============================================= */
         #webModal .mirror-login {
             background: transparent;
@@ -731,7 +743,7 @@
         #webModal .mirror-login .back-btn:hover { color: var(--text-secondary); }
 
         /* =============================================
-           SETTINGS - THEME AWARE
+           SETTINGS
            ============================================= */
         .settings-toggle {
             position: fixed;
@@ -781,7 +793,7 @@
         }
         .settings-panel.open {
             width: 340px;
-            height: 440px;
+            height: 480px;
             opacity: 1;
             pointer-events: all;
             padding: 20px;
@@ -894,6 +906,32 @@
         .theme-rose { background: #14080a; }
         .theme-ocean { background: #060a18; }
         .theme-sunset { background: #140a06; }
+
+        /* =============================================
+           BACKGROUND SELECTOR
+           ============================================= */
+        .bg-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
+            margin-top: 4px;
+        }
+        .bg-option {
+            padding: 4px 2px;
+            background: var(--input-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            text-align: center;
+            font-size: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-muted);
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.5px;
+            text-transform: lowercase;
+        }
+        .bg-option:hover { border-color: var(--accent); background: var(--accent-dim); }
+        .bg-option.active { border-color: var(--accent); background: var(--accent-dim); }
 
         .reset-btn {
             padding: 4px 14px;
@@ -1040,8 +1078,8 @@
 </head>
 <body>
 
-    <!-- ===== PIPE BACKGROUND ===== -->
-    <canvas id="pipeCanvas"></canvas>
+    <!-- ===== BACKGROUND CANVAS ===== -->
+    <canvas id="bgCanvas"></canvas>
 
     <!-- ===== FLOATING ARROW ===== -->
     <div class="floating-arrow" id="floatingArrow" onclick="toggleChannels()">
@@ -1246,38 +1284,63 @@
                 <div class="update-date">📅 12:32, Tuesday</div>
                 <div class="section">
                     <div class="section-title">[ new features ]</div>
-                    <div class="item new">added linux pipes.sh animated background</div>
+                    <div class="item new">added 20 terminal script backgrounds (pipes, matrix, clock, starfield, fire, life, snow, rain, spinner, fireworks, etc.)</div>
+                    <div class="item new">added background selector in settings</div>
+                    <div class="item new">all backgrounds change colors with themes</div>
                     <div class="item new">added 10 cursor effects (glow, trail, sparkle, ring, cross, dot, heart, star, moon)</div>
-                    <div class="item new">added 13 color themes (dark, light, purple, cyan, pink, green, orange, forest, lavender, slate, rose, ocean, sunset)</div>
-                    <div class="item new">added settings panel with cursor and theme controls</div>
+                    <div class="item new">added 13 color themes</div>
+                    <div class="item new">added settings panel with cursor, theme, and background controls</div>
                 </div>
                 <div class="section">
                     <div class="section-title">[ ui improvements ]</div>
                     <div class="item">removed main login password - open straight to channels</div>
                     <div class="item">channels and settings always visible</div>
-                    <div class="item">random closing animations for channels (slide, fade, scale, rotate, bounce)</div>
-                    <div class="item">all colors now smoothly transition with themes</div>
-                    <div class="item">pipe colors change with themes</div>
-                    <div class="item">cursor effects now theme-aware</div>
+                    <div class="item">random closing animations for channels</div>
+                    <div class="item">all colors smoothly transition with themes</div>
                 </div>
                 <div class="section">
                     <div class="section-title">[ bug fixes ]</div>
-                    <div class="item">fixed cursor effects not working on hover/click</div>
-                    <div class="item">fixed settings toggle animation</div>
-                    <div class="item">fixed channels staying open after modal close</div>
                     <div class="item">fixed all elements changing colors with themes</div>
+                    <div class="item">fixed cursor effects not working on hover/click</div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- ===== SETTINGS ===== -->
+    <!-- =============================================
+    SETTINGS
+    ============================================= -->
     <button class="settings-toggle" id="settingsToggle" onclick="toggleSettings()">
         <span class="icon">⚙</span>
     </button>
 
     <div class="settings-panel" id="settingsPanel">
         <h3>settings</h3>
+
+        <!-- Background Selector -->
+        <div class="setting-group">
+            <label>background</label>
+            <div class="bg-grid">
+                <div class="bg-option active" data-bg="pipes" onclick="setBackground('pipes', this)">pipes</div>
+                <div class="bg-option" data-bg="matrix" onclick="setBackground('matrix', this)">matrix</div>
+                <div class="bg-option" data-bg="clock" onclick="setBackground('clock', this)">clock</div>
+                <div class="bg-option" data-bg="starfield" onclick="setBackground('starfield', this)">stars</div>
+                <div class="bg-option" data-bg="fire" onclick="setBackground('fire', this)">fire</div>
+                <div class="bg-option" data-bg="life" onclick="setBackground('life', this)">life</div>
+                <div class="bg-option" data-bg="snow" onclick="setBackground('snow', this)">snow</div>
+                <div class="bg-option" data-bg="rain" onclick="setBackground('rain', this)">rain</div>
+                <div class="bg-option" data-bg="spinner" onclick="setBackground('spinner', this)">spinner</div>
+                <div class="bg-option" data-bg="fireworks" onclick="setBackground('fireworks', this)">fireworks</div>
+                <div class="bg-option" data-bg="water" onclick="setBackground('water', this)">water</div>
+                <div class="bg-option" data-bg="galaxy" onclick="setBackground('galaxy', this)">galaxy</div>
+                <div class="bg-option" data-bg="trees" onclick="setBackground('trees', this)">trees</div>
+                <div class="bg-option" data-bg="moon" onclick="setBackground('moon', this)">moon</div>
+                <div class="bg-option" data-bg="earth" onclick="setBackground('earth', this)">earth</div>
+                <div class="bg-option" data-bg="banner" onclick="setBackground('banner', this)">banner</div>
+            </div>
+        </div>
+
+        <!-- Cursor Effects -->
         <div class="setting-group">
             <label>cursor effects</label>
             <div class="cursor-grid">
@@ -1293,6 +1356,8 @@
                 <div class="cursor-option" data-cursor="moon" onclick="setCursor('moon', this)"><span>🌙</span><span class="label">moon</span></div>
             </div>
         </div>
+
+        <!-- Themes -->
         <div class="setting-group">
             <label>themes</label>
             <div class="theme-grid">
@@ -1311,6 +1376,7 @@
                 <div class="theme-option theme-sunset" data-theme="sunset" onclick="setTheme('sunset', this)"><span class="check">✓</span><span class="theme-label">sunset</span></div>
             </div>
         </div>
+
         <button class="reset-btn" onclick="resetSettings()">reset to default</button>
     </div>
 
@@ -1336,11 +1402,12 @@
     ============================================= -->
     <script>
         // =============================================
-        // ===== PIPE BACKGROUND =====
+        // ===== BACKGROUND ENGINE =====
         // =============================================
-        const canvas = document.getElementById('pipeCanvas');
+        const canvas = document.getElementById('bgCanvas');
         const ctx = canvas.getContext('2d');
-        const pipes = [];
+        let bgType = 'pipes';
+        let animFrame;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -1349,6 +1416,7 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
+        // ===== GET THEME COLOR =====
         function getThemeColor() {
             const body = document.body;
             if (body.classList.contains('theme-purple')) return '#9b6bff';
@@ -1365,6 +1433,28 @@
             if (body.classList.contains('theme-light')) return '#6a6aff';
             return '#6a6aff';
         }
+
+        function getThemeSecondary() {
+            const body = document.body;
+            if (body.classList.contains('theme-purple')) return '#6a5a99';
+            if (body.classList.contains('theme-cyan')) return '#4a7a80';
+            if (body.classList.contains('theme-pink')) return '#884466';
+            if (body.classList.contains('theme-green')) return '#4a7a4a';
+            if (body.classList.contains('theme-orange')) return '#886040';
+            if (body.classList.contains('theme-forest')) return '#4a604a';
+            if (body.classList.contains('theme-lavender')) return '#685880';
+            if (body.classList.contains('theme-slate')) return '#505868';
+            if (body.classList.contains('theme-rose')) return '#805050';
+            if (body.classList.contains('theme-ocean')) return '#405870';
+            if (body.classList.contains('theme-sunset')) return '#805840';
+            if (body.classList.contains('theme-light')) return '#8888aa';
+            return '#555566';
+        }
+
+        // =============================================
+        // ===== PIPES BACKGROUND =====
+        // =============================================
+        let pipes = [];
 
         function createPipe() {
             const dirs = [{ dx: 1, dy: 0 }, { dx: -1, dy: 0 }, { dx: 0, dy: 1 }, { dx: 0, dy: -1 }];
@@ -1424,7 +1514,7 @@
                 ctx.moveTo(segs[0].x, segs[0].y);
                 for (let i = 1; i < segs.length; i++) ctx.lineTo(segs[i].x, segs[i].y);
                 ctx.strokeStyle = pipe.color;
-                ctx.globalAlpha = 0.3 * pipe.life;
+                ctx.globalAlpha = 0.4 * pipe.life;
                 ctx.lineWidth = 2;
                 ctx.shadowColor = pipe.color;
                 ctx.shadowBlur = 8;
@@ -1434,15 +1524,613 @@
             });
         }
 
-        function animatePipes() {
-            updatePipes();
-            drawPipes();
-            requestAnimationFrame(animatePipes);
+        // =============================================
+        // ===== MATRIX BACKGROUND =====
+        // =============================================
+        let matrixColumns = [];
+        let matrixChars = [];
+
+        function initMatrix() {
+            const cols = Math.floor(canvas.width / 20);
+            matrixColumns = [];
+            matrixChars = [];
+            for (let i = 0; i < cols; i++) {
+                matrixColumns[i] = Math.random() * canvas.height / 20;
+                matrixChars[i] = [];
+                for (let j = 0; j < 30; j++) {
+                    const charCode = 0x30A0 + Math.random() * 96;
+                    matrixChars[i][j] = String.fromCharCode(charCode);
+                }
+            }
         }
-        for (let i = 0; i < 15; i++) { const p = createPipe();
-            p.life = 0.5 + Math.random() * 0.5;
-            pipes.push(p); }
-        animatePipes();
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(5, 5, 8, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            const color = getThemeColor();
+            const secondary = getThemeSecondary();
+            const cols = Math.floor(canvas.width / 20);
+            for (let i = 0; i < cols; i++) {
+                const y = matrixColumns[i] * 20;
+                for (let j = 0; j < 6; j++) {
+                    const idx = (Math.floor(matrixColumns[i]) + j) % matrixChars[i].length;
+                    const alpha = 1 - (j / 6);
+                    ctx.fillStyle = j === 0 ? color : secondary;
+                    ctx.globalAlpha = alpha * 0.6;
+                    ctx.font = '16px monospace';
+                    ctx.fillText(matrixChars[i][idx], i * 20, y + j * 20);
+                }
+                matrixColumns[i] += 0.1;
+                if (matrixColumns[i] * 20 > canvas.height) {
+                    matrixColumns[i] = 0;
+                }
+            }
+            ctx.globalAlpha = 1;
+        }
+
+        // =============================================
+        // ===== CLOCK BACKGROUND =====
+        // =============================================
+        function drawClock() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const now = new Date();
+            const time = now.toLocaleTimeString();
+            const color = getThemeColor();
+            ctx.fillStyle = color;
+            ctx.globalAlpha = 0.4;
+            ctx.font = `${Math.min(canvas.width, canvas.height) * 0.12}px monospace`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.shadowColor = color;
+            ctx.shadowBlur = 20;
+            ctx.fillText(time, canvas.width / 2, canvas.height / 2);
+            ctx.shadowBlur = 0;
+            ctx.globalAlpha = 1;
+        }
+
+        // =============================================
+        // ===== STARFIELD BACKGROUND =====
+        // =============================================
+        let stars = [];
+
+        function initStars() {
+            stars = [];
+            for (let i = 0; i < 150; i++) {
+                stars.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    z: Math.random() * canvas.width,
+                    speed: 2 + Math.random() * 6
+                });
+            }
+        }
+
+        function drawStarfield() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const color = getThemeColor();
+            stars.forEach(star => {
+                star.z -= star.speed;
+                if (star.z <= 0) {
+                    star.x = Math.random() * canvas.width;
+                    star.y = Math.random() * canvas.height;
+                    star.z = canvas.width;
+                }
+                const sx = (star.x - canvas.width / 2) * (canvas.width / star.z) + canvas.width / 2;
+                const sy = (star.y - canvas.height / 2) * (canvas.width / star.z) + canvas.height / 2;
+                const size = (canvas.width - star.z) / canvas.width * 4 + 1;
+                ctx.globalAlpha = (canvas.width - star.z) / canvas.width * 0.6;
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.arc(sx, sy, Math.max(size, 0.5), 0, Math.PI * 2);
+                ctx.fill();
+            });
+            ctx.globalAlpha = 1;
+        }
+
+        // =============================================
+        // ===== FIRE BACKGROUND =====
+        // =============================================
+        let fireParticles = [];
+
+        function initFire() {
+            fireParticles = [];
+            for (let i = 0; i < 100; i++) {
+                fireParticles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: 2 + Math.random() * 4,
+                    speed: 0.5 + Math.random() * 1.5,
+                    life: Math.random()
+                });
+            }
+        }
+
+        function drawFire() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const color = getThemeColor();
+            fireParticles.forEach(p => {
+                p.y -= p.speed;
+                p.life -= 0.005;
+                if (p.life <= 0 || p.y < 0) {
+                    p.x = Math.random() * canvas.width;
+                    p.y = canvas.height;
+                    p.life = 1;
+                    p.size = 2 + Math.random() * 4;
+                }
+                const alpha = p.life * 0.5;
+                ctx.globalAlpha = alpha;
+                ctx.fillStyle = color;
+                const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.size);
+                gradient.addColorStop(0, color);
+                gradient.addColorStop(1, 'transparent');
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size * 2, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            ctx.globalAlpha = 1;
+        }
+
+        // =============================================
+        // ===== GAME OF LIFE BACKGROUND =====
+        // =============================================
+        let lifeGrid = [];
+        let lifeSize = 40;
+
+        function initLife() {
+            lifeGrid = [];
+            const cols = Math.floor(canvas.width / lifeSize);
+            const rows = Math.floor(canvas.height / lifeSize);
+            for (let i = 0; i < rows; i++) {
+                lifeGrid[i] = [];
+                for (let j = 0; j < cols; j++) {
+                    lifeGrid[i][j] = Math.random() > 0.7 ? 1 : 0;
+                }
+            }
+        }
+
+        function drawLife() {
+            const color = getThemeColor();
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const cols = Math.floor(canvas.width / lifeSize);
+            const rows = Math.floor(canvas.height / lifeSize);
+            const newGrid = [];
+            for (let i = 0; i < rows; i++) {
+                newGrid[i] = [];
+                for (let j = 0; j < cols; j++) {
+                    let neighbors = 0;
+                    for (let di = -1; di <= 1; di++) {
+                        for (let dj = -1; dj <= 1; dj++) {
+                            if (di === 0 && dj === 0) continue;
+                            const ni = i + di,
+                                nj = j + dj;
+                            if (ni >= 0 && ni < rows && nj >= 0 && nj < cols) {
+                                neighbors += lifeGrid[ni][nj];
+                            }
+                        }
+                    }
+                    const alive = lifeGrid[i][j];
+                    if (alive && (neighbors < 2 || neighbors > 3)) newGrid[i][j] = 0;
+                    else if (!alive && neighbors === 3) newGrid[i][j] = 1;
+                    else newGrid[i][j] = alive;
+                    if (newGrid[i][j]) {
+                        ctx.fillStyle = color;
+                        ctx.globalAlpha = 0.5;
+                        ctx.fillRect(j * lifeSize, i * lifeSize, lifeSize, lifeSize);
+                    }
+                }
+            }
+            lifeGrid = newGrid;
+            ctx.globalAlpha = 1;
+        }
+
+        // =============================================
+        // ===== SNOW BACKGROUND =====
+        // =============================================
+        let snowflakes = [];
+
+        function initSnow() {
+            snowflakes = [];
+            for (let i = 0; i < 100; i++) {
+                snowflakes.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    size: 1 + Math.random() * 3,
+                    speed: 0.5 + Math.random() * 1.5,
+                    drift: Math.random() * 2 - 1
+                });
+            }
+        }
+
+        function drawSnow() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const color = getThemeColor();
+            snowflakes.forEach(s => {
+                s.y += s.speed;
+                s.x += s.drift * 0.3;
+                if (s.y > canvas.height) { s.y = -10;
+                    s.x = Math.random() * canvas.width; }
+                if (s.x < 0) s.x = canvas.width;
+                if (s.x > canvas.width) s.x = 0;
+                ctx.globalAlpha = 0.6;
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            ctx.globalAlpha = 1;
+        }
+
+        // =============================================
+        // ===== RAIN BACKGROUND =====
+        // =============================================
+        let raindrops = [];
+
+        function initRain() {
+            raindrops = [];
+            for (let i = 0; i < 150; i++) {
+                raindrops.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    speed: 5 + Math.random() * 10,
+                    length: 10 + Math.random() * 20
+                });
+            }
+        }
+
+        function drawRain() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const color = getThemeColor();
+            raindrops.forEach(r => {
+                r.y += r.speed;
+                if (r.y > canvas.height) { r.y = -r.length;
+                    r.x = Math.random() * canvas.width; }
+                ctx.globalAlpha = 0.3;
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(r.x, r.y);
+                ctx.lineTo(r.x - 2, r.y + r.length);
+                ctx.stroke();
+            });
+            ctx.globalAlpha = 1;
+        }
+
+        // =============================================
+        // ===== SPINNER BACKGROUND =====
+        // =============================================
+        let spinnerAngle = 0;
+        const spinners = ['◐', '◓', '◑', '◒'];
+
+        function drawSpinner() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const color = getThemeColor();
+            spinnerAngle += 0.05;
+            const idx = Math.floor(spinnerAngle) % 4;
+            ctx.globalAlpha = 0.3;
+            ctx.fillStyle = color;
+            const size = Math.min(canvas.width, canvas.height) * 0.3;
+            ctx.font = `${size}px monospace`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.shadowColor = color;
+            ctx.shadowBlur = 30;
+            ctx.fillText(spinners[idx], canvas.width / 2, canvas.height / 2);
+            ctx.shadowBlur = 0;
+            ctx.globalAlpha = 1;
+        }
+
+        // =============================================
+        // ===== FIREWORKS BACKGROUND =====
+        // =============================================
+        let fireworks = [];
+
+        function initFireworks() {
+            fireworks = [];
+            for (let i = 0; i < 5; i++) {
+                createFirework();
+            }
+        }
+
+        function createFirework() {
+            const x = Math.random() * canvas.width;
+            const y = Math.random() * canvas.height * 0.6;
+            const particles = [];
+            const count = 30 + Math.random() * 40;
+            const color = getThemeColor();
+            for (let i = 0; i < count; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const speed = 1 + Math.random() * 3;
+                particles.push({
+                    x: x,
+                    y: y,
+                    dx: Math.cos(angle) * speed,
+                    dy: Math.sin(angle) * speed,
+                    life: 1,
+                    size: 2 + Math.random() * 3,
+                    color: color
+                });
+            }
+            fireworks.push({ particles: particles, age: 0 });
+        }
+
+        function drawFireworks() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const color = getThemeColor();
+            fireworks.forEach(fw => {
+                fw.age++;
+                fw.particles.forEach(p => {
+                    p.x += p.dx;
+                    p.y += p.dy;
+                    p.dy += 0.05;
+                    p.life -= 0.008;
+                    ctx.globalAlpha = p.life * 0.6;
+                    ctx.fillStyle = p.color || color;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+            });
+            fireworks = fireworks.filter(fw => fw.particles.some(p => p.life > 0));
+            if (fireworks.length < 3 && Math.random() < 0.02) createFirework();
+            ctx.globalAlpha = 1;
+        }
+
+        // =============================================
+        // ===== WATER RIPPLE BACKGROUND =====
+        // =============================================
+        let ripples = [];
+
+        function initWater() {
+            ripples = [];
+            for (let i = 0; i < 5; i++) {
+                ripples.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: 5,
+                    maxRadius: 50 + Math.random() * 100,
+                    speed: 0.5 + Math.random() * 1,
+                    life: 1
+                });
+            }
+        }
+
+        function drawWater() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const color = getThemeColor();
+            ripples.forEach(r => {
+                r.radius += r.speed;
+                r.life -= 0.005;
+                if (r.life <= 0 || r.radius > r.maxRadius) {
+                    r.x = Math.random() * canvas.width;
+                    r.y = Math.random() * canvas.height;
+                    r.radius = 5;
+                    r.maxRadius = 50 + Math.random() * 100;
+                    r.speed = 0.5 + Math.random() * 1;
+                    r.life = 1;
+                }
+                ctx.globalAlpha = r.life * 0.3;
+                ctx.strokeStyle = color;
+                ctx.lineWidth = 1.5;
+                ctx.beginPath();
+                ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
+                ctx.stroke();
+            });
+            ctx.globalAlpha = 1;
+        }
+
+        // =============================================
+        // ===== GALAXY BACKGROUND =====
+        // =============================================
+        let galaxyAngle = 0;
+        let galaxyStars = [];
+
+        function initGalaxy() {
+            galaxyStars = [];
+            for (let i = 0; i < 200; i++) {
+                const radius = 50 + Math.random() * 200;
+                const angle = Math.random() * Math.PI * 2;
+                const height = (Math.random() - 0.5) * 40;
+                galaxyStars.push({
+                    radius: radius,
+                    angle: angle,
+                    height: height,
+                    size: 1 + Math.random() * 2,
+                    speed: 0.005 + Math.random() * 0.01
+                });
+            }
+        }
+
+        function drawGalaxy() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const color = getThemeColor();
+            galaxyAngle += 0.005;
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            galaxyStars.forEach(s => {
+                const a = s.angle + galaxyAngle * s.speed * 10;
+                const x = cx + Math.cos(a) * s.radius + (s.height * 0.3);
+                const y = cy + Math.sin(a) * s.radius * 0.4 + s.height;
+                ctx.globalAlpha = 0.5;
+                ctx.fillStyle = color;
+                ctx.beginPath();
+                ctx.arc(x, y, s.size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            ctx.globalAlpha = 1;
+        }
+
+        // =============================================
+        // ===== TREES BACKGROUND =====
+        // =============================================
+        let trees = [];
+
+        function initTrees() {
+            trees = [];
+            for (let i = 0; i < 10; i++) {
+                trees.push({
+                    x: Math.random() * canvas.width,
+                    height: 50 + Math.random() * 100,
+                    width: 10 + Math.random() * 20,
+                    growth: 0
+                });
+            }
+        }
+
+        function drawTrees() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const color = getThemeColor();
+            trees.forEach(t => {
+                t.growth += 0.005;
+                if (t.growth > 1) t.growth = 1;
+                const h = t.height * t.growth;
+                const w = t.width * t.growth;
+                ctx.globalAlpha = 0.3;
+                ctx.fillStyle = color;
+                // trunk
+                ctx.fillRect(t.x - w / 6, canvas.height - h, w / 3, h);
+                // canopy
+                for (let i = 0; i < 5; i++) {
+                    const cy = canvas.height - h + i * (h / 5);
+                    const cw = w * (1 - i / 6);
+                    ctx.beginPath();
+                    ctx.arc(t.x, cy, cw, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            });
+            ctx.globalAlpha = 1;
+        }
+
+        // =============================================
+        // ===== MOON BACKGROUND =====
+        // =============================================
+        let moonPhase = 0;
+
+        function drawMoon() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const color = getThemeColor();
+            moonPhase += 0.005;
+            const phases = ['🌑', '🌒', '🌓', '🌔', '🌕', '🌖', '🌗', '🌘'];
+            const idx = Math.floor(moonPhase) % phases.length;
+            ctx.globalAlpha = 0.3;
+            ctx.fillStyle = color;
+            const size = Math.min(canvas.width, canvas.height) * 0.2;
+            ctx.font = `${size}px monospace`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.shadowColor = color;
+            ctx.shadowBlur = 40;
+            ctx.fillText(phases[idx], canvas.width / 2, canvas.height / 2);
+            ctx.shadowBlur = 0;
+            ctx.globalAlpha = 1;
+        }
+
+        // =============================================
+        // ===== EARTH BACKGROUND =====
+        // =============================================
+        let earthAngle = 0;
+
+        function drawEarth() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const color = getThemeColor();
+            earthAngle += 0.02;
+            const size = Math.min(canvas.width, canvas.height) * 0.15;
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            ctx.globalAlpha = 0.25;
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.arc(cx, cy, size, 0, Math.PI * 2);
+            ctx.stroke();
+            // Lines (latitude)
+            for (let i = -3; i <= 3; i++) {
+                const y = cy + i * (size / 4);
+                const w = Math.sqrt(size * size - (i * size / 4) * (i * size / 4));
+                ctx.beginPath();
+                ctx.ellipse(cx, y, w, size * 0.05, 0, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+            // Longitude
+            for (let i = 0; i < 6; i++) {
+                const angle = earthAngle + i * Math.PI / 3;
+                ctx.beginPath();
+                ctx.ellipse(cx, cy, size * 0.2, size, angle, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+            ctx.globalAlpha = 1;
+        }
+
+        // =============================================
+        // ===== BANNER BACKGROUND =====
+        // =============================================
+        let bannerText = ['dreading', 'portal', 'unblocked', 'links'];
+        let bannerIdx = 0;
+        let bannerTimer = 0;
+
+        function drawBanner() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const color = getThemeColor();
+            bannerTimer++;
+            if (bannerTimer > 60) { bannerTimer = 0;
+                bannerIdx = (bannerIdx + 1) % bannerText.length; }
+            const text = bannerText[bannerIdx];
+            ctx.globalAlpha = 0.2;
+            ctx.fillStyle = color;
+            const size = Math.min(canvas.width, canvas.height) * 0.08;
+            ctx.font = `${size}px monospace`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.shadowColor = color;
+            ctx.shadowBlur = 30;
+            ctx.fillText(text, canvas.width / 2, canvas.height / 2);
+            ctx.shadowBlur = 0;
+            ctx.globalAlpha = 1;
+        }
+
+        // =============================================
+        // ===== BACKGROUND RENDERER =====
+        // =============================================
+        const bgRenderers = {
+            pipes: { init: () => { pipes = [];
+                    for (let i = 0; i < 15; i++) pipes.push(createPipe()); }, draw: drawPipes, update: updatePipes },
+            matrix: { init: initMatrix, draw: drawMatrix },
+            clock: { init: () => {}, draw: drawClock },
+            starfield: { init: initStars, draw: drawStarfield },
+            fire: { init: initFire, draw: drawFire },
+            life: { init: initLife, draw: drawLife },
+            snow: { init: initSnow, draw: drawSnow },
+            rain: { init: initRain, draw: drawRain },
+            spinner: { init: () => {}, draw: drawSpinner },
+            fireworks: { init: initFireworks, draw: drawFireworks },
+            water: { init: initWater, draw: drawWater },
+            galaxy: { init: initGalaxy, draw: drawGalaxy },
+            trees: { init: initTrees, draw: drawTrees },
+            moon: { init: () => {}, draw: drawMoon },
+            earth: { init: () => {}, draw: drawEarth },
+            banner: { init: () => {}, draw: drawBanner }
+        };
+
+        let currentBg = 'pipes';
+
+        function setBackground(type, el) {
+            currentBg = type;
+            document.querySelectorAll('.bg-option').forEach(opt => opt.classList.remove('active'));
+            if (el) el.classList.add('active');
+            if (bgRenderers[type].init) bgRenderers[type].init();
+        }
+
+        function renderBackground() {
+            const renderer = bgRenderers[currentBg];
+            if (!renderer) return;
+            if (renderer.update) renderer.update();
+            renderer.draw();
+            requestAnimationFrame(renderBackground);
+        }
+
+        // Start with pipes
+        bgRenderers.pipes.init();
+        renderBackground();
 
         // =============================================
         // ===== CHANNELS =====
@@ -1612,8 +2300,19 @@
             document.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('active'));
             el.classList.add('active');
             document.body.className = 'theme-' + theme;
+            // Update background colors
             const color = getThemeColor();
             pipes.forEach(pipe => pipe.color = color);
+            // Re-init backgrounds that need color updates
+            if (currentBg === 'fireworks') initFireworks();
+            if (currentBg === 'fire') initFire();
+            if (currentBg === 'water') initWater();
+            if (currentBg === 'trees') initTrees();
+            if (currentBg === 'galaxy') initGalaxy();
+            if (currentBg === 'stars' || currentBg === 'starfield') initStars();
+            if (currentBg === 'snow') initSnow();
+            if (currentBg === 'rain') initRain();
+            if (currentBg === 'life') initLife();
         }
 
         function resetSettings() {
@@ -1625,8 +2324,7 @@
             document.body.className = 'theme-dark';
             document.getElementById('settingsPanel').classList.remove('open');
             document.getElementById('settingsToggle').classList.remove('active');
-            const color = getThemeColor();
-            pipes.forEach(pipe => pipe.color = color);
+            setBackground('pipes', document.querySelector('.bg-option[data-bg="pipes"]'));
         }
 
         // =============================================
@@ -2021,4 +2719,4 @@
         })();
     </script>
 </body>
-</html>
+    </html>
