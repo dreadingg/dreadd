@@ -288,6 +288,95 @@
         body.theme-sunset #bgCanvas { opacity: 0.35; }
 
         /* =============================================
+           RAINBOW THEME
+           ============================================= */
+        body.theme-rainbow {
+            --accent: #ff6b6b;
+            --accent-hover: #ffd93d;
+            --accent-dim: rgba(255, 107, 107, 0.15);
+            --accent-dim-hover: rgba(255, 215, 0, 0.25);
+            --bg: rgba(5, 5, 8, 0.25);
+            --border: rgba(255, 255, 255, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: #e0e0ff;
+            --text-muted: #9999bb;
+            --panel-bg: rgba(10, 10, 30, 0.5);
+            --input-bg: rgba(255, 255, 255, 0.05);
+            --badge-bg: rgba(255, 255, 255, 0.08);
+            --shadow: rgba(255, 200, 200, 0.1);
+            --border-hover: rgba(255, 215, 0, 0.3);
+            --bg-opacity: 0.35;
+            --rainbow-gradient: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcbff, #ff6b9d, #ff6b6b);
+        }
+        body.theme-rainbow #bgCanvas { opacity: 0.35; }
+        body.theme-rainbow .floating-arrow .arrow-icon { color: #ffd93d; }
+        body.theme-rainbow .floating-arrow .arrow-text { color: #ff6b9d; }
+        body.theme-rainbow .channel-btn .badge-channel { color: #6bcbff; }
+        body.theme-rainbow .channel-btn:hover { border-color: #ffd93d; }
+        body.theme-rainbow .settings-toggle { color: #ff6b6b; border-color: rgba(255, 107, 107, 0.3); }
+        body.theme-rainbow .settings-toggle:hover { border-color: #ffd93d; }
+        body.theme-rainbow .cursor-option.active { border-color: #ff6b6b; }
+        body.theme-rainbow .theme-option.active { border-color: #ffd93d; }
+        body.theme-rainbow .bg-option.active { border-color: #6bcbff; }
+        body.theme-rainbow #webModal .mirror-login .tab-btn.active { color: #ffd93d; border-bottom-color: #ffd93d; }
+        body.theme-rainbow #webModal .mirror-login .link-list .option .badge { color: #6bcbff; }
+        body.theme-rainbow .footer-credit { color: #ff6b9d; }
+        body.theme-rainbow .footer-credit:hover { color: #ffd93d; }
+
+        /* Rainbow accent for buttons and interactive elements */
+        body.theme-rainbow .floating-arrow {
+            border-image: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcbff, #ff6b9d) 1;
+            border-image-slice: 1;
+            border-width: 1px;
+            border-style: solid;
+        }
+        body.theme-rainbow .channel-btn {
+            border-image: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcbff, #ff6b9d) 1;
+            border-image-slice: 1;
+            border-width: 1px;
+            border-style: solid;
+        }
+        body.theme-rainbow .channel-btn:hover {
+            border-image: linear-gradient(90deg, #ffd93d, #6bcbff, #ff6b9d, #ff6b6b) 1;
+            border-image-slice: 1;
+        }
+        body.theme-rainbow #webModal .mirror-login button {
+            background: linear-gradient(90deg, #ff6b6b, #ffd93d, #6bcbff, #ff6b9d);
+            background-size: 300% 100%;
+            animation: rainbowMove 3s ease infinite;
+        }
+        body.theme-rainbow #webModal .mirror-login button:hover {
+            background-size: 300% 100%;
+            animation: rainbowMove 1.5s ease infinite;
+        }
+        body.theme-rainbow .settings-toggle {
+            background: linear-gradient(135deg, #ff6b6b33, #ffd93d33, #6bcbff33, #ff6b9d33);
+            background-size: 300% 300%;
+            animation: rainbowMove 4s ease infinite;
+        }
+        body.theme-rainbow .settings-toggle:hover {
+            background: linear-gradient(135deg, #ff6b6b55, #ffd93d55, #6bcbff55, #ff6b9d55);
+            background-size: 300% 300%;
+        }
+        body.theme-rainbow .cursor-option.active {
+            background: linear-gradient(90deg, #ff6b6b22, #ffd93d22, #6bcbff22, #ff6b9d22);
+        }
+        body.theme-rainbow .reset-btn {
+            border-color: rgba(255, 107, 107, 0.3);
+            color: #ff6b6b;
+        }
+        body.theme-rainbow .reset-btn:hover {
+            background: rgba(255, 107, 107, 0.15);
+            border-color: #ff6b6b;
+        }
+
+        @keyframes rainbowMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* =============================================
            FLOATING ARROW
            ============================================= */
         .floating-arrow {
@@ -430,10 +519,12 @@
             padding: 20px;
             opacity: 0;
             transition: opacity 0.4s ease;
+            pointer-events: none;
         }
         .channel-modal.show {
             display: flex;
             opacity: 1;
+            pointer-events: all;
         }
         .channel-modal .modal-content {
             background: var(--panel-bg);
@@ -893,6 +984,7 @@
             text-transform: lowercase;
             white-space: nowrap;
         }
+        /* Theme color swatches */
         .theme-dark { background: #050508; }
         .theme-light { background: #f0f0f5; }
         .theme-purple { background: #0a0a1a; }
@@ -906,6 +998,16 @@
         .theme-rose { background: #14080a; }
         .theme-ocean { background: #060a18; }
         .theme-sunset { background: #140a06; }
+        .theme-rainbow {
+            background: linear-gradient(135deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff);
+            background-size: 300% 300%;
+            animation: rainbowBg 3s ease infinite;
+        }
+        @keyframes rainbowBg {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
 
         /* =============================================
            BACKGROUND SELECTOR
@@ -1284,11 +1386,11 @@
                 <div class="update-date">📅 12:32, Tuesday</div>
                 <div class="section">
                     <div class="section-title">[ new features ]</div>
-                    <div class="item new">added 20 terminal script backgrounds (pipes, matrix, clock, starfield, fire, life, snow, rain, spinner, fireworks, etc.)</div>
+                    <div class="item new">added 16 terminal script backgrounds (pipes, matrix, clock, starfield, fire, life, snow, rain, spinner, fireworks, etc.)</div>
                     <div class="item new">added background selector in settings</div>
                     <div class="item new">all backgrounds change colors with themes</div>
                     <div class="item new">added 10 cursor effects (glow, trail, sparkle, ring, cross, dot, heart, star, moon)</div>
-                    <div class="item new">added 13 color themes</div>
+                    <div class="item new">added 14 color themes including RAINBOW</div>
                     <div class="item new">added settings panel with cursor, theme, and background controls</div>
                 </div>
                 <div class="section">
@@ -1374,6 +1476,7 @@
                 <div class="theme-option theme-rose" data-theme="rose" onclick="setTheme('rose', this)"><span class="check">✓</span><span class="theme-label">rose</span></div>
                 <div class="theme-option theme-ocean" data-theme="ocean" onclick="setTheme('ocean', this)"><span class="check">✓</span><span class="theme-label">ocean</span></div>
                 <div class="theme-option theme-sunset" data-theme="sunset" onclick="setTheme('sunset', this)"><span class="check">✓</span><span class="theme-label">sunset</span></div>
+                <div class="theme-option theme-rainbow" data-theme="rainbow" onclick="setTheme('rainbow', this)"><span class="check">✓</span><span class="theme-label">🌈</span></div>
             </div>
         </div>
 
@@ -1431,6 +1534,12 @@
             if (body.classList.contains('theme-ocean')) return '#42a5f5';
             if (body.classList.contains('theme-sunset')) return '#ff7043';
             if (body.classList.contains('theme-light')) return '#6a6aff';
+            if (body.classList.contains('theme-rainbow')) {
+                // Cycle through rainbow colors
+                const colors = ['#ff6b6b', '#ffd93d', '#6bcbff', '#ff6b9d'];
+                const index = Math.floor(Date.now() / 800) % colors.length;
+                return colors[index];
+            }
             return '#6a6aff';
         }
 
@@ -1448,6 +1557,11 @@
             if (body.classList.contains('theme-ocean')) return '#405870';
             if (body.classList.contains('theme-sunset')) return '#805840';
             if (body.classList.contains('theme-light')) return '#8888aa';
+            if (body.classList.contains('theme-rainbow')) {
+                const colors = ['#ff9b9b', '#ffe99d', '#9bd9ff', '#ff9bc9'];
+                const index = Math.floor(Date.now() / 800 + 1) % colors.length;
+                return colors[index];
+            }
             return '#555566';
         }
 
@@ -2313,6 +2427,13 @@
             if (currentBg === 'snow') initSnow();
             if (currentBg === 'rain') initRain();
             if (currentBg === 'life') initLife();
+            
+            // If rainbow theme, add a class for animated elements
+            if (theme === 'rainbow') {
+                document.body.style.setProperty('--rainbow-active', 'true');
+            } else {
+                document.body.style.setProperty('--rainbow-active', 'false');
+            }
         }
 
         function resetSettings() {
@@ -2719,4 +2840,4 @@
         })();
     </script>
 </body>
-</html>
+                        </html>
