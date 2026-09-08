@@ -39,96 +39,6 @@
         }
 
         /* =============================================
-           MAIN LOGIN (visible by default)
-           ============================================= */
-        .main-wrapper {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
-            max-width: 400px;
-            z-index: 10;
-            position: relative;
-        }
-
-        #login {
-            background: transparent;
-            padding: 24px 20px;
-            border-radius: 10px;
-            border: 1px solid rgba(26, 26, 46, 0.3);
-            box-shadow: none;
-            text-align: center;
-            width: 100%;
-            transition: opacity 0.8s ease, transform 0.8s ease;
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            background: rgba(5, 5, 8, 0.25);
-        }
-        #login.fade-out {
-            opacity: 0;
-            transform: scale(0.96);
-            pointer-events: none;
-        }
-        #login h2 {
-            font-weight: 300;
-            letter-spacing: 4px;
-            font-size: 16px;
-            color: #8888aa;
-            margin-bottom: 16px;
-            text-transform: lowercase;
-        }
-        #login input {
-            width: 100%;
-            padding: 8px 12px;
-            background: rgba(8, 8, 15, 0.5);
-            border: 1px solid rgba(24, 24, 48, 0.4);
-            border-radius: 5px;
-            color: #d0d0e0;
-            font-size: 13px;
-            outline: none;
-            transition: border 0.3s;
-            margin-bottom: 8px;
-            font-family: 'Inter', sans-serif;
-        }
-        #login input:focus {
-            border-color: #6a6aff;
-            box-shadow: 0 0 16px rgba(100, 100, 255, 0.05);
-        }
-        #login input::placeholder {
-            color: #3a3a55;
-            font-weight: 300;
-            letter-spacing: 0.3px;
-        }
-        #login button {
-            width: 100%;
-            padding: 8px;
-            background: #6a6aff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 12px;
-            font-weight: 400;
-            letter-spacing: 1.2px;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.1s;
-            text-transform: lowercase;
-            font-family: 'Inter', sans-serif;
-        }
-        #login button:hover {
-            background: #7a7aff;
-        }
-        #login button:active {
-            transform: scale(0.97);
-        }
-        #login .login-error {
-            color: #ff5a6a;
-            font-size: 11px;
-            margin-top: 10px;
-            display: none;
-            letter-spacing: 0.3px;
-        }
-
-        /* =============================================
            THEMES
            ============================================= */
         body.theme-dark { background: #050508; color: #e0e0e0; }
@@ -159,27 +69,7 @@
         body.theme-sunset #pipeCanvas { opacity: 0.3; }
 
         /* =============================================
-           HIDDEN UNTIL LOGIN (hidden by default)
-           ============================================= */
-        .floating-arrow,
-        .settings-toggle,
-        .channels-container {
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-        .floating-arrow.visible,
-        .settings-toggle.visible {
-            opacity: 1;
-            pointer-events: all;
-        }
-        .channels-container.visible {
-            opacity: 1;
-            pointer-events: all;
-        }
-
-        /* =============================================
-           FLOATING ARROW
+           FLOATING ARROW (always visible)
            ============================================= */
         .floating-arrow {
             position: fixed;
@@ -217,14 +107,19 @@
             left: 50%;
             transform: translateX(-50%);
             z-index: 49;
-            display: flex;
+            display: none;
             flex-direction: column;
             align-items: center;
             gap: 6px;
             width: 90%;
             max-width: 320px;
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            transform: translateX(-50%) translateY(-10px) scale(0.95);
         }
         .channels-container.show {
+            display: flex;
+            opacity: 1;
             transform: translateX(-50%) translateY(0) scale(1);
         }
         .channels-container.closing-slide {
@@ -402,6 +297,127 @@
         }
         .info-content .stat-box .number { font-size: 16px; color: #6a6aff; font-weight: 600; }
         .info-content .stat-box .label { font-size: 8px; color: #444466; letter-spacing: 0.5px; text-transform: uppercase; }
+
+        /* =============================================
+           WEB MODAL - MIRROR LOGIN
+           ============================================= */
+        #webModal .mirror-login {
+            background: transparent;
+            padding: 12px 8px;
+            border-radius: 8px;
+            border: 1px solid rgba(26, 26, 46, 0.2);
+            text-align: center;
+            width: 100%;
+            backdrop-filter: blur(8px);
+            background: rgba(5, 5, 8, 0.15);
+        }
+        #webModal .mirror-login input {
+            width: 100%;
+            padding: 6px 10px;
+            background: rgba(8, 8, 15, 0.5);
+            border: 1px solid rgba(24, 24, 48, 0.4);
+            border-radius: 4px;
+            color: #d0d0e0;
+            font-size: 12px;
+            outline: none;
+            margin-bottom: 6px;
+            font-family: 'Inter', sans-serif;
+            transition: border 0.3s, background 0.3s;
+        }
+        #webModal .mirror-login input:focus { border-color: #6a6aff; box-shadow: 0 0 16px rgba(100, 100, 255, 0.05); }
+        #webModal .mirror-login button {
+            width: 100%;
+            padding: 6px;
+            background: #6a6aff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+            text-transform: lowercase;
+            font-family: 'Inter', sans-serif;
+        }
+        #webModal .mirror-login button:hover { background: #7a7aff; }
+        #webModal .mirror-login .tab-container {
+            display: flex;
+            margin-bottom: 8px;
+            border-bottom: 1px solid rgba(18, 18, 42, 0.3);
+        }
+        #webModal .mirror-login .tab-btn {
+            flex: 1;
+            padding: 4px 0;
+            background: transparent !important;
+            border: none;
+            color: #3a3a55;
+            font-size: 9px;
+            letter-spacing: 1px;
+            text-transform: lowercase;
+            cursor: pointer;
+            transition: color 0.3s, border-color 0.3s;
+            border-bottom: 1.5px solid transparent;
+            font-family: 'Inter', sans-serif;
+        }
+        #webModal .mirror-login .tab-btn:hover { color: #c0c0e0; border-bottom-color: #6a6aff; }
+        #webModal .mirror-login .tab-btn.active { color: #c0c0e0; border-bottom-color: #6a6aff; }
+        #webModal .mirror-login .tab-content {
+            display: none;
+            text-align: left;
+            max-height: 260px;
+            overflow-y: auto;
+            animation: fadeSlide 0.3s ease;
+        }
+        #webModal .mirror-login .tab-content.active { display: block; }
+        @keyframes fadeSlide { 0% { opacity: 0.5; transform: translateY(4px); } 100% { opacity: 1; transform: translateY(0); } }
+        #webModal .mirror-login .tab-content::-webkit-scrollbar { width: 2px; }
+        #webModal .mirror-login .tab-content::-webkit-scrollbar-track { background: rgba(8, 8, 15, 0.2); }
+        #webModal .mirror-login .tab-content::-webkit-scrollbar-thumb { background: #1a1a3e; border-radius: 2px; }
+        #webModal .mirror-login .link-list .option {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 3px 2px;
+            font-size: 9px;
+            color: #7777aa;
+            border-bottom: 1px solid rgba(10, 10, 26, 0.3);
+            cursor: pointer;
+            transition: color 0.3s, background 0.3s;
+            border-radius: 3px;
+            font-family: 'Inter', sans-serif;
+        }
+        #webModal .mirror-login .link-list .option:hover { color: #d0d0f0; background: rgba(10, 10, 24, 0.3); }
+        #webModal .mirror-login .link-list .option .badge {
+            background: rgba(8, 8, 16, 0.4);
+            padding: 0px 6px;
+            border-radius: 6px;
+            font-size: 7px;
+            color: #6a6aff;
+            letter-spacing: 0.3px;
+            font-family: 'Inter', monospace;
+            white-space: nowrap;
+        }
+        #webModal .mirror-login .link-list .option .badge.free { color: #55bb99; }
+        #webModal .mirror-login .link-list .option .badge.experimental { color: #ff9966; }
+        #webModal .mirror-login .tab-hint { font-size: 7px; color: rgba(42, 42, 68, 0.6); margin-top: 6px; text-align: center; }
+        #webModal .mirror-login .selected-link { font-size: 11px; color: #7a7aff; margin-bottom: 8px; letter-spacing: 0.3px; text-transform: lowercase; border-bottom: 1px solid rgba(20, 20, 42, 0.4); padding-bottom: 6px; }
+        #webModal .mirror-login .back-btn {
+            background: transparent !important;
+            border: none;
+            color: #444466;
+            font-size: 12px;
+            cursor: pointer;
+            transition: color 0.3s;
+            padding: 2px 4px;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 6px;
+        }
+        #webModal .mirror-login .back-btn:hover { color: #8888bb; }
 
         /* =============================================
            SETTINGS
@@ -690,13 +706,13 @@
     <!-- ===== PIPE BACKGROUND ===== -->
     <canvas id="pipeCanvas"></canvas>
 
-    <!-- ===== FLOATING ARROW (hidden until login) ===== -->
+    <!-- ===== FLOATING ARROW (always visible) ===== -->
     <div class="floating-arrow" id="floatingArrow" onclick="toggleChannels()">
         <span class="arrow-text">channels</span>
         <span class="arrow-icon" id="arrowIcon">▼</span>
     </div>
 
-    <!-- ===== CHANNELS (hidden until login) ===== -->
+    <!-- ===== CHANNELS ===== -->
     <div class="channels-container" id="channelsContainer">
         <button class="channel-btn" onclick="openModal('web')"><span>web</span><span class="badge-channel">websites</span></button>
         <button class="channel-btn" onclick="openModal('info')"><span>info</span><span class="badge-channel">about</span></button>
@@ -704,20 +720,7 @@
     </div>
 
     <!-- =============================================
-    MAIN LOGIN (visible by default)
-    ============================================= -->
-    <div class="main-wrapper">
-        <div id="login">
-            <h2>enter password</h2>
-            <input type="password" id="mainPasswordInput" placeholder="password" autofocus>
-            <button onclick="handleMainLogin()">unlock</button>
-            <div class="login-error" id="mainLoginError">access denied</div>
-        </div>
-        <div class="footer-credit" style="position:relative;bottom:auto;left:auto;transform:none;margin-top:12px;">made by dreadingg | gio &lt;3</div>
-    </div>
-
-    <!-- =============================================
-    WEB MODAL (for after login)
+    WEB MODAL
     ============================================= -->
     <div class="channel-modal" id="webModal">
         <div class="modal-content">
@@ -913,7 +916,8 @@
                 </div>
                 <div class="section">
                     <div class="section-title">[ ui improvements ]</div>
-                    <div class="item">channels and settings now hidden until login</div>
+                    <div class="item">removed main login password - open straight to channels</div>
+                    <div class="item">channels and settings always visible</div>
                     <div class="item">random closing animations for channels (slide, fade, scale, rotate, bounce)</div>
                     <div class="item">all colors now smoothly transition with themes</div>
                     <div class="item">pipe colors change with themes</div>
@@ -971,6 +975,11 @@
         </div>
         <button class="reset-btn" onclick="resetSettings()">reset to default</button>
     </div>
+
+    <!-- =============================================
+    FOOTER
+    ============================================= -->
+    <div class="footer-credit">made by dreadingg | gio &lt;3</div>
 
     <!-- =============================================
     SPLASH & IFRAME
@@ -1096,127 +1105,6 @@
             p.life = 0.5 + Math.random() * 0.5;
             pipes.push(p); }
         animatePipes();
-
-        // =============================================
-        // ===== MAIN LOGIN =====
-        // =============================================
-        const MAIN_PASSWORD = "fall";
-
-        function handleMainLogin() {
-            const input = document.getElementById('mainPasswordInput');
-            const error = document.getElementById('mainLoginError');
-            if (input.value.trim().toLowerCase() === MAIN_PASSWORD) {
-                document.getElementById('login').classList.add('fade-out');
-                error.style.display = 'none';
-                // Show channels and settings
-                document.getElementById('floatingArrow').classList.add('visible');
-                document.getElementById('settingsToggle').classList.add('visible');
-                document.getElementById('channelsContainer').classList.add('visible');
-                // Show splash
-                const splash = document.getElementById('splash');
-                const textEl = document.getElementById('splashText');
-                const quoteEl = document.getElementById('splashQuote');
-                textEl.innerHTML = 'fall <span>productions</span>';
-                textEl.style.opacity = '1';
-                const rq = quotes[Math.floor(Math.random() * quotes.length)];
-                quoteEl.innerHTML = rq.attribution ? `"${rq.text}" <span class="attribution">— ${rq.attribution}</span>` : rq.text;
-                quoteEl.classList.remove('show', 'fade-out');
-                splash.style.display = 'flex';
-                setTimeout(() => {
-                    splash.classList.add('show');
-                    setTimeout(() => quoteEl.classList.add('show'), 500);
-                    setTimeout(() => {
-                        quoteEl.classList.remove('show');
-                        quoteEl.classList.add('fade-out');
-                        textEl.style.opacity = '0';
-                        setTimeout(() => {
-                            splash.classList.remove('show');
-                            splash.classList.add('fade-out');
-                            setTimeout(() => {
-                                splash.style.display = 'none';
-                                splash.classList.remove('fade-out');
-                                textEl.style.opacity = '1';
-                                // Open web modal automatically
-                                openModal('web');
-                            }, 800);
-                        }, 400);
-                    }, 2500);
-                }, 50);
-            } else {
-                error.style.display = 'block';
-                input.value = '';
-                input.focus();
-                input.style.borderColor = '#ff5a6a';
-                setTimeout(() => input.style.borderColor = '#181830', 800);
-            }
-        }
-
-        document.getElementById('mainPasswordInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') handleMainLogin();
-        });
-
-        // =============================================
-        // ===== QUOTES =====
-        // =============================================
-        const quotes = [
-            { text: "the unexamined life is not worth living", attribution: "socrates" },
-            { text: "i think, therefore i am", attribution: "descartes" },
-            { text: "the only true wisdom is in knowing you know nothing", attribution: "socrates" },
-            { text: "to be or not to be, that is the question", attribution: "shakespeare" },
-            { text: "the cave you fear to enter holds the treasure you seek", attribution: "joseph campbell" },
-            { text: "life is really simple, but we insist on making it complicated", attribution: "confucius" },
-            { text: "the journey of a thousand miles begins with one step", attribution: "lao tzu" },
-            { text: "he who has a why to live can bear almost any how", attribution: "nietzsche" },
-            { text: "we suffer more often in imagination than in reality", attribution: "seneca" },
-            { text: "the only thing i know is that i know nothing", attribution: "socrates" },
-            { text: "it does not matter how slowly you go as long as you do not stop", attribution: "confucius" },
-            { text: "the mind is everything. what you think you become", attribution: "buddha" },
-            { text: "we are what we repeatedly do. excellence, then, is not an act, but a habit", attribution: "aristotle" },
-            { text: "the function of prayer is not to influence god, but to change the nature of the one who prays", attribution: "kierkegaard" },
-            { text: "life can only be understood backwards; but it must be lived forwards", attribution: "kierkegaard" },
-            { text: "the greater the difficulty, the more the glory in surmounting it", attribution: "epicurus" },
-            { text: "it is not death that a man should fear, but he should fear never beginning to live", attribution: "marcus aurelius" },
-            { text: "the happiness of your life depends upon the quality of your thoughts", attribution: "marcus aurelius" },
-            { text: "we have two ears and one mouth so we can listen twice as much as we speak", attribution: "epictetus" },
-            { text: "first say to yourself what you would be; and then do what you have to do", attribution: "epictetus" },
-            { text: "the soul is dyed the color of its thoughts", attribution: "marcus aurelius" },
-            { text: "be kind, for everyone you meet is fighting a hard battle", attribution: "plato" },
-            { text: "the measure of a man is what he does with power", attribution: "plato" },
-            { text: "the secret of change is to focus all your energy not on fighting the old, but on building the new", attribution: "socrates" },
-            { text: "there is only one good, knowledge, and one evil, ignorance", attribution: "socrates" },
-            { text: "the greatest wealth is to live content with little", attribution: "plato" },
-            { text: "the beginning is the most important part of the work", attribution: "plato" },
-            { text: "character is simply habit long continued", attribution: "plutarch" },
-            { text: "the whole is greater than the sum of its parts", attribution: "aristotle" },
-            { text: "knowing yourself is the beginning of all wisdom", attribution: "aristotle" },
-            { text: "the more you know, the more you realize you don't know", attribution: "aristotle" },
-            { text: "i cannot teach anybody anything. i can only make them think", attribution: "socrates" },
-            { text: "the only real failure is the failure to try", attribution: "seneca" },
-            { text: "luck is what happens when preparation meets opportunity", attribution: "seneca" },
-            { text: "the greatest minds are capable of the greatest vices as well as of the greatest virtues", attribution: "descartes" },
-            { text: "doubt is the origin of wisdom", attribution: "descartes" },
-            { text: "the more we know, the more we know we don't know", attribution: "lao tzu" },
-            { text: "the way out is through the door. why is it that no one will use it?", attribution: "confucius" },
-            { text: "the man who moves a mountain begins by carrying away small stones", attribution: "confucius" },
-            { text: "everything has beauty, but not everyone sees it", attribution: "confucius" },
-            { text: "the world is a book and those who do not travel read only one page", attribution: "augustine" },
-            { text: "the heart has its reasons which reason knows nothing of", attribution: "pascal" },
-            { text: "the more we try to understand, the more mysterious it becomes", attribution: "pascal" },
-            { text: "all our knowledge begins with the senses, proceeds then to the understanding, and ends with reason", attribution: "kant" },
-            { text: "the only thing necessary for the triumph of evil is for good men to do nothing", attribution: "edmund burke" },
-            { text: "life is not about finding yourself. life is about creating yourself", attribution: "george bernard shaw" },
-            { text: "the power of accurate observation is commonly called cynicism by those who have not got it", attribution: "george bernard shaw" },
-            { text: "the only way to find true happiness is to risk being completely cut open", attribution: "chuck palahniuk" },
-            { text: "you are not a drop in the ocean. you are the entire ocean in a drop", attribution: "rumi" },
-            { text: "the wound is the place where the light enters you", attribution: "rumi" },
-            { text: "oscar gucci morty", attribution: "" },
-            { text: "julian gucci morty", attribution: "" },
-            { text: "jacob gucci morty", attribution: "" },
-            { text: "cameron gucci morty", attribution: "" },
-            { text: "gio gucci morty", attribution: "" },
-            { text: "saul gucci morty", attribution: "" },
-            { text: "ian gucci morty", attribution: "" }
-        ];
 
         // =============================================
         // ===== CHANNELS =====
@@ -1404,8 +1292,68 @@
         }
 
         // =============================================
-        // ===== MIRROR FUNCTIONS (web modal) =====
+        // ===== MIRROR FUNCTIONS =====
         // =============================================
+        const quotes = [
+            { text: "the unexamined life is not worth living", attribution: "socrates" },
+            { text: "i think, therefore i am", attribution: "descartes" },
+            { text: "the only true wisdom is in knowing you know nothing", attribution: "socrates" },
+            { text: "to be or not to be, that is the question", attribution: "shakespeare" },
+            { text: "the cave you fear to enter holds the treasure you seek", attribution: "joseph campbell" },
+            { text: "life is really simple, but we insist on making it complicated", attribution: "confucius" },
+            { text: "the journey of a thousand miles begins with one step", attribution: "lao tzu" },
+            { text: "he who has a why to live can bear almost any how", attribution: "nietzsche" },
+            { text: "we suffer more often in imagination than in reality", attribution: "seneca" },
+            { text: "the only thing i know is that i know nothing", attribution: "socrates" },
+            { text: "it does not matter how slowly you go as long as you do not stop", attribution: "confucius" },
+            { text: "the mind is everything. what you think you become", attribution: "buddha" },
+            { text: "we are what we repeatedly do. excellence, then, is not an act, but a habit", attribution: "aristotle" },
+            { text: "the function of prayer is not to influence god, but to change the nature of the one who prays", attribution: "kierkegaard" },
+            { text: "life can only be understood backwards; but it must be lived forwards", attribution: "kierkegaard" },
+            { text: "the greater the difficulty, the more the glory in surmounting it", attribution: "epicurus" },
+            { text: "it is not death that a man should fear, but he should fear never beginning to live", attribution: "marcus aurelius" },
+            { text: "the happiness of your life depends upon the quality of your thoughts", attribution: "marcus aurelius" },
+            { text: "we have two ears and one mouth so we can listen twice as much as we speak", attribution: "epictetus" },
+            { text: "first say to yourself what you would be; and then do what you have to do", attribution: "epictetus" },
+            { text: "the soul is dyed the color of its thoughts", attribution: "marcus aurelius" },
+            { text: "be kind, for everyone you meet is fighting a hard battle", attribution: "plato" },
+            { text: "the measure of a man is what he does with power", attribution: "plato" },
+            { text: "the secret of change is to focus all your energy not on fighting the old, but on building the new", attribution: "socrates" },
+            { text: "there is only one good, knowledge, and one evil, ignorance", attribution: "socrates" },
+            { text: "the greatest wealth is to live content with little", attribution: "plato" },
+            { text: "the beginning is the most important part of the work", attribution: "plato" },
+            { text: "character is simply habit long continued", attribution: "plutarch" },
+            { text: "the whole is greater than the sum of its parts", attribution: "aristotle" },
+            { text: "knowing yourself is the beginning of all wisdom", attribution: "aristotle" },
+            { text: "the more you know, the more you realize you don't know", attribution: "aristotle" },
+            { text: "i cannot teach anybody anything. i can only make them think", attribution: "socrates" },
+            { text: "the only real failure is the failure to try", attribution: "seneca" },
+            { text: "luck is what happens when preparation meets opportunity", attribution: "seneca" },
+            { text: "the greatest minds are capable of the greatest vices as well as of the greatest virtues", attribution: "descartes" },
+            { text: "doubt is the origin of wisdom", attribution: "descartes" },
+            { text: "the more we know, the more we know we don't know", attribution: "lao tzu" },
+            { text: "the way out is through the door. why is it that no one will use it?", attribution: "confucius" },
+            { text: "the man who moves a mountain begins by carrying away small stones", attribution: "confucius" },
+            { text: "everything has beauty, but not everyone sees it", attribution: "confucius" },
+            { text: "the world is a book and those who do not travel read only one page", attribution: "augustine" },
+            { text: "the heart has its reasons which reason knows nothing of", attribution: "pascal" },
+            { text: "the more we try to understand, the more mysterious it becomes", attribution: "pascal" },
+            { text: "all our knowledge begins with the senses, proceeds then to the understanding, and ends with reason", attribution: "kant" },
+            { text: "the only thing necessary for the triumph of evil is for good men to do nothing", attribution: "edmund burke" },
+            { text: "life is not about finding yourself. life is about creating yourself", attribution: "george bernard shaw" },
+            { text: "the power of accurate observation is commonly called cynicism by those who have not got it", attribution: "george bernard shaw" },
+            { text: "the only way to find true happiness is to risk being completely cut open", attribution: "chuck palahniuk" },
+            { text: "you are not a drop in the ocean. you are the entire ocean in a drop", attribution: "rumi" },
+            { text: "the wound is the place where the light enters you", attribution: "rumi" },
+            { text: "oscar gucci morty", attribution: "" },
+            { text: "julian gucci morty", attribution: "" },
+            { text: "jacob gucci morty", attribution: "" },
+            { text: "cameron gucci morty", attribution: "" },
+            { text: "gio gucci morty", attribution: "" },
+            { text: "saul gucci morty", attribution: "" },
+            { text: "ian gucci morty", attribution: "" }
+        ];
+
         const links = {
             "gclassroom": "https://storage.googleapis.com/gclassroom/index.html",
             "clever-s3": "https://cleverlearning.s3.amazonaws.com/index.html",
@@ -1655,10 +1603,6 @@
             const container = document.getElementById('iframe-container');
             container.classList.remove('fade-in');
             document.querySelector('.logout-btn').classList.remove('show');
-            // Hide channels and settings
-            document.getElementById('floatingArrow').classList.remove('visible');
-            document.getElementById('settingsToggle').classList.remove('visible');
-            document.getElementById('channelsContainer').classList.remove('visible');
             setTimeout(() => {
                 container.style.display = 'none';
                 document.querySelector('.logout-btn').style.display = 'none';
@@ -1739,4 +1683,4 @@
         })();
     </script>
 </body>
-</html>
+                                                                                                  </html>
