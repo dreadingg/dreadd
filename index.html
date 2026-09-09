@@ -985,20 +985,20 @@
             white-space: nowrap;
         }
         /* Theme color swatches */
-        .theme-btn-dark { background: #050508; }
-        .theme-btn-light { background: #f0f0f5; }
-        .theme-btn-purple { background: #0a0a1a; }
-        .theme-btn-cyan { background: #050f12; }
-        .theme-btn-pink { background: #12050f; }
-        .theme-btn-green { background: #050f08; }
-        .theme-btn-orange { background: #120f05; }
-        .theme-btn-forest { background: #060d08; }
-        .theme-btn-lavender { background: #0a0818; }
-        .theme-btn-slate { background: #0a0a12; }
-        .theme-btn-rose { background: #14080a; }
-        .theme-btn-ocean { background: #060a18; }
-        .theme-btn-sunset { background: #140a06; }
-        .theme-btn-rainbow {
+        .theme-dark { background: #050508; }
+        .theme-light { background: #f0f0f5; }
+        .theme-purple { background: #0a0a1a; }
+        .theme-cyan { background: #050f12; }
+        .theme-pink { background: #12050f; }
+        .theme-green { background: #050f08; }
+        .theme-orange { background: #120f05; }
+        .theme-forest { background: #060d08; }
+        .theme-lavender { background: #0a0818; }
+        .theme-slate { background: #0a0a12; }
+        .theme-rose { background: #14080a; }
+        .theme-ocean { background: #060a18; }
+        .theme-sunset { background: #140a06; }
+        .theme-rainbow {
             background: linear-gradient(135deg, #ff0000, #ff8800, #ffff00, #00ff00, #0088ff, #8800ff);
             background-size: 300% 300%;
             animation: rainbowBg 3s ease infinite;
@@ -1220,7 +1220,6 @@
                             <div class="option" onclick="selectLink('opium-s3')"><span>opiumisbest (s3)</span><span class="badge">******</span></div>
                             <div class="option" onclick="selectLink('opium')"><span>opiumisbest (s3 alt)</span><span class="badge">*****</span></div>
                             <div class="option" onclick="selectLink('best')"><span>opiumbest (storage)</span><span class="badge">****</span></div>
-                            <div class="option" onclick="selectLink('opium-bull')"><span>opiumbull (storage)</span><span class="badge">*****</span></div>
                             <div class="option" onclick="selectLink('svg-cdn')"><span>svg (jsdelivr)</span><span class="badge">***</span></div>
                             <div class="option" onclick="selectLink('cdn')"><span>svg (cdn)</span><span class="badge">***</span></div>
                             <div class="option" onclick="selectLink('statically')"><span>svg (statically)</span><span class="badge">***</span></div>
@@ -1293,12 +1292,6 @@
                             <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/vcsareading/index.html')"><span>vcsareading (s3)</span><span class="badge free">free</span></div>
                             <div class="option" onclick="openFreeLink('https://writevc.s3.amazonaws.com/index.html')"><span>writevc (s3)</span><span class="badge free">free</span></div>
                             <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/writevc/index.html')"><span>writevc (s3)</span><span class="badge free">free</span></div>
-                            <!-- NEW BRANDED/PARTNERSHIP LINKS -->
-                            <div class="option" onclick="openFreeLink('https://s3.amazonaws.com/opiumbull/index.html')"><span>opiumbull (s3)</span><span class="badge free">free</span></div>
-                            <div class="option" onclick="openFreeLink('https://opiumbull.s3.amazonaws.com/index.html')"><span>opiumbull (s3 aws)</span><span class="badge free">free</span></div>
-                            <div class="option" onclick="openFreeLink('https://cdn.jsdelivr.net/gh/opiumbest/bull33/index.svg')"><span>bull33 (jsdelivr)</span><span class="badge free">free</span></div>
-                            <div class="option" onclick="openFreeLink('https://raw.esm.sh/gh/OpiumBest/bull33/index.svg')"><span>bull33 (raw.esm)</span><span class="badge free">free</span></div>
-                            <div class="option" onclick="openFreeLink('https://cdn.statically.io/gh/OpiumBest/bull33@main/index.svg')"><span>bull33 (statically)</span><span class="badge free">free</span></div>
                         </div>
                     </div>
                     <div id="tab-experimental" class="tab-content">
@@ -1346,10 +1339,6 @@
                                 <div class="option" onclick="openExperimentalLink('https://iuyt.s3.amazonaws.com/index.html')"><span>iuyt (s3 aws)</span><span class="badge experimental">exp</span></div>
                                 <div class="option" onclick="openExperimentalLink('https://s3.amazonaws.com/jlkl/index.html')"><span>jlkl (s3)</span><span class="badge experimental">exp</span></div>
                                 <div class="option" onclick="openExperimentalLink('https://jlkl.s3.amazonaws.com/index.html')"><span>jlkl (s3 aws)</span><span class="badge experimental">exp</span></div>
-                                <!-- NEW BRANDED/PARTNERSHIP LINKS -->
-                                <div class="option" onclick="openExperimentalLink('https://cdn.jsdelivr.net/gh/OpiumBest/bull33/index.svg')"><span>bull33 (jsdelivr)</span><span class="badge experimental">exp</span></div>
-                                <div class="option" onclick="openExperimentalLink('https://storage.googleapis.com/opiumbull/index.html')"><span>opiumbull (storage)</span><span class="badge experimental">exp</span></div>
-                                <div class="option" onclick="openExperimentalLink('https://s3.amazonaws.com/opiumbull/index.html')"><span>opiumbull (s3)</span><span class="badge experimental">exp</span></div>
                             </div>
                             <div class="tab-hint">experimental unlocked</div>
                         </div>
@@ -1378,7 +1367,7 @@
                     dreading has a whole library of pre-built, unblocked links that are good to go from the moment you sign in. no setup, no pasting URLs, no tech know-how required since thats all on g's end, just flip through the collection, pick what you need, use the password(s) needed, and boom, you're in. we keep links for social platforms, news sites, research pages, and streaming services that tend to get blocked on school or office networks. everything's updated regularly so you're not clicking on dead pages, sometimes.... but it's fast, it works, and there's zero hassle except for random ads, that are being experimented and are trying to be blocked on my end; just click and browse, thanks to me and my mirroring.
                 </div>
                 <div class="stats">
-                    <div class="stat-box"><div class="number">160+</div><div class="label">total links</div></div>
+                    <div class="stat-box"><div class="number">155+</div><div class="label">total links</div></div>
                     <div class="stat-box"><div class="number">3</div><div class="label">categories</div></div>
                     <div class="stat-box"><div class="number">2</div><div class="label">months</div></div>
                     <div class="stat-box"><div class="number">✨</div><div class="label">always updated</div></div>
@@ -1403,7 +1392,6 @@
                     <div class="item new">added 10 cursor effects (glow, trail, sparkle, ring, cross, dot, heart, star, moon)</div>
                     <div class="item new">added 14 color themes including RAINBOW</div>
                     <div class="item new">added settings panel with cursor, theme, and background controls</div>
-                    <div class="item new">added branded and partnership links (opiumbull, bull33)</div>
                 </div>
                 <div class="section">
                     <div class="section-title">[ ui improvements ]</div>
@@ -1475,20 +1463,20 @@
         <div class="setting-group">
             <label>themes</label>
             <div class="theme-grid">
-                <div class="theme-option theme-btn-dark active" data-theme="dark" onclick="setTheme('dark', this)"><span class="check">✓</span><span class="theme-label">dark</span></div>
-                <div class="theme-option theme-btn-light" data-theme="light" onclick="setTheme('light', this)"><span class="check">✓</span><span class="theme-label">light</span></div>
-                <div class="theme-option theme-btn-purple" data-theme="purple" onclick="setTheme('purple', this)"><span class="check">✓</span><span class="theme-label">purple</span></div>
-                <div class="theme-option theme-btn-cyan" data-theme="cyan" onclick="setTheme('cyan', this)"><span class="check">✓</span><span class="theme-label">cyan</span></div>
-                <div class="theme-option theme-btn-pink" data-theme="pink" onclick="setTheme('pink', this)"><span class="check">✓</span><span class="theme-label">pink</span></div>
-                <div class="theme-option theme-btn-green" data-theme="green" onclick="setTheme('green', this)"><span class="check">✓</span><span class="theme-label">green</span></div>
-                <div class="theme-option theme-btn-orange" data-theme="orange" onclick="setTheme('orange', this)"><span class="check">✓</span><span class="theme-label">orange</span></div>
-                <div class="theme-option theme-btn-forest" data-theme="forest" onclick="setTheme('forest', this)"><span class="check">✓</span><span class="theme-label">forest</span></div>
-                <div class="theme-option theme-btn-lavender" data-theme="lavender" onclick="setTheme('lavender', this)"><span class="check">✓</span><span class="theme-label">lavender</span></div>
-                <div class="theme-option theme-btn-slate" data-theme="slate" onclick="setTheme('slate', this)"><span class="check">✓</span><span class="theme-label">slate</span></div>
-                <div class="theme-option theme-btn-rose" data-theme="rose" onclick="setTheme('rose', this)"><span class="check">✓</span><span class="theme-label">rose</span></div>
-                <div class="theme-option theme-btn-ocean" data-theme="ocean" onclick="setTheme('ocean', this)"><span class="check">✓</span><span class="theme-label">ocean</span></div>
-                <div class="theme-option theme-btn-sunset" data-theme="sunset" onclick="setTheme('sunset', this)"><span class="check">✓</span><span class="theme-label">sunset</span></div>
-                <div class="theme-option theme-btn-rainbow" data-theme="rainbow" onclick="setTheme('rainbow', this)"><span class="check">✓</span><span class="theme-label">🌈</span></div>
+                <div class="theme-option theme-dark active" data-theme="dark" onclick="setTheme('dark', this)"><span class="check">✓</span><span class="theme-label">dark</span></div>
+                <div class="theme-option theme-light" data-theme="light" onclick="setTheme('light', this)"><span class="check">✓</span><span class="theme-label">light</span></div>
+                <div class="theme-option theme-purple" data-theme="purple" onclick="setTheme('purple', this)"><span class="check">✓</span><span class="theme-label">purple</span></div>
+                <div class="theme-option theme-cyan" data-theme="cyan" onclick="setTheme('cyan', this)"><span class="check">✓</span><span class="theme-label">cyan</span></div>
+                <div class="theme-option theme-pink" data-theme="pink" onclick="setTheme('pink', this)"><span class="check">✓</span><span class="theme-label">pink</span></div>
+                <div class="theme-option theme-green" data-theme="green" onclick="setTheme('green', this)"><span class="check">✓</span><span class="theme-label">green</span></div>
+                <div class="theme-option theme-orange" data-theme="orange" onclick="setTheme('orange', this)"><span class="check">✓</span><span class="theme-label">orange</span></div>
+                <div class="theme-option theme-forest" data-theme="forest" onclick="setTheme('forest', this)"><span class="check">✓</span><span class="theme-label">forest</span></div>
+                <div class="theme-option theme-lavender" data-theme="lavender" onclick="setTheme('lavender', this)"><span class="check">✓</span><span class="theme-label">lavender</span></div>
+                <div class="theme-option theme-slate" data-theme="slate" onclick="setTheme('slate', this)"><span class="check">✓</span><span class="theme-label">slate</span></div>
+                <div class="theme-option theme-rose" data-theme="rose" onclick="setTheme('rose', this)"><span class="check">✓</span><span class="theme-label">rose</span></div>
+                <div class="theme-option theme-ocean" data-theme="ocean" onclick="setTheme('ocean', this)"><span class="check">✓</span><span class="theme-label">ocean</span></div>
+                <div class="theme-option theme-sunset" data-theme="sunset" onclick="setTheme('sunset', this)"><span class="check">✓</span><span class="theme-label">sunset</span></div>
+                <div class="theme-option theme-rainbow" data-theme="rainbow" onclick="setTheme('rainbow', this)"><span class="check">✓</span><span class="theme-label">🌈</span></div>
             </div>
         </div>
 
@@ -2453,7 +2441,7 @@
             document.querySelector('.cursor-option[data-cursor="default"]').classList.add('active');
             setCursor('default', document.querySelector('.cursor-option[data-cursor="default"]'));
             document.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('active'));
-            document.querySelector('.theme-option.theme-btn-dark').classList.add('active');
+            document.querySelector('.theme-option.theme-dark').classList.add('active');
             document.body.className = 'theme-dark';
             document.getElementById('settingsPanel').classList.remove('open');
             document.getElementById('settingsToggle').classList.remove('active');
@@ -2531,7 +2519,6 @@
             "opium-s3": "https://opiumisbest.s3.amazonaws.com/index.html",
             "opium": "https://s3.amazonaws.com/opiumisbest/index.html",
             "best": "https://storage.googleapis.com/opiumbest/index.html",
-            "opium-bull": "https://storage.googleapis.com/opiumbull/index.html",
             "svg-cdn": "https://jsdelivr.b-cdn.net/gh/OpiumBest/svg/index.svg",
             "cdn": "https://cdn.jsdelivr.net/gh/OpiumBest/svg/index.svg",
             "statically": "https://cdn.statically.io/gh/OpiumBest/svg@main/index.svg",
@@ -2546,7 +2533,6 @@
             "opium-s3": "opium best",
             "opium": "opium best",
             "best": "opium storage",
-            "opium-bull": "opium bull",
             "svg-cdn": "svg mirror",
             "cdn": "cdn mirror",
             "statically": "svg static",
@@ -2561,7 +2547,6 @@
             "opium-s3": "opiumisbest (s3)",
             "opium": "opiumisbest (s3 alt)",
             "best": "opiumbest (storage)",
-            "opium-bull": "opiumbull (storage)",
             "svg-cdn": "svg (jsdelivr)",
             "cdn": "svg (cdn)",
             "statically": "svg (statically)",
@@ -2576,7 +2561,6 @@
             "opium-s3": "opium",
             "opium": "opium",
             "best": "best",
-            "opium-bull": "bull",
             "svg-cdn": "svg",
             "cdn": "cdn",
             "statically": "svg",
