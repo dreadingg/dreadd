@@ -3,26 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>mirror</title>
+    <title>arc</title>
     <script src="coi-serviceworker.js"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
-        body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #050508; color: #e0e0e0; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; padding: 16px; transition: background 0.8s ease, color 0.8s ease; }
+        
+        /* Halloween Background base */
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: #0d0a1a url('https://images.unsplash.com/photo-1509557750927-31956d1a1b29?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+            color: #e0e0e0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            overflow: hidden; 
+            padding: 16px; 
+            transition: background 0.8s ease, color 0.8s ease; 
+        }
+
         #bgCanvas { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 0; pointer-events: none; opacity: 0.3; transition: opacity 0.8s ease; }
 
-        body.theme-dark { --accent: #6a6aff; --accent-hover: #7a7aff; --accent-dim: rgba(106, 106, 255, 0.15); --accent-dim-hover: rgba(106, 106, 255, 0.25); --bg: rgba(5, 5, 8, 0.25); --border: rgba(26, 26, 46, 0.3); --text-primary: #e0e0e0; --text-secondary: #8888aa; --text-muted: #555566; --panel-bg: rgba(10, 10, 20, 0.6); --input-bg: rgba(8, 8, 15, 0.5); --badge-bg: rgba(8, 8, 16, 0.4); --shadow: rgba(0, 0, 0, 0.6); --border-hover: rgba(106, 106, 255, 0.3); --bg-opacity: 0.3; }
-        body.theme-light { --accent: #6a6aff; --accent-hover: #7a7aff; --accent-dim: rgba(106, 106, 255, 0.15); --accent-dim-hover: rgba(106, 106, 255, 0.25); --bg: rgba(240, 240, 245, 0.3); --border: rgba(180, 180, 200, 0.4); --text-primary: #1a1a2e; --text-secondary: #555577; --text-muted: #8888aa; --panel-bg: rgba(240, 240, 245, 0.7); --input-bg: rgba(255, 255, 255, 0.5); --badge-bg: rgba(200, 200, 220, 0.4); --shadow: rgba(0, 0, 0, 0.1); --border-hover: rgba(106, 106, 255, 0.3); --bg-opacity: 0.15; }
-        body.theme-purple { --accent: #9b6bff; --accent-hover: #ab7bff; --accent-dim: rgba(155, 107, 255, 0.15); --accent-dim-hover: rgba(155, 107, 255, 0.25); --bg: rgba(10, 10, 26, 0.3); --border: rgba(100, 80, 200, 0.3); --text-primary: #d0c0ff; --text-secondary: #a090dd; --text-muted: #6a5a99; --panel-bg: rgba(10, 10, 26, 0.6); --input-bg: rgba(8, 8, 20, 0.5); --badge-bg: rgba(60, 40, 120, 0.4); --shadow: rgba(80, 60, 200, 0.3); --border-hover: rgba(155, 107, 255, 0.3); --bg-opacity: 0.35; }
+        /* ARC HALLOWEEN THEME (Default) */
+        body.theme-halloween {
+            --accent: #f5d7a1; /* Warm Moonlight */
+            --accent-hover: #ffe8b5;
+            --accent-dim: rgba(245, 215, 161, 0.15);
+            --accent-dim-hover: rgba(245, 215, 161, 0.25);
+            --bg: rgba(13, 10, 26, 0.4);
+            --border: rgba(245, 215, 161, 0.2);
+            --text-primary: #ffffff;
+            --text-secondary: #d1c4e9;
+            --text-muted: #8e84a8;
+            --panel-bg: rgba(13, 10, 26, 0.85);
+            --input-bg: rgba(0, 0, 0, 0.4);
+            --badge-bg: rgba(245, 215, 161, 0.1);
+            --shadow: rgba(0, 0, 0, 0.8);
+            --border-hover: rgba(245, 215, 161, 0.5);
+            --bg-opacity: 0.3;
+        }
+
+        /* Other default themes adjusted for the new vibe */
+        body.theme-dark { --accent: #6a6aff; --accent-hover: #7a7aff; --accent-dim: rgba(106, 106, 255, 0.15); --accent-dim-hover: rgba(106, 106, 255, 0.25); --bg: rgba(5, 5, 8, 0.4); --border: rgba(26, 26, 46, 0.4); --text-primary: #e0e0e0; --text-secondary: #8888aa; --text-muted: #555566; --panel-bg: rgba(10, 10, 20, 0.85); --input-bg: rgba(8, 8, 15, 0.5); --badge-bg: rgba(8, 8, 16, 0.4); --shadow: rgba(0, 0, 0, 0.6); --border-hover: rgba(106, 106, 255, 0.3); --bg-opacity: 0.3; }
+        body.theme-light { --accent: #6a6aff; --accent-hover: #7a7aff; --accent-dim: rgba(106, 106, 255, 0.15); --accent-dim-hover: rgba(106, 106, 255, 0.25); --bg: rgba(240, 240, 245, 0.3); --border: rgba(180, 180, 200, 0.4); --text-primary: #1a1a2e; --text-secondary: #555577; --text-muted: #8888aa; --panel-bg: rgba(240, 240, 245, 0.9); --input-bg: rgba(255, 255, 255, 0.5); --badge-bg: rgba(200, 200, 220, 0.4); --shadow: rgba(0, 0, 0, 0.1); --border-hover: rgba(106, 106, 255, 0.3); --bg-opacity: 0.15; }
+        body.theme-purple { --accent: #9b6bff; --accent-hover: #ab7bff; --accent-dim: rgba(155, 107, 255, 0.15); --accent-dim-hover: rgba(155, 107, 255, 0.25); --bg: rgba(10, 10, 26, 0.4); --border: rgba(100, 80, 200, 0.3); --text-primary: #d0c0ff; --text-secondary: #a090dd; --text-muted: #6a5a99; --panel-bg: rgba(10, 10, 26, 0.85); --input-bg: rgba(8, 8, 20, 0.5); --badge-bg: rgba(60, 40, 120, 0.4); --shadow: rgba(80, 60, 200, 0.3); --border-hover: rgba(155, 107, 255, 0.3); --bg-opacity: 0.35; }
+        body.theme-orange { --accent: #ff8c00; --accent-hover: #ff9b26; --accent-dim: rgba(255, 140, 0, 0.15); --accent-dim-hover: rgba(255, 140, 0, 0.25); --bg: rgba(18, 12, 5, 0.4); --border: rgba(200, 130, 60, 0.3); --text-primary: #ffd0a0; --text-secondary: #cca070; --text-muted: #886040; --panel-bg: rgba(18, 12, 5, 0.85); --input-bg: rgba(15, 10, 5, 0.5); --badge-bg: rgba(140, 100, 40, 0.4); --shadow: rgba(200, 160, 40, 0.2); --border-hover: rgba(255, 140, 0, 0.3); --bg-opacity: 0.35; }
+
+        /* Fallback placeholder for other themes */
         body.theme-cyan { --accent: #4dd0e1; --accent-hover: #5de0f1; --accent-dim: rgba(77, 208, 225, 0.15); --accent-dim-hover: rgba(77, 208, 225, 0.25); --bg: rgba(5, 15, 18, 0.3); --border: rgba(60, 180, 200, 0.3); --text-primary: #b0e0e6; --text-secondary: #70b0b6; --text-muted: #4a7a80; --panel-bg: rgba(5, 15, 18, 0.6); --input-bg: rgba(5, 12, 15, 0.5); --badge-bg: rgba(40, 120, 140, 0.4); --shadow: rgba(40, 200, 220, 0.2); --border-hover: rgba(77, 208, 225, 0.3); --bg-opacity: 0.35; }
         body.theme-pink { --accent: #ff6b9d; --accent-hover: #ff7bad; --accent-dim: rgba(255, 107, 157, 0.15); --accent-dim-hover: rgba(255, 107, 157, 0.25); --bg: rgba(18, 5, 15, 0.3); --border: rgba(200, 80, 150, 0.3); --text-primary: #ffc0d0; --text-secondary: #cc8899; --text-muted: #884466; --panel-bg: rgba(18, 5, 15, 0.6); --input-bg: rgba(15, 5, 12, 0.5); --badge-bg: rgba(160, 60, 120, 0.4); --shadow: rgba(200, 60, 150, 0.2); --border-hover: rgba(255, 107, 157, 0.3); --bg-opacity: 0.35; }
         body.theme-green { --accent: #66bb6a; --accent-hover: #76cb7a; --accent-dim: rgba(102, 187, 106, 0.15); --accent-dim-hover: rgba(102, 187, 106, 0.25); --bg: rgba(5, 15, 8, 0.3); --border: rgba(60, 180, 80, 0.3); --text-primary: #b0e0b0; --text-secondary: #70b070; --text-muted: #4a7a4a; --panel-bg: rgba(5, 15, 8, 0.6); --input-bg: rgba(5, 12, 8, 0.5); --badge-bg: rgba(40, 140, 60, 0.4); --shadow: rgba(60, 200, 80, 0.2); --border-hover: rgba(102, 187, 106, 0.3); --bg-opacity: 0.35; }
-        body.theme-orange { --accent: #ffa726; --accent-hover: #ffb736; --accent-dim: rgba(255, 167, 38, 0.15); --accent-dim-hover: rgba(255, 167, 38, 0.25); --bg: rgba(18, 15, 5, 0.3); --border: rgba(200, 160, 60, 0.3); --text-primary: #ffd0a0; --text-secondary: #cca070; --text-muted: #886040; --panel-bg: rgba(18, 15, 5, 0.6); --input-bg: rgba(15, 12, 5, 0.5); --badge-bg: rgba(140, 100, 40, 0.4); --shadow: rgba(200, 160, 40, 0.2); --border-hover: rgba(255, 167, 38, 0.3); --bg-opacity: 0.35; }
         body.theme-forest { --accent: #4caf50; --accent-hover: #5cbf60; --accent-dim: rgba(76, 175, 80, 0.15); --accent-dim-hover: rgba(76, 175, 80, 0.25); --bg: rgba(6, 13, 8, 0.3); --border: rgba(60, 160, 80, 0.3); --text-primary: #a0c0a0; --text-secondary: #709070; --text-muted: #4a604a; --panel-bg: rgba(6, 13, 8, 0.6); --input-bg: rgba(5, 10, 6, 0.5); --badge-bg: rgba(40, 120, 60, 0.4); --shadow: rgba(60, 180, 80, 0.2); --border-hover: rgba(76, 175, 80, 0.3); --bg-opacity: 0.35; }
         body.theme-lavender { --accent: #b39ddb; --accent-hover: #c3adeb; --accent-dim: rgba(179, 157, 219, 0.15); --accent-dim-hover: rgba(179, 157, 219, 0.25); --bg: rgba(10, 8, 24, 0.3); --border: rgba(140, 120, 200, 0.3); --text-primary: #c8b8f0; --text-secondary: #9888c0; --text-muted: #685880; --panel-bg: rgba(10, 8, 24, 0.6); --input-bg: rgba(8, 6, 18, 0.5); --badge-bg: rgba(100, 80, 160, 0.4); --shadow: rgba(140, 120, 220, 0.2); --border-hover: rgba(179, 157, 219, 0.3); --bg-opacity: 0.35; }
         body.theme-slate { --accent: #78909c; --accent-hover: #88a0ac; --accent-dim: rgba(120, 144, 156, 0.15); --accent-dim-hover: rgba(120, 144, 156, 0.25); --bg: rgba(10, 10, 18, 0.3); --border: rgba(100, 120, 140, 0.3); --text-primary: #b0b8c8; --text-secondary: #808898; --text-muted: #505868; --panel-bg: rgba(10, 10, 18, 0.6); --input-bg: rgba(8, 8, 14, 0.5); --badge-bg: rgba(80, 100, 120, 0.4); --shadow: rgba(100, 120, 140, 0.2); --border-hover: rgba(120, 144, 156, 0.3); --bg-opacity: 0.3; }
         body.theme-rose { --accent: #ef5350; --accent-hover: #ff6360; --accent-dim: rgba(239, 83, 80, 0.15); --accent-dim-hover: rgba(239, 83, 80, 0.25); --bg: rgba(20, 8, 10, 0.3); --border: rgba(200, 80, 80, 0.3); --text-primary: #f0b8b8; --text-secondary: #c08888; --text-muted: #805050; --panel-bg: rgba(20, 8, 10, 0.6); --input-bg: rgba(16, 6, 8, 0.5); --badge-bg: rgba(160, 60, 60, 0.4); --shadow: rgba(200, 60, 60, 0.2); --border-hover: rgba(239, 83, 80, 0.3); --bg-opacity: 0.35; }
         body.theme-ocean { --accent: #42a5f5; --accent-hover: #52b5ff; --accent-dim: rgba(66, 165, 245, 0.15); --accent-dim-hover: rgba(66, 165, 245, 0.25); --bg: rgba(6, 10, 24, 0.3); --border: rgba(60, 140, 220, 0.3); --text-primary: #90b8e0; --text-secondary: #6088b0; --text-muted: #405870; --panel-bg: rgba(6, 10, 24, 0.6); --input-bg: rgba(5, 8, 18, 0.5); --badge-bg: rgba(40, 100, 180, 0.4); --shadow: rgba(60, 160, 240, 0.2); --border-hover: rgba(66, 165, 245, 0.3); --bg-opacity: 0.35; }
         body.theme-sunset { --accent: #ff7043; --accent-hover: #ff8053; --accent-dim: rgba(255, 112, 67, 0.15); --accent-dim-hover: rgba(255, 112, 67, 0.25); --bg: rgba(20, 10, 6, 0.3); --border: rgba(200, 140, 60, 0.3); --text-primary: #f0c8a0; --text-secondary: #c09870; --text-muted: #805840; --panel-bg: rgba(20, 10, 6, 0.6); --input-bg: rgba(16, 8, 5, 0.5); --badge-bg: rgba(160, 100, 40, 0.4); --shadow: rgba(220, 140, 60, 0.2); --border-hover: rgba(255, 112, 67, 0.3); --bg-opacity: 0.35; }
+        
         body.theme-rainbow { --accent: #ff6b6b; --accent-hover: #ffd93d; --accent-dim: rgba(255, 107, 107, 0.15); --accent-dim-hover: rgba(255, 215, 0, 0.25); --bg: rgba(5, 5, 8, 0.25); --border: rgba(255, 255, 255, 0.1); --text-primary: #ffffff; --text-secondary: #e0e0ff; --text-muted: #9999bb; --panel-bg: rgba(10, 10, 30, 0.5); --input-bg: rgba(255, 255, 255, 0.05); --badge-bg: rgba(255, 255, 255, 0.08); --shadow: rgba(255, 200, 200, 0.1); --border-hover: rgba(255, 215, 0, 0.3); --bg-opacity: 0.35; }
         body.theme-rainbow #bgCanvas { opacity: 0.35; }
         body.theme-rainbow .floating-arrow .arrow-icon { color: #ffd93d; }
@@ -155,6 +192,9 @@
         .theme-option .check { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 8px; color: white; opacity: 0; transition: opacity 0.3s ease; text-shadow: 0 0 8px rgba(0,0,0,0.5); }
         .theme-option.active .check { opacity: 1; }
         .theme-option .theme-label { position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); font-size: 4px; color: rgba(255,255,255,0.2); letter-spacing: 0.3px; text-transform: lowercase; white-space: nowrap; }
+        
+        /* Theme Grid Colors */
+        .theme-halloween { background: linear-gradient(135deg, #0d0a1a 50%, #f5d7a1 100%); }
         .theme-dark { background: #050508; }
         .theme-light { background: #f0f0f5; }
         .theme-purple { background: #0a0a1a; }
@@ -186,10 +226,10 @@
         .footer-credit { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); font-size: 9px; color: var(--text-muted); letter-spacing: 0.8px; text-align: center; font-family: 'Inter', sans-serif; opacity: 0.6; transition: opacity 0.3s ease, color 0.8s ease; z-index: 40; }
         .footer-credit:hover { opacity: 1; color: var(--text-secondary); }
 
-        #splash { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #050508; z-index: 20; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.8s ease; pointer-events: none; flex-direction: column; padding: 20px; }
+        #splash { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #0d0a1a; z-index: 20; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.8s ease; pointer-events: none; flex-direction: column; padding: 20px; }
         #splash.show { opacity: 1; }
         #splash.fade-out { opacity: 0; }
-        #splash .text { font-size: 26px; font-weight: 300; letter-spacing: 6px; color: var(--text-primary); text-transform: lowercase; text-align: center; padding: 14px 14px 0 14px; font-family: 'Inter', sans-serif; transition: opacity 0.8s ease, color 0.8s ease; }
+        #splash .text { font-size: 42px; font-weight: 300; letter-spacing: 2px; color: var(--text-primary); text-transform: lowercase; text-align: center; padding: 14px 14px 0 14px; font-family: 'Times New Roman', serif; font-style: italic; text-shadow: 0 0 20px var(--accent-dim); transition: opacity 0.8s ease, color 0.8s ease; }
         #splash .text span { color: var(--accent); font-weight: 400; transition: color 0.8s ease; }
         #splash .quote { font-size: 12px; color: var(--text-secondary); letter-spacing: 1px; text-align: center; padding: 8px 20px 14px 20px; opacity: 0; transition: opacity 0.8s ease, color 0.8s ease; max-width: 520px; line-height: 1.5; font-style: italic; font-family: 'Inter', sans-serif; }
         #splash .quote.show { opacity: 1; }
@@ -204,7 +244,6 @@
         .logout-btn.show { opacity: 0.6; }
         .logout-btn:hover { background: var(--accent-dim); color: var(--text-primary); border-color: var(--accent); opacity: 1; }
 
-        /* ===== NEW: iframe fallback overlay ===== */
         #iframe-fallback {
             display: none;
             position: absolute;
@@ -244,7 +283,7 @@
         #iframe-fallback .btn.secondary:hover { color: var(--text-primary); }
     </style>
 </head>
-<body>
+<body class="theme-halloween">
 
     <canvas id="bgCanvas"></canvas>
 
@@ -420,10 +459,10 @@
             <button class="close-modal" onclick="closeModal('infoModal')">✕</button>
             <h2>info <span>channel</span></h2>
             <div class="info-content">
-                <div class="brand">Dreading</div>
+                <div class="brand">arc</div>
                 <div class="subtitle">portal to unblocked links</div>
                 <div class="paragraph">
-                    dreading has a whole library of pre-built, unblocked links that are good to go from the moment you sign in. no setup, no pasting URLs, no tech know-how required since thats all on g's end, just flip through the collection, pick what you need, use the password(s) needed, and boom, you're in. we keep links for social platforms, news sites, research pages, and streaming services that tend to get blocked on school or office networks. everything's updated regularly so you're not clicking on dead pages, sometimes.... but it's fast, it works, and there's zero hassle except for random ads, that are being experimented and are trying to be blocked on my end; just click and browse, thanks to me and my mirroring.
+                    arc has a whole library of pre-built, unblocked links that are good to go from the moment you sign in. no setup, no pasting URLs, no tech know-how required since thats all on g's end, just flip through the collection, pick what you need, use the password(s) needed, and boom, you're in. we keep links for social platforms, news sites, research pages, and streaming services that tend to get blocked on school or office networks. everything's updated regularly so you're not clicking on dead pages, sometimes.... but it's fast, it works, and there's zero hassle except for random ads, that are being experimented and are trying to be blocked on my end; just click and browse, thanks to me and my mirroring.
                 </div>
                 <div class="stats">
                     <div class="stat-box"><div class="number">155+</div><div class="label">total links</div></div>
@@ -440,15 +479,15 @@
             <button class="close-modal" onclick="closeModal('updatesModal')">✕</button>
             <h2>update <span>log</span></h2>
             <div class="update-log">
-                <div class="big-header">✦ THE UPDATE ???? ✦</div>
-                <div class="update-date">📅 12:32, Tuesday</div>
+                <div class="big-header">✦ HALLOWEEN UPDATE ✦</div>
+                <div class="update-date">📅 11:01, Sunday</div>
                 <div class="section">
                     <div class="section-title">[ new features ]</div>
                     <div class="item new">added 16 terminal script backgrounds (pipes, matrix, clock, starfield, fire, life, snow, rain, spinner, fireworks, etc.)</div>
-                    <div class="item new">added background selector in settings</div>
+                    <div class="item new">added new background selector in settings</div>
                     <div class="item new">all backgrounds change colors with themes</div>
                     <div class="item new">added 10 cursor effects (glow, trail, sparkle, ring, cross, dot, heart, star, moon)</div>
-                    <div class="item new">added 14 color themes including RAINBOW</div>
+                    <div class="item new">added 15 color themes including HALLOWEEN and RAINBOW</div>
                     <div class="item new">added settings panel with cursor, theme, and background controls</div>
                 </div>
                 <div class="section">
@@ -461,7 +500,7 @@
                 <div class="section">
                     <div class="section-title">[ bug fixes ]</div>
                     <div class="item">fixed all elements changing colors with themes</div>
-                    <div class="item">fixed cursor effects not working on hover/click</div>
+                    <div class="item">havent fixed cursor effects not working on hover/click</div>
                 </div>
             </div>
         </div>
@@ -515,7 +554,8 @@
         <div class="setting-group">
             <label>themes</label>
             <div class="theme-grid">
-                <div class="theme-option theme-dark active" data-theme="dark" onclick="setTheme('dark', this)"><span class="check">✓</span><span class="theme-label">dark</span></div>
+                <div class="theme-option theme-halloween active" data-theme="halloween" onclick="setTheme('halloween', this)"><span class="check">✓</span><span class="theme-label">spooky</span></div>
+                <div class="theme-option theme-dark" data-theme="dark" onclick="setTheme('dark', this)"><span class="check">✓</span><span class="theme-label">dark</span></div>
                 <div class="theme-option theme-light" data-theme="light" onclick="setTheme('light', this)"><span class="check">✓</span><span class="theme-label">light</span></div>
                 <div class="theme-option theme-purple" data-theme="purple" onclick="setTheme('purple', this)"><span class="check">✓</span><span class="theme-label">purple</span></div>
                 <div class="theme-option theme-cyan" data-theme="cyan" onclick="setTheme('cyan', this)"><span class="check">✓</span><span class="theme-label">cyan</span></div>
@@ -535,10 +575,10 @@
         <button class="reset-btn" onclick="resetSettings()">reset to default</button>
     </div>
 
-    <div class="footer-credit">made by dreadingg | gio &lt;3</div>
+    <div class="footer-credit">arc.best | DEVELOPER</div>
 
     <div id="splash">
-        <div class="text" id="splashText">fall <span>productions</span></div>
+        <div class="text" id="splashText">arc <span>productions</span></div>
         <div class="quote" id="splashQuote"></div>
     </div>
     <div id="iframe-container">
@@ -578,11 +618,12 @@
 
         function getThemeColor() {
             const body = document.body;
+            if (body.classList.contains('theme-halloween')) return '#f5d7a1';
             if (body.classList.contains('theme-purple')) return '#9b6bff';
             if (body.classList.contains('theme-cyan')) return '#4dd0e1';
             if (body.classList.contains('theme-pink')) return '#ff6b9d';
             if (body.classList.contains('theme-green')) return '#66bb6a';
-            if (body.classList.contains('theme-orange')) return '#ffa726';
+            if (body.classList.contains('theme-orange')) return '#ff8c00';
             if (body.classList.contains('theme-forest')) return '#4caf50';
             if (body.classList.contains('theme-lavender')) return '#b39ddb';
             if (body.classList.contains('theme-slate')) return '#78909c';
@@ -595,11 +636,12 @@
                 const index = Math.floor(Date.now() / 800) % colors.length;
                 return colors[index];
             }
-            return '#6a6aff';
+            return '#f5d7a1';
         }
 
         function getThemeSecondary() {
             const body = document.body;
+            if (body.classList.contains('theme-halloween')) return '#8e84a8';
             if (body.classList.contains('theme-purple')) return '#6a5a99';
             if (body.classList.contains('theme-cyan')) return '#4a7a80';
             if (body.classList.contains('theme-pink')) return '#884466';
@@ -619,6 +661,10 @@
             }
             return '#555566';
         }
+
+        // ... [Keep all your background scripts exactly the same from here] ...
+        // For brevity, I am assuming you pasted your original background scripts here.
+        // I will paste the rest of the background logic in the final output.
 
         // PIPES
         let pipes = [];
@@ -1066,7 +1112,7 @@
         }
 
         // BANNER
-        let bannerText = ['dreading', 'portal', 'unblocked', 'links'];
+        let bannerText = ['arc', 'portal', 'unblocked', 'links'];
         let bannerIdx = 0;
         let bannerTimer = 0;
         function drawBanner() {
@@ -1303,8 +1349,8 @@
             document.querySelector('.cursor-option[data-cursor="default"]').classList.add('active');
             setCursor('default', document.querySelector('.cursor-option[data-cursor="default"]'));
             document.querySelectorAll('.theme-option').forEach(opt => opt.classList.remove('active'));
-            document.querySelector('.theme-option.theme-dark').classList.add('active');
-            document.body.className = 'theme-dark';
+            document.querySelector('.theme-option.theme-halloween').classList.add('active');
+            document.body.className = 'theme-halloween';
             document.getElementById('settingsPanel').classList.remove('open');
             document.getElementById('settingsToggle').classList.remove('active');
             setBackground('pipes', document.querySelector('.bg-option[data-bg="pipes"]'));
@@ -1363,14 +1409,7 @@
             { text: "the power of accurate observation is commonly called cynicism by those who have not got it", attribution: "george bernard shaw" },
             { text: "the only way to find true happiness is to risk being completely cut open", attribution: "chuck palahniuk" },
             { text: "you are not a drop in the ocean. you are the entire ocean in a drop", attribution: "rumi" },
-            { text: "the wound is the place where the light enters you", attribution: "rumi" },
-            { text: "oscar gucci morty", attribution: "" },
-            { text: "julian gucci morty", attribution: "" },
-            { text: "jacob gucci morty", attribution: "" },
-            { text: "cameron gucci morty", attribution: "" },
-            { text: "gio gucci morty", attribution: "" },
-            { text: "saul gucci morty", attribution: "" },
-            { text: "ian gucci morty", attribution: "" }
+            { text: "the wound is the place where the light enters you", attribution: "rumi" }
         ];
 
         const links = {
@@ -1586,7 +1625,7 @@
                 const splash = document.getElementById('splash');
                 const textEl = document.getElementById('splashText');
                 const quoteEl = document.getElementById('splashQuote');
-                const st = splashTexts[selectedKey] || "fall productions";
+                const st = splashTexts[selectedKey] || "arc productions";
                 const words = st.split(' ');
                 if (words.length > 1) { const last = words.pop(); textEl.innerHTML = words.join(' ') + ' <span>' + last + '</span>'; }
                 else { textEl.innerHTML = '<span>' + st + '</span>'; }
@@ -1712,4 +1751,4 @@
         })();
     </script>
 </body>
-</html>
+    </html>
